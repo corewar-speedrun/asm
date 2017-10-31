@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/31 10:55:17 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:41:32 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init(t_a *s)
 	s->comment_tmp = NULL;
 	s->curr_line = 1;
 	s->i = 0;
+	s->total_bytes = 0;
 }
 
 void	print_usage(char *pname)
@@ -54,19 +55,15 @@ void	ve(char *fn, char *er)
 void	putmagic(t_a *s)
 {
 	union u_onebyte	z;
-	char			magic[4];
 
-	(void)s;
 	z.magic = COREWAR_EXEC_MAGIC;
-	magic[0] = z.bit[3];
-	magic[1] = z.bit[2];
-	magic[2] = z.bit[1];
-	magic[3] = z.bit[0];
-	s->output = ft_strdup(magic);
-//	write(fd, &z.bit[3], 1);
-//	write(fd, &z.bit[2], 1);
-//	write(fd, &z.bit[1], 1);
-//	write(fd, &z.bit[0], 1);
+	s->output = (unsigned char *)malloc(sizeof(unsigned char) * 5);
+	s->output[0] = z.bit[3];
+	s->output[1] = z.bit[2];
+	s->output[2] = z.bit[1];
+	s->output[3] = z.bit[0];
+	s->output[4] = '\0';
+	s->total_bytes = 4;
 }
 
 int		split_cnt(char **s)
@@ -93,27 +90,15 @@ char	*ft_strndup(char *src)
 
 int		check_ext(t_a *s)
 {
-	char	**tm;
-	int		cnt;
-	int		i;
 	int		flag;
 
-	tm = ft_strsplit(s->av, '.');
-	cnt = split_cnt(tm);
-	if (cnt < 2)
-		flag = 0;
+	if (ft_strequ(s->av + (ft_strlen(s->av) - 2), ".s"))
+	{
+		flag = 1;
+		s->basename = ft_strndup(s->av);
+	}
 	else
-		if (ft_strequ(tm[cnt - 1], "s"))
-		{
-			flag = 1;
-			s->basename = ft_strndup(s->av);
-		}
-		else
-			flag = 0;
-	i = -1;
-	while (++i < cnt)
-		ft_strdel(&tm[i]);
-	free(tm);
+		flag = 0;
 	return (flag);
 }
 
@@ -152,14 +137,28 @@ int		read_file(t_a *s)
 		return (1);
 }
 
+void	writeout_fd(t_a *s, int fd)
+{
+	int	i;
+
+	i = -1;
+	if (fd < 3)
+		return ;
+	while (++i < s->total_bytes)
+		write(fd, &s->output[i], 1);
+}
+
 int		compile(t_a *s)
 {
+	int	fd;
+
+	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
+			O_TRUNC, 0666);
 	if (validate(s))
 	{
-		int fd = open(ft_strjoin(s->basename, "cor"), O_CREAT |
-			O_WRONLY | O_TRUNC, 0666);
 		putmagic(s);
-		ft_putstr_fd("bot name and info", fd);
+		//TODO some func to compile and join s->output also s->total_bytes++
+		writeout_fd(s, fd);
 		return (1);
 	}
 	else

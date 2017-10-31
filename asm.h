@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/30 19:23:06 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/31 15:19:37 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_a
 	int				curr_line;
 	int				i;
 	unsigned char	*output;
+	int				total_bytes;
 }				t_a;
 
 union			u_onebyte

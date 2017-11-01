@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/31 17:18:15 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/01 20:30:06 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		grep_name(t_a *s)
 		}
 		s->i++ && tmp_i++;
 	}
+	s->i++;
 	s->prog_name_tmp = ft_strsub(s->f, name_point_start,
 			name_point_stop - name_point_start);
 	if (ft_strlen(s->prog_name_tmp) > PROG_NAME_LENGTH)
@@ -75,6 +76,7 @@ int		grep_comm(t_a *s)
 	comment_point_stop = s->i;
 	s->comment_tmp = ft_strsub(s->f, comment_point_start,
 			comment_point_stop - comment_point_start);
+	s->i++;
 	if (ft_strlen(s->comment_tmp) > COMMENT_LENGTH)
 	{
 		ft_putstr("Champion comment is too long (Max ");
@@ -87,6 +89,47 @@ int		grep_comm(t_a *s)
 	return (1);
 }
 
+int		ch_l(t_a *s)
+{
+	(void)s;
+	return (1);
+}
+
+int		ch_op(t_a *s)
+{
+	int		n;
+	char	*cmp;
+
+	n = 0;
+	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
+		s->i++;
+	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
+			(s->f + s->i)[n] != DIRECT_CHAR && (s->f + s->i)[n] != '\0')
+		n++;
+//	printf("here |n=%d|s->i=%d|\n", n, s->i);
+	cmp = ft_strsub(s->f + s->i, 0, n);
+	s->i += n;
+	printf("|%s| ", cmp);
+	return (1); //if this is op
+//	return (0); //if not op
+}
+
+int		check(t_a *s)
+{
+	//check op
+	//check label
+	if (ch_op(s))
+	{
+		return (1);
+	}
+	else if (ch_l(s))
+	{
+		return (1);
+	}
+	else
+		return (0); //on failture
+}
+
 int		validate(t_a *s)
 {
 	s->i = 0;
@@ -97,7 +140,7 @@ int		validate(t_a *s)
 		if (s->f[s->i] == COMMENT_CHAR)
 			while (s->f[s->i] != '\n')
 				s->i++;
-		s->f[s->i] == '\n' ? s->curr_line++ : 0;
+		s->f[s->i++] == '\n' ? s->curr_line++ : 0;
 		if (ft_strnequ(NAME_CMD_STRING, s->f + s->i, ft_strlen(NAME_CMD_STRING)))
 		{
 			if (s->prog_name[0] == '\0')
@@ -125,6 +168,12 @@ int		validate(t_a *s)
 				return (0);
 			}
 		}
+		if (check(s))
+			continue ;
+		else if (s->f[s->i] == '\n')
+			s->i++;
+		else
+			return (0);
 		//write ft_bytejoin()
 		//check instructions && labels
 		s->i++;

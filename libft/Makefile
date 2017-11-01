@@ -6,13 +6,13 @@
 #    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 12:18:36 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/10/24 17:12:36 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/01 19:44:31 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror -I libft.h
+FLAGS = -Wall -Wextra -Werror -g -I libft.h
 
 CC = gcc
 

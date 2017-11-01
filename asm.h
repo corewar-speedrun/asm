@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 17:14:18 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/31 17:14:22 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/01 14:07:12 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_a
 	int				i;
 	unsigned char	*output;
 	int				total_bytes;
+	char			**op;
 }				t_a;
 
 union			u_onebyte

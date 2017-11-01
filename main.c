@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/31 15:41:32 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/01 10:17:05 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,20 +137,25 @@ int		read_file(t_a *s)
 		return (1);
 }
 
-void	writeout_fd(t_a *s, int fd)
+int		writeout_fd(t_a *s, int fd)
 {
 	int	i;
 
 	i = -1;
 	if (fd < 3)
-		return ;
+	{
+		ft_putstr("Impossible to write to file! I/O/E stream detected\n");
+		return (0);
+	}
 	while (++i < s->total_bytes)
 		write(fd, &s->output[i], 1);
+	return (1);
 }
 
 int		compile(t_a *s)
 {
 	int	fd;
+	int	flag;
 
 	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
 			O_TRUNC, 0666);
@@ -158,8 +163,8 @@ int		compile(t_a *s)
 	{
 		putmagic(s);
 		//TODO some func to compile and join s->output also s->total_bytes++
-		writeout_fd(s, fd);
-		return (1);
+		flag = writeout_fd(s, fd);
+		return (flag);
 	}
 	else
 		return (0);

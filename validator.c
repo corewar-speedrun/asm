@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/01 20:30:06 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/02 15:06:28 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,28 +106,65 @@ int		ch_op(t_a *s)
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			(s->f + s->i)[n] != DIRECT_CHAR && (s->f + s->i)[n] != '\0')
 		n++;
-//	printf("here |n=%d|s->i=%d|\n", n, s->i);
 	cmp = ft_strsub(s->f + s->i, 0, n);
 	s->i += n;
-	printf("|%s| ", cmp);
-	return (1); //if this is op
-//	return (0); //if not op
+	n = 0;
+	while (n < 16)
+	{
+		if (ft_strequ(s->op[n++], cmp))
+		{
+			//функция пихания в лист операций
+			// и считывания аргументов для операции
+			//add_op(s->op[n - 1], s);
+			printf("operation found |%s|\n", cmp);
+			return (1);
+		}
+	}
+	ft_strdel(&cmp);
+	return (0);
 }
 
 int		check(t_a *s)
 {
-	//check op
 	//check label
 	if (ch_op(s))
-	{
 		return (1);
-	}
 	else if (ch_l(s))
-	{
 		return (1);
-	}
 	else
-		return (0); //on failture
+		return (0);
+}
+
+size_t			ft_bytelen(unsigned char *s)
+{
+	size_t	n;
+
+	n = 0;
+	while (s[n])
+		n++;
+	return (n);
+}
+
+unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2)
+{
+	unsigned char	*ret;
+	size_t			i;
+	size_t			j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	ret = (unsigned char*)malloc(ft_bytelen(s1) + ft_bytelen(s2) + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[j])
+		ret[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		ret[i++] = s2[j++];
+	ret[i] = '\0';
+	return (ret);
 }
 
 int		validate(t_a *s)

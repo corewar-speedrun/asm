@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/01 14:22:02 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/02 14:58:57 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ void	main_loop(int ac, char **av)
 	int i;
 
 	init(&st);
+	init2(&st);
 	i = 0;
 	while (++i < ac)
 	{

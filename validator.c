@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/02 15:06:28 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/03 19:16:48 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ int		grep_name(t_a *s)
 {
 	int name_point_stop = 0;
 	int name_point_start = 0;
-	int tmp_i = 1;
-	while (s->f[s->i] == NAME_CMD_STRING[tmp_i - 1])
-		s->i++ && tmp_i++;
+	int tmp_i = 0;
+	while (s->f[s->i] == NAME_CMD_STRING[tmp_i])
+	{
+		s->i++;
+		tmp_i++;
+	}
 	while ((s->f[s->i] == ' ' || s->f[s->i] == '\t') &&
 			(s->f[s->i] != '\"' && s->f[s->i] != '\n'))
-		s->i++ && tmp_i++;
+	{
+		s->i++;
+		tmp_i++;
+	}
 	if (s->f[s->i] != '\"')
 	{
 		print_le(tmp_i, s);
@@ -38,7 +44,10 @@ int		grep_name(t_a *s)
 	}
 	name_point_start = s->i++;
 	while (s->f[s->i] != '\"')
-		s->i++ && tmp_i++;
+	{
+		s->i++;
+		tmp_i++;
+	}
 	name_point_stop = s->i++;
 	while (s->f[s->i] != '\n')
 	{
@@ -47,9 +56,11 @@ int		grep_name(t_a *s)
 			print_le(tmp_i, s);
 			return (0);
 		}
-		s->i++ && tmp_i++;
+		s->i++;
+		tmp_i++;
 	}
 	s->i++;
+	s->curr_line++;
 	s->prog_name_tmp = ft_strsub(s->f, name_point_start,
 			name_point_stop - name_point_start);
 	if (ft_strlen(s->prog_name_tmp) > PROG_NAME_LENGTH)
@@ -68,12 +79,45 @@ int		grep_comm(t_a *s)
 {
 	int comment_point_start = 0;
 	int comment_point_stop = 0;
-	while (s->f[s->i] != '\"')
+	int tmp_i = 0;
+	while (s->f[s->i] == COMMENT_CMD_STRING[tmp_i])
+	{
 		s->i++;
+		tmp_i++;
+	}
+	while ((s->f[s->i] == ' ' || s->f[s->i] == '\t') &&
+			(s->f[s->i] != '\"' && s->f[s->i] != '\n'))
+	{
+		s->i++;
+		tmp_i++;
+	}
+	if (s->f[s->i] != '\"')
+	{
+		print_le(tmp_i, s);
+		return (0);
+	}
 	comment_point_start = s->i++;
-	while (s->f[s->i] != '\"')
+	while (s->f[s->i] != '\"' && s->f[s->i] != '\0')
+	{
 		s->i++;
-	comment_point_stop = s->i;
+		tmp_i++;
+	}
+	comment_point_stop = s->i++;
+	while (s->f[s->i] != '\n')
+	{
+		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
+		{
+			print_le(tmp_i, s);
+			return (0);
+		}
+		s->i++;
+		tmp_i++;
+	}
+	if (s->f[s->i] == '\0')
+	{
+		ft_putstr("expected '\"' for comment. File with no operations");
+		return (0);
+	}
 	s->comment_tmp = ft_strsub(s->f, comment_point_start,
 			comment_point_stop - comment_point_start);
 	s->i++;
@@ -167,53 +211,84 @@ unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2)
 	return (ret);
 }
 
+void	s32(t_a *s)
+{
+	while (s->f[s->i] == ' ' || s->f[s->i] == '\t')
+		s->i++;
+}
+
+void	scom(t_a *s)
+{
+	while (s->f[s->i] != '\n')
+		s->i++;
+	s->f[s->i] == '\n' ? s->curr_line++ : 0;
+}
+
+int		check_name(t_a *s)
+{
+	if (ft_strnequ(NAME_CMD_STRING, s->f + s->i,
+				ft_strlen(NAME_CMD_STRING)))
+	{
+		if (s->prog_name[0] == '\0')
+		{
+			if (grep_name(s) == 0)
+				return (0);
+		}
+		else
+		{
+			ft_putstr("Duplicate .name in file\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int		check_comm(t_a *s)
+{
+	if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
+				ft_strlen(COMMENT_CMD_STRING)))
+	{
+		if (s->comment[0] == '\0')
+		{
+			if (grep_comm(s) == 0)
+				return (0);
+		}
+		else
+		{
+			ft_putstr("Duplicate .comment in file");
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int		validate(t_a *s)
 {
+	int j = 0;
 	s->i = 0;
 	while (s->f[s->i] != '\0')
 	{
-		while (s->f[s->i] == ' ' || s->f[s->i] == '\t')
-			s->i++;
+		s32(s);
+//		printf("|%d|%c|		|%d|\n", s->i, s->f[s->i], j);
+//		if (j == 30)			//kostil
+//			break ;				//kostil
 		if (s->f[s->i] == COMMENT_CHAR)
-			while (s->f[s->i] != '\n')
-				s->i++;
-		s->f[s->i++] == '\n' ? s->curr_line++ : 0;
-		if (ft_strnequ(NAME_CMD_STRING, s->f + s->i, ft_strlen(NAME_CMD_STRING)))
+			scom(s);
+		else if (s->f[s->i] == '.')
 		{
-			if (s->prog_name[0] == '\0')
-			{
-				if (grep_name(s) == 0)
-					return (0);
-			}
-			else
-			{
-				ft_putstr("Duplicate .name in file\n");
+			if (!check_name(s))
 				return (0);
-			}
-		}
-		if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
-					ft_strlen(COMMENT_CMD_STRING)))
-		{
-			if (s->comment[0] == '\0')
-			{
-				if (grep_comm(s) == 0)
-					return (0);
-			}
-			else
-			{
-				ft_putstr("Duplicate .comment in file");
+			else if (!check_comm(s))
 				return (0);
-			}
 		}
-		if (check(s))
-			continue ;
-		else if (s->f[s->i] == '\n')
-			s->i++;
-		else
+		else if (!check(s))
 			return (0);
+//		else if (s->f[s->i] == '\n')
+//			s->i++ && s->curr_line++;
 		//write ft_bytejoin()
 		//check instructions && labels
 		s->i++;
+		j++;
 	}
 	return (1);
 }

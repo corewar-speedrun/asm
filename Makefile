@@ -6,13 +6,13 @@
 #    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 13:09:37 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/10/26 03:32:49 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/03 15:42:01 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 CC = gcc
 
@@ -38,7 +38,7 @@ OBJ = main.o validator.o
 all: $(NAME)
 
 %.o: %.c
-	@$(CC) $(FLAGS) -g -c -o $@ $<
+	@$(CC) $(FLAGS) -c -o $@ $<
 
 $(NAME): $(OBJ) $(LIB)
 	@$(CC) $(FLAGS) -o $(NAME) $(LIB) $(OBJ)

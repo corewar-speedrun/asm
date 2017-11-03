@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/03 17:04:15 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/03 20:11:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,9 @@ union			u_onebyte
 };
 
 int				validate(t_a *s);
+size_t			ft_bytelen(unsigned char *s);
+unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
+void			init2(t_a *s);
+void			init(t_a *s);
 
 #endif

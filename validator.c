@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/03 19:16:48 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/03 21:57:03 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,40 @@ int		grep_comm(t_a *s)
 
 int		ch_l(t_a *s)
 {
-	(void)s;
-	return (1);
+	size_t	n;
+	char	*cmp;
+
+	n = 0;
+//	printf("|%.10s|%d|\n", s->f + s->i, s->i);
+	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
+		s->i++;
+	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
+			(s->f + s->i)[n] != '\0')
+		n++;
+	cmp = ft_strsub(s->f + s->i, 0, n);
+	s->i += n;
+	n = 0;
+//	printf("label predict |%s|\n", cmp);
+	if (cmp[ft_strlen(cmp) - 1] != LABEL_CHAR)
+		return (1);
+	while (n < ft_strlen(cmp))
+	{
+		if (!ft_strchr(LABEL_CHARS, cmp[n]))
+		{
+			ft_putstr(cmp);
+			ft_putstr("Illegal label char at line ");
+			ft_putnbr(s->curr_line);
+			ft_putchar('\n');
+			return (0);
+		}
+		//функция пихания в лист операций
+		// и считывания аргументов для операции
+		//add_label(cmp, s);
+		printf("label found |%s|\n", cmp);
+		return (1);
+	}
+	ft_strdel(&cmp);
+	return (0);
 }
 
 int		ch_op(t_a *s)
@@ -148,9 +180,12 @@ int		ch_op(t_a *s)
 	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
 		s->i++;
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
-			(s->f + s->i)[n] != DIRECT_CHAR && (s->f + s->i)[n] != '\0')
+			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\0')
 		n++;
 	cmp = ft_strsub(s->f + s->i, 0, n);
+//	printf("operation predict |%s|\n", cmp);
+	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
+		return (ch_l(s));
 	s->i += n;
 	n = 0;
 	while (n < 16)
@@ -164,6 +199,9 @@ int		ch_op(t_a *s)
 			return (1);
 		}
 	}
+	while (s->f[s->i] != '\n')	//kostil
+		s->i++;					//kostil
+//	s->i++;						//kostil
 	ft_strdel(&cmp);
 	return (0);
 }
@@ -177,38 +215,6 @@ int		check(t_a *s)
 		return (1);
 	else
 		return (0);
-}
-
-size_t			ft_bytelen(unsigned char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
-
-unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2)
-{
-	unsigned char	*ret;
-	size_t			i;
-	size_t			j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	ret = (unsigned char*)malloc(ft_bytelen(s1) + ft_bytelen(s2) + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[j])
-		ret[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		ret[i++] = s2[j++];
-	ret[i] = '\0';
-	return (ret);
 }
 
 void	s32(t_a *s)
@@ -270,8 +276,6 @@ int		validate(t_a *s)
 	{
 		s32(s);
 //		printf("|%d|%c|		|%d|\n", s->i, s->f[s->i], j);
-//		if (j == 30)			//kostil
-//			break ;				//kostil
 		if (s->f[s->i] == COMMENT_CHAR)
 			scom(s);
 		else if (s->f[s->i] == '.')
@@ -285,7 +289,6 @@ int		validate(t_a *s)
 			return (0);
 //		else if (s->f[s->i] == '\n')
 //			s->i++ && s->curr_line++;
-		//write ft_bytejoin()
 		//check instructions && labels
 		s->i++;
 		j++;

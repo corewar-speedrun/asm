@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/03 21:57:03 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/04 12:11:46 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int		ch_op(t_a *s)
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\0')
 		n++;
-	cmp = ft_strsub(s->f + s->i, 0, n);
+	cmp = ft_strsub(s->f, s->i, n);
 //	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 		return (ch_l(s));
@@ -194,14 +194,11 @@ int		ch_op(t_a *s)
 		{
 			//функция пихания в лист операций
 			// и считывания аргументов для операции
-			//add_op(s->op[n - 1], s);
+			add_op(s->op[n - 1], s);
 			printf("operation found |%s|\n", cmp);
 			return (1);
 		}
 	}
-	while (s->f[s->i] != '\n')	//kostil
-		s->i++;					//kostil
-//	s->i++;						//kostil
 	ft_strdel(&cmp);
 	return (0);
 }

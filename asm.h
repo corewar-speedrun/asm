@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/03 20:11:47 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/04 11:52:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ typedef struct	s_l
 	struct s_l	*next;
 }				t_l;
 
+typedef struct	s_o
+{
+	char			*op;
+	unsigned char	opcode;
+	unsigned char	codage;
+	char			*args;
+	struct s_o		*next;
+}				t_o;
+
 typedef struct	s_a
 {
 	char			*f;
@@ -66,6 +75,8 @@ typedef struct	s_a
 	unsigned char	*output;
 	int				total_bytes;
 	char			**op;
+	struct s_o		*oplist;
+	struct s_l		*lablist;
 }				t_a;
 
 union			u_onebyte
@@ -79,5 +90,7 @@ size_t			ft_bytelen(unsigned char *s);
 unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
 void			init2(t_a *s);
 void			init(t_a *s);
+void			add_op(char *op, t_a *s);
+unsigned char	ret_opcode(char *op, t_a *s);
 
 #endif

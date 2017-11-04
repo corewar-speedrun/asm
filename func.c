@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 20:07:45 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/03 20:12:09 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/04 11:53:21 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ size_t			ft_bytelen(unsigned char *s)
 	while (s[n])
 		n++;
 	return (n);
+}
+
+unsigned char	ret_opcode(char *op, t_a *s)
+{
+	unsigned char	opcode;
+	int				i;
+
+	i = -1;
+	while (++i < 16)
+		ft_strequ(op, s->op[i]) ? opcode = i + 1 : 0;
+	return (opcode);
 }
 
 unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2)
@@ -78,4 +89,6 @@ void			init(t_a *s)
 	s->curr_line = 1;
 	s->i = 0;
 	s->total_bytes = 0;
+	s->oplist = NULL;
+	s->lablist = NULL;
 }

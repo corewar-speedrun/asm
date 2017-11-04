@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/04 11:52:47 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/04 17:03:23 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_header
 typedef struct	s_l
 {
 	char		*name;
-	//add smth else
+	//place in compiled code
 	struct s_l	*next;
 }				t_l;
 

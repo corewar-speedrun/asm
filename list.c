@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/04 12:08:56 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:11:04 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void	add_op(char *op, t_a *s)
 	while (s->f[s->i] != '\n')
 		s->i++;
 	new->args = ft_strsub(s->f, st_p, s->i - st_p);
+	//парсер аргументів з треканням виклику лейбла
+	//arg_pars();
 	printf("op |%s| args |%s|\n", op, new->args);
 }

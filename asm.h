@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/04 17:03:23 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:04:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ typedef struct	s_l
 	struct s_l	*next;
 }				t_l;
 
+typedef struct	s_lc
+{
+	char		*name;
+	//place in compiled code
+	struct s_l	*next;
+}				t_lc;
+
 typedef struct	s_o
 {
 	char			*op;
@@ -77,6 +84,7 @@ typedef struct	s_a
 	char			**op;
 	struct s_o		*oplist;
 	struct s_l		*lablist;
+	struct s_lc		*lcallist;
 }				t_a;
 
 union			u_onebyte

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 20:07:45 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/04 11:53:21 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/05 21:03:32 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void			init(t_a *s)
 	s->total_bytes = 0;
 	s->oplist = NULL;
 	s->lablist = NULL;
+	s->lcallist = NULL;
 }

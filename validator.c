@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/05 20:28:33 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 12:29:35 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,12 @@ int		validate(t_a *s)
 		//check instructions && labels
 		s->i++;
 		j++;
+	}
+	t_o *tmp = s->oplist;
+	while (tmp)
+	{
+		printf("|%s| ", tmp->op);
+		tmp = tmp->next;
 	}
 	return (1);
 }

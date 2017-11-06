@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/05 21:04:58 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 12:35:52 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_l
 typedef struct	s_lc
 {
 	char		*name;
-	//place in compiled code
+	//place where called from, in compiled code
 	struct s_l	*next;
 }				t_lc;
 

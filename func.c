@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 20:07:45 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/05 21:03:32 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 20:51:19 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void			init(t_a *s)
 	s->comment_tmp = NULL;
 	s->curr_line = 1;
 	s->i = 0;
+	s->output = NULL;
 	s->total_bytes = 0;
 	s->oplist = NULL;
 	s->lablist = NULL;

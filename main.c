@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/04 16:54:56 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 20:46:16 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ void	putmagic(t_a *s)
 	union u_onebyte	z;
 
 	z.magic = COREWAR_EXEC_MAGIC;
-	s->output = (unsigned char *)malloc(sizeof(unsigned char) * 5);
-	s->output[0] = z.bit[3];
-	s->output[1] = z.bit[2];
-	s->output[2] = z.bit[1];
-	s->output[3] = z.bit[0];
-	s->output[4] = '\0';
+	add_code(z.bit[3], s);
+	add_code(z.bit[2], s);
+	add_code(z.bit[1], s);
+	add_code(z.bit[0], s);
 	s->total_bytes = 4;
 }
 
@@ -144,9 +142,9 @@ int		compile(t_a *s)
 
 	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
 			O_TRUNC, 0666);
+	putmagic(s);
 	if (validate(s))
 	{
-		putmagic(s);
 		//TODO some func to compile and join s->output also s->total_bytes++
 		flag = writeout_fd(s, fd);
 		return (flag);

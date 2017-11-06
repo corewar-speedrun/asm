@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/06 14:53:10 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 20:51:21 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,25 @@ void	add_op(char *op, t_a *s)
 	//парсер аргументів з треканням виклику лейбла
 	//arg_pars();
 	printf("op |%s| args |%s|\n", op, new->args);
+}
+
+void	add_code(unsigned char cod, t_a *s)
+{
+	t_pro			*new;
+	t_pro			*tmp;
+
+	new = (t_pro*)malloc(sizeof(t_pro));
+	new->byte = cod;
+	new->nb = 0;
+	new->next = NULL;
+	if (!s->output)
+		s->output = new;
+	else
+	{
+		tmp = s->output;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->nb = tmp->nb + 1;
+	}
 }

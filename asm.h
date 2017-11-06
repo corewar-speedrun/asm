@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/06 12:35:52 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/06 20:41:46 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ typedef struct	s_lc
 	struct s_l	*next;
 }				t_lc;
 
+typedef struct	s_pro
+{
+	unsigned char	byte;
+	unsigned int	nb;
+	struct s_pro	*next;
+}				t_pro;
+
 typedef struct	s_o
 {
 	char			*op;
@@ -79,9 +86,9 @@ typedef struct	s_a
 	char			*comment_tmp;
 	int				curr_line;
 	int				i;
-	unsigned char	*output;
 	int				total_bytes;
 	char			**op;
+	struct s_pro	*output;
 	struct s_o		*oplist;
 	struct s_l		*lablist;
 	struct s_lc		*lcallist;
@@ -99,6 +106,7 @@ unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
 void			init2(t_a *s);
 void			init(t_a *s);
 void			add_op(char *op, t_a *s);
+void			add_code(unsigned char cod, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 
 #endif

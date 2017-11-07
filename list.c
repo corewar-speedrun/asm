@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/07 17:58:31 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/07 18:20:51 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	arg_parsa(unsigned char op, char *a)
 {
 	if (op == 9)
-		p_zjump(a);
+		p_zjmp(a);
 	else if (op == 10)
 		p_ldi(a);
 	else if (op == 11)

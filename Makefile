@@ -6,7 +6,7 @@
 #    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 13:09:37 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/11/04 11:05:56 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/07 17:01:34 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIB = libft/ft_atoi.o libft/ft_bzero.o libft/ft_isalnum.o libft/ft_isalpha.o\
 	  libft/ft_tolower.o libft/ft_toupper.o libft/get_next_line.o\
 	  libft/ft_itoa_base.o
 
-OBJ = main.o validator.o func.o list.o
+OBJ = main.o validator.o func.o list.o, arg_parce.o
 
 all: $(NAME)
 

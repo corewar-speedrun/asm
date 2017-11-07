@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/06 20:41:46 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/07 16:29:43 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ size_t			ft_bytelen(unsigned char *s);
 unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
 void			init2(t_a *s);
 void			init(t_a *s);
+void			s32(t_a *s);
 void			add_op(char *op, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);

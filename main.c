@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/06 20:46:16 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/07 16:01:50 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,22 @@ int		read_file(t_a *s)
 
 int		writeout_fd(t_a *s, int fd)
 {
-	int	i;
+	//LISTS OUTPUT!!!!
+	int		i;
+	t_pro	*tmp;
 
+	tmp = s->output;
 	i = -1;
 	if (fd < 3)
 	{
 		ft_putstr("Impossible to write to file! I/O/E stream detected\n");
 		return (0);
 	}
-	while (++i < s->total_bytes)
-		write(fd, &s->output[i], 1);
+	while (tmp)
+	{
+		write(fd, &tmp->byte, 1);
+		tmp = tmp->next;
+	}
 	return (1);
 }
 
@@ -142,10 +148,16 @@ int		compile(t_a *s)
 
 	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
 			O_TRUNC, 0666);
-	putmagic(s);
 	if (validate(s))
 	{
-		//TODO some func to compile and join s->output also s->total_bytes++
+//		TODO
+//		putmagic(s);
+//		putname(s);
+//		putident(s);
+//		putsize(s);
+//		putcomment(s);
+//		putident(s);
+//		putcode(s);
 		flag = writeout_fd(s, fd);
 		return (flag);
 	}

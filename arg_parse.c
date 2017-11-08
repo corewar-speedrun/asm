@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 13:40:03 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 15:59:32 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,46 @@ int	p_live(char *a, t_a *s, int i, int j)
 		return (dir_exp(a[i - 1]));
 	if (a[i] == LABEL_CHAR)
 	{
-		while (ft_strchr(LABEL_CHARS, a[j]))
+		while (ft_strchr(LABEL_CHARS, a[i + j]))
 			j++;
 		l = ft_strsub(a, i, j);
 		add_lc(l, s);
 		ft_strdel(&l);
 		i += j;
+		add_4z(s);
 	}
-	while (a[i] != '\n')
+	else
 	{
-		if (a[i] == '#')
-			while (a[i] != '\n' && a[i] != '\0')
-				i++;
-		i++;
+		if (a[i] == '-' && ft_isdigit(a[i + 1]))
+		{
+			while (ft_isdigit(a[i + 1 + j]))
+				j++;
+			l = ft_strsub(a, i, j + 1);
+			add_4b(ft_atoi(l), s);
+			ft_strdel(&l);
+		}
+		else if (ft_isdigit(a[i]))
+		{
+			printf("here\n");
+			while (ft_isdigit(a[i + j]))
+				j++;
+			l = ft_strsub(a, i, j);
+			add_4b(ft_atoi(l), s);
+			ft_strdel(&l);
+		}
+		else
+			return (num_exp(a[i]));
 	}
-	add_4b(s);
+	while (a[i] != '\0')
+	{
+		while (a[i] == ' ' || a[i] == '\t')
+			i++;
+		if (a[i] == '#')
+			while (a[i] != '\0')
+				i++;
+		else
+			return (nc_exp(a[i]));
+	}
 	return (1);
 }
 

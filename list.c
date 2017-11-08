@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 13:27:00 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 15:51:35 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		add_op(char *op, t_a *s)
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else
-		flag = 0;
+		return (1);
 	ft_strdel(&args);
 	printf("op |%s| args |%s|\n", op, args);
 	return (flag);
@@ -98,26 +98,26 @@ void	add_code(unsigned char cod, t_a *s)
 	}
 }
 
-void	add_4b(t_a *s)
+void	add_4b(int add, t_a *s)
 {
-	t_pro			*new;
-	t_pro			*tmp;
 
-	new = (t_pro*)malloc(sizeof(t_pro));
-	new->byte = 0;
-	new->nb = s->total_bytes++;
-	new->next = new;
-	new->next->next = new;
-	new->next->next->next = new;
-	if (!s->output)
-		s->output = new;
-	else
-	{
-		tmp = s->output;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+	union u_onebyte	z;
+
+	z.magic = add;
+	add_code(z.bit[3], s);
+	add_code(z.bit[2], s);
+	add_code(z.bit[1], s);
+	add_code(z.bit[0], s);
+	s->total_bytes += 4;
+}
+
+void	add_4z(t_a *s)
+{
+	add_code(0, s);
+	add_code(0, s);
+	add_code(0, s);
+	add_code(0, s);
+	s->total_bytes += 4;
 }
 
 void	add_lc(char *name, t_a *s)

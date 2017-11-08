@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:31:28 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 11:34:13 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 15:30:51 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@ int	dir_exp(char a)
 		ft_putstr("newline break");
 	else
 		ft_putchar(a);
+	ft_putstr("\"\n");
+	return (0);
+}
+
+int	nc_exp(char a)
+{
+	ft_putstr("Expected newline break or ");
+	ft_putchar(COMMENT_CHAR);
+	ft_putstr(", got \"");
+	ft_putchar(a);
+	ft_putstr("\"\n");
+	return (0);
+}
+
+int	num_exp(char a)
+{
+	ft_putstr("Expected number, got \"");
+	ft_putchar(a);
 	ft_putstr("\"\n");
 	return (0);
 }

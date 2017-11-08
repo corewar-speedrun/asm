@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/07 18:20:54 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:36:49 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,25 +106,27 @@ unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
 void			init2(t_a *s);
 void			init(t_a *s);
 void			s32(t_a *s);
-void			add_op(char *op, t_a *s);
+int				add_op(char *op, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 
-void			p_live(char *a);
-void			p_ld(char *a);
-void			p_st(char *a);
-void			p_add(char *a);
-void			p_sub(char *a);
-void			p_and(char *a);
-void			p_or(char *a);
-void			p_xor(char *a);
-void			p_zjmp(char *a);
-void			p_ldi(char *a);
-void			p_sti(char *a);
-void			p_fork(char *a);
-void			p_lld(char *a);
-void			p_lldi(char *a);
-void			p_lfork(char *a);
-void			p_aff(char *a);
+int				dir_exp(char a);
+
+int				p_live(char *a);
+int				p_ld(char *a);
+int				p_st(char *a);
+int				p_add(char *a);
+int				p_sub(char *a);
+int				p_and(char *a);
+int				p_or(char *a);
+int				p_xor(char *a);
+int				p_zjmp(char *a);
+int				p_ldi(char *a);
+int				p_sti(char *a);
+int				p_fork(char *a);
+int				p_lld(char *a);
+int				p_lldi(char *a);
+int				p_lfork(char *a);
+int				p_aff(char *a);
 
 #endif

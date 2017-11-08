@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/07 15:37:59 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 11:12:53 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,11 @@ int		ch_op(t_a *s)
 		{
 			//функция пихания в лист операций
 			// и считывания аргументов для операции
-			add_op(s->op[n - 1], s);
 			//printf("operation found |%s|\n", cmp);
-			return (1);
+			if (add_op(s->op[n - 1], s))
+				return (1);
+			else
+				return (0);
 		}
 	}
 	ft_strdel(&cmp);

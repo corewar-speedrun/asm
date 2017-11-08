@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 15:59:32 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 20:43:45 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	p_live(char *a, t_a *s, int i, int j)
 		i++;
 	if (a[i++] != DIRECT_CHAR)
 		return (dir_exp(a[i - 1]));
-	if (a[i] == LABEL_CHAR)
+	if (a[i++] == LABEL_CHAR)
 	{
-		while (ft_strchr(LABEL_CHARS, a[i + j]))
+		while (ft_strchr(LABEL_CHARS, a[i + j]) && a[i + j] != 0)
 			j++;
 		l = ft_strsub(a, i, j);
+		printf("|%s|%d|%d|\n", l, i, j);
 		add_lc(l, s);
 		ft_strdel(&l);
 		i += j;
@@ -42,15 +43,15 @@ int	p_live(char *a, t_a *s, int i, int j)
 		}
 		else if (ft_isdigit(a[i]))
 		{
-			printf("here\n");
 			while (ft_isdigit(a[i + j]))
 				j++;
 			l = ft_strsub(a, i, j);
 			add_4b(ft_atoi(l), s);
 			ft_strdel(&l);
 		}
-		else
+		else if (a[i] != 0)
 			return (num_exp(a[i]));
+		i += j;
 	}
 	while (a[i] != '\0')
 	{

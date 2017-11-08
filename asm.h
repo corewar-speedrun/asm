@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 15:23:31 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 20:57:53 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_header
 typedef struct	s_l
 {
 	char		*name;
-	//place in compiled code
+	int			defined;
 	struct s_l	*next;
 }				t_l;
 
@@ -55,7 +55,6 @@ typedef struct	s_lc
 {
 	char		*name;
 	int			called_on;
-	//place where called from, in compiled code
 	struct s_lc	*next;
 }				t_lc;
 
@@ -108,6 +107,7 @@ void			init2(t_a *s);
 void			init(t_a *s);
 void			s32(t_a *s);
 int				add_op(char *op, t_a *s);
+int				add_la(char *l, t_a *s);
 void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);

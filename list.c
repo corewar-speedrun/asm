@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 15:51:35 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 21:19:15 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,26 @@ int		add_op(char *op, t_a *s)
 	else
 		return (1);
 	ft_strdel(&args);
-	printf("op |%s| args |%s|\n", op, args);
+//	printf("op |%s| args |%s|\n", op, args);
+	return (flag);
+}
+
+int		add_la(char *l, t_a *s)
+{
+	t_l		*new;
+	t_l		*tmp;
+
+	while (s->f[s->i] != '\n')
+		s->i++;
+	args = ft_strsub(s->f, st_p, s->i - st_p);
+	//парсер аргументів з треканням виклику лейбла
+	//	і вираховуванням codage
+	if ()
+		flag = 1;
+	else
+		return (1);
+	ft_strdel(&args);
+//	printf("op |%s| args |%s|\n", op, args);
 	return (flag);
 }
 

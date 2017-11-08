@@ -6,13 +6,13 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 11:40:11 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 13:27:00 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		arg_parsa(unsigned char op, char *a)
+int		arg_parsa(unsigned char op, char *a/*, t_a *s*/)
 {
 	if (op == 9)
 		return (p_zjmp(a));
@@ -30,12 +30,13 @@ int		arg_parsa(unsigned char op, char *a)
 		return (p_lfork(a));
 	else if (op == 16)
 		return (p_aff(a));
+	return (0);
 }
 
-int		arg_pars(unsigned char op, char *a)
+int		arg_pars(unsigned char op, char *a, t_a *s)
 {
 	if (op == 1)
-		return (p_live(a));
+		return (p_live(a, s, 0, 0));
 	else if (op == 2)
 		return (p_ld(a));
 	else if (op == 3)
@@ -51,7 +52,8 @@ int		arg_pars(unsigned char op, char *a)
 	else if (op == 8)
 		return (p_xor(a));
 	else
-		return (arg_parsa(op, a));
+		return (arg_parsa(op, a/*, s*/));
+	return (0);
 }
 
 int		add_op(char *op, t_a *s)
@@ -67,7 +69,7 @@ int		add_op(char *op, t_a *s)
 	args = ft_strsub(s->f, st_p, s->i - st_p);
 	//парсер аргументів з треканням виклику лейбла
 	//	і вираховуванням codage
-	if (arg_pars(ret_opcode(op, s), args))
+	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else
 		flag = 0;
@@ -96,20 +98,42 @@ void	add_code(unsigned char cod, t_a *s)
 	}
 }
 
-void	add_lc(char<F8>, t_a *s)
+void	add_4b(t_a *s)
 {
 	t_pro			*new;
 	t_pro			*tmp;
 
 	new = (t_pro*)malloc(sizeof(t_pro));
-	new->byte = cod;
+	new->byte = 0;
 	new->nb = s->total_bytes++;
-	new->next = NULL;
+	new->next = new;
+	new->next->next = new;
+	new->next->next->next = new;
 	if (!s->output)
 		s->output = new;
 	else
 	{
 		tmp = s->output;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void	add_lc(char *name, t_a *s)
+{
+	t_lc			*new;
+	t_lc			*tmp;
+
+	new = (t_lc*)malloc(sizeof(t_lc));
+	new->name = ft_strdup(name);
+	new->called_on = s->total_bytes;
+	new->next = NULL;
+	if (!s->lcallist)
+		s->lcallist = new;
+	else
+	{
+		tmp = s->lcallist;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;

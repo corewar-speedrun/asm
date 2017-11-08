@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 11:36:49 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/08 13:26:09 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ typedef struct	s_l
 typedef struct	s_lc
 {
 	char		*name;
+	int			called_on;
 	//place where called from, in compiled code
-	struct s_l	*next;
+	struct s_lc	*next;
 }				t_lc;
 
 typedef struct	s_pro
@@ -107,12 +108,14 @@ void			init2(t_a *s);
 void			init(t_a *s);
 void			s32(t_a *s);
 int				add_op(char *op, t_a *s);
+void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
+void			add_4b(t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 
 int				dir_exp(char a);
 
-int				p_live(char *a);
+int				p_live(char *a, t_a *s, int i, int j);
 int				p_ld(char *a);
 int				p_st(char *a);
 int				p_add(char *a);

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 20:58:02 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 17:13:41 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,12 +180,17 @@ int		ch_op(t_a *s)
 	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
 		s->i++;
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
-			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\0')
+			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\n')
 		n++;
 	cmp = ft_strsub(s->f, s->i, n);
-//	printf("operation predict |%s|\n", cmp);
+	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
-		return (ch_l(s));
+	{
+		printf("got lable |%s|\n", cmp);
+		add_la(cmp, s);
+		s->i += n;
+		return (1);
+	}
 	s->i += n;
 	n = 0;
 	while (n < 16)
@@ -292,11 +297,10 @@ int		validate(t_a *s)
 		s->i++;
 		j++;
 	}
-//	t_pro *tmp = s->output;
+//	t_l *tmp = s->lablist;
 //	while (tmp)
 //	{
-//		printf("lol\n");
-//		printf("[%x|%d] ", tmp->byte, tmp->nb);
+//		printf("[%x|%s] ", tmp->defined, tmp->name);
 //		tmp = tmp->next;
 //	}
 	return (1);

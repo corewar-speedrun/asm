@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 21:19:15 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 17:19:49 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,39 +62,43 @@ int		add_op(char *op, t_a *s)
 	char	*args;
 	int		flag;
 
+	printf("operation |%s|", op);
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
 	while (s->f[s->i] != '\n')
 		s->i++;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
+	printf(" args |%s|\n", args);
 	//парсер аргументів з треканням виклику лейбла
 	//	і вираховуванням codage
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else
-		return (1);
+		flag = 0;
 	ft_strdel(&args);
 //	printf("op |%s| args |%s|\n", op, args);
 	return (flag);
 }
 
-int		add_la(char *l, t_a *s)
+void	add_la(char *l, t_a *s)
 {
 	t_l		*new;
 	t_l		*tmp;
 
-	while (s->f[s->i] != '\n')
-		s->i++;
-	args = ft_strsub(s->f, st_p, s->i - st_p);
-	//парсер аргументів з треканням виклику лейбла
-	//	і вираховуванням codage
-	if ()
-		flag = 1;
+	//трекання дефайну лейбла
+	new = (t_l*)malloc(sizeof(t_l));
+	new->name = ft_strdup(l);
+	new->defined = s->total_bytes;
+	new->next = NULL;
+	if (!s->lablist)
+		s->lablist = new;
 	else
-		return (1);
-	ft_strdel(&args);
-//	printf("op |%s| args |%s|\n", op, args);
-	return (flag);
+	{
+		tmp = s->lablist;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 }
 
 void	add_code(unsigned char cod, t_a *s)

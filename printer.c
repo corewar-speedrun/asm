@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:31:28 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 15:30:51 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:38:13 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,11 @@ int	num_exp(char a)
 	ft_putstr("Expected number, got \"");
 	ft_putchar(a);
 	ft_putstr("\"\n");
+	return (0);
+}
+
+int	er_stru(void)
+{
+	ft_putstr("File should end with newline, but NULL-Terminator found\n");
 	return (0);
 }

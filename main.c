@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/07 16:01:50 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:39:19 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ int		compile(t_a *s)
 
 	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
 			O_TRUNC, 0666);
+	if (s->f[ft_strlen(s->f) - 1] != '\n')
+		return (er_stru());
 	if (validate(s))
 	{
 //		TODO

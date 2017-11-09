@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 20:57:53 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 15:49:24 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			init2(t_a *s);
 void			init(t_a *s);
 void			s32(t_a *s);
 int				add_op(char *op, t_a *s);
-int				add_la(char *l, t_a *s);
+void			add_la(char *l, t_a *s);
 void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
@@ -117,6 +117,7 @@ unsigned char	ret_opcode(char *op, t_a *s);
 int				dir_exp(char a);
 int				nc_exp(char a);
 int				num_exp(char a);
+int				er_stru(void);
 
 int				p_live(char *a, t_a *s, int i, int j);
 int				p_ld(char *a);

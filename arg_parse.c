@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/08 20:43:45 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 17:33:48 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ int	p_live(char *a, t_a *s, int i, int j)
 {
 	char	*l;
 
+	printf("zashlo\n");
 	while (a[i] == ' ' || a[i] == '\t')
 		i++;
 	if (a[i++] != DIRECT_CHAR)
 		return (dir_exp(a[i - 1]));
-	if (a[i++] == LABEL_CHAR)
+	if (a[i] == LABEL_CHAR)
 	{
+		i++;
 		while (ft_strchr(LABEL_CHARS, a[i + j]) && a[i + j] != 0)
 			j++;
 		l = ft_strsub(a, i, j);
@@ -33,8 +35,10 @@ int	p_live(char *a, t_a *s, int i, int j)
 	}
 	else
 	{
+		printf("|%s|\n", a + i);
 		if (a[i] == '-' && ft_isdigit(a[i + 1]))
 		{
+			printf("chislo -\n");
 			while (ft_isdigit(a[i + 1 + j]))
 				j++;
 			l = ft_strsub(a, i, j + 1);
@@ -43,6 +47,7 @@ int	p_live(char *a, t_a *s, int i, int j)
 		}
 		else if (ft_isdigit(a[i]))
 		{
+			printf("chislo +\n");
 			while (ft_isdigit(a[i + j]))
 				j++;
 			l = ft_strsub(a, i, j);

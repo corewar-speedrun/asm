@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 17:33:48 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:18:50 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,39 @@ int	p_ldi(char *a)
 	return (a[0]);
 }
 
+char	*ft_strstrip(char *s, int i, int j)
+{
+	char	*ret;
+	char	*tmp;
+	int		len;
+
+	len = 0;
+	tmp = ft_strtrim(s);
+	while (tmp[i] != '\0')
+	{
+		if (tmp[i] != ' ' && tmp[i] != '\t')
+			len++;
+		i++;
+	}
+	ret = ft_strnew(len);
+	i = 0;
+	while (j < len)
+	{
+		if (tmp[i] != ' ' && tmp[i] != '\t')
+			ret[j++] = tmp[i++];
+		else
+			i++;
+	}
+	return (ret);
+}
+
 int	p_sti(char *a)
 {
+	char	*tmp1;
+	char	**tmp2;
+
+	tmp1 = ft_strstrip(a, 0, 0);
+	printf("~~~~~~~~~~~~~~~~~~sti arg |%s|\n", tmp1);
 	return (a[0]);
 }
 

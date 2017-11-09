@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 19:18:50 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 22:55:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,16 @@ int	p_ldi(char *a)
 	return (a[0]);
 }
 
+int		split_cnt(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != NULL)
+		i++;
+	return (i);
+}
+
 char	*ft_strstrip(char *s, int i, int j)
 {
 	char	*ret;
@@ -148,6 +158,17 @@ int	p_sti(char *a)
 	char	**tmp2;
 
 	tmp1 = ft_strstrip(a, 0, 0);
+	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
+	if (split_cnt(tmp2) != 3)
+		return (three_ae(split_cnt(tmp2)));
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	if (!eval_reg(tmp2[0]))
+		return ();
+	if (!eval_reg(tmp2[1]) && !eval_dir(tmp2[1]) && !eval_ind(tmp2[1]))
+		return ();
+	if (!eval_dir(tmp2[2]) && !eval_reg(tmp2[2]))
+		return ();
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	printf("~~~~~~~~~~~~~~~~~~sti arg |%s|\n", tmp1);
 	return (a[0]);
 }

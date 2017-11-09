@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 15:49:24 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/09 19:35:45 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int				dir_exp(char a);
 int				nc_exp(char a);
 int				num_exp(char a);
 int				er_stru(void);
+int				three_ae(int a);
 
 int				p_live(char *a, t_a *s, int i, int j);
 int				p_ld(char *a);

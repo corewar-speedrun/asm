@@ -1,55 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.c                                          :+:      :+:    :+:   */
+/*   printer2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 11:31:28 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 18:08:20 by dmaznyts         ###   ########.fr       */
+/*   Created: 2017/11/10 17:31:19 by dmaznyts          #+#    #+#             */
+/*   Updated: 2017/11/10 18:46:05 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	dir_exp(char *a)
+int	reg_exp(char *a)
 {
-	ft_putstr("Expected ");
-	ft_putchar(DIRECT_CHAR);
-	ft_putstr(", got \"");
+	ft_putstr("Expected register, got \"");
 	ft_putstr(a);
 	ft_putstr("\"\n");
 	return (0);
 }
 
-int	nc_exp(char a)
+int	ind_exp(char *a)
 {
-	ft_putstr("Expected newline break or ");
-	ft_putchar(COMMENT_CHAR);
-	ft_putstr(", got \"");
-	ft_putchar(a);
+	ft_putstr("Expected indirect, got \"");
+	ft_putstr(a);
 	ft_putstr("\"\n");
 	return (0);
 }
 
-int	num_exp(char a)
+int	arg_exp(char *a)
 {
-	ft_putstr("Expected number, got \"");
-	ft_putchar(a);
+	ft_putstr("Expected argument, got \"");
+	ft_putstr(a);
 	ft_putstr("\"\n");
 	return (0);
 }
 
-int	er_stru(void)
+int	reg_bad(int got)
 {
-	ft_putstr("File should end with newline, but NULL-Terminator found\n");
-	return (0);
-}
-
-int	three_ae(int a)
-{
-	ft_putstr("Expected three args, got \"");
-	ft_putnbr(a);
+	ft_putstr("Bad register number, got \"");
+	ft_putnbr(got);
+	ft_putstr("\", maximum \"");
+	ft_putnbr(REG_NUMBER);
 	ft_putstr("\"\n");
 	return (0);
 }

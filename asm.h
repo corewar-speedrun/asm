@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 19:35:45 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/10 19:44:16 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef struct	s_header
 	char				comment[COMMENT_LENGTH + 1];
 }				t_header;
 
+union			u_onebyte
+{
+	unsigned char	bit[4];
+	unsigned int	magic;
+};
+
 typedef struct	s_l
 {
 	char		*name;
@@ -74,6 +80,12 @@ typedef struct	s_o
 	struct s_o		*next;
 }				t_o;
 
+typedef struct	s_arg
+{
+	int				arg[3];
+	union u_onebyte	codage;
+}				t_arg;
+
 typedef struct	s_a
 {
 	char			*f;
@@ -94,12 +106,6 @@ typedef struct	s_a
 	struct s_lc		*lcallist;
 }				t_a;
 
-union			u_onebyte
-{
-	unsigned char	bit[4];
-	unsigned int	magic;
-};
-
 int				validate(t_a *s);
 size_t			ft_bytelen(unsigned char *s);
 unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2);
@@ -113,8 +119,14 @@ void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
 void			add_4b(int add, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
+int				split_cnt(char **s);
+char			*ft_strstrip(char *s, int i, int j);
 
-int				dir_exp(char a);
+int				arg_exp(char *a);
+int				dir_exp(char *a);
+int				reg_exp(char *a);
+int				ind_exp(char *a);
+int				reg_bad(int got);
 int				nc_exp(char a);
 int				num_exp(char a);
 int				er_stru(void);
@@ -136,5 +148,10 @@ int				p_lld(char *a);
 int				p_lldi(char *a);
 int				p_lfork(char *a);
 int				p_aff(char *a);
+
+int				eval_reg(char *s, t_arg *a, int w);
+int				eval_dir(char *s, t_arg *a, int w);
+int				eval_ind(char *s, t_arg *a, int w);
+int				eval_lable(void);
 
 #endif

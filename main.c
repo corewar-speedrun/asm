@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 15:39:19 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/10 18:12:04 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ void	putmagic(t_a *s)
 	add_code(z.bit[1], s);
 	add_code(z.bit[0], s);
 	s->total_bytes = 4;
-}
-
-int		split_cnt(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != NULL)
-		i++;
-	return (i);
 }
 
 char	*ft_strndup(char *src)

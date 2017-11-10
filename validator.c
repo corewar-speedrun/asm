@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/09 17:13:41 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/10 21:01:12 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int		ch_l(t_a *s)
 		//функция пихания в лист лейблов
 		// и считывания операции, если операции нет - еррор
 		add_la(cmp, s);
-		printf("label found |%s|\n", cmp);
+//		printf("label found |%s|\n", cmp);
 		return (1);
 	}
 	ft_strdel(&cmp);
@@ -183,10 +183,10 @@ int		ch_op(t_a *s)
 			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\n')
 		n++;
 	cmp = ft_strsub(s->f, s->i, n);
-	printf("operation predict |%s|\n", cmp);
+//	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
-		printf("got lable |%s|\n", cmp);
+//		printf("got lable |%s|\n", cmp);
 		add_la(cmp, s);
 		s->i += n;
 		return (1);

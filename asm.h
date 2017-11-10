@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 19:44:16 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/10 21:46:55 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct	s_o
 typedef struct	s_arg
 {
 	int				arg[3];
-	union u_onebyte	codage;
+	unsigned char	codage;
 }				t_arg;
 
 typedef struct	s_a
@@ -117,6 +117,7 @@ void			add_la(char *l, t_a *s);
 void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
+void			add_2z(t_a *s);
 void			add_4b(int add, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 int				split_cnt(char **s);
@@ -142,7 +143,7 @@ int				p_or(char *a);
 int				p_xor(char *a);
 int				p_zjmp(char *a);
 int				p_ldi(char *a);
-int				p_sti(char *a);
+int				p_sti(char *a, t_a *s);
 int				p_fork(char *a);
 int				p_lld(char *a);
 int				p_lldi(char *a);
@@ -150,8 +151,8 @@ int				p_lfork(char *a);
 int				p_aff(char *a);
 
 int				eval_reg(char *s, t_arg *a, int w);
-int				eval_dir(char *s, t_arg *a, int w);
-int				eval_ind(char *s, t_arg *a, int w);
+int				eval_dir(char *s, t_arg *a, int w, t_a *st);
+int				eval_ind(char *s, t_arg *a, int w, t_a *st);
 int				eval_lable(void);
 
 #endif

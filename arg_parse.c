@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 19:48:57 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/10 21:49:53 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	p_live(char *a, t_a *s, int i, int j)
 {
 	char	*l;
 
-	printf("zashlo\n");
 	while (a[i] == ' ' || a[i] == '\t')
 		i++;
 	if (a[i++] != DIRECT_CHAR)
@@ -27,7 +26,6 @@ int	p_live(char *a, t_a *s, int i, int j)
 		while (ft_strchr(LABEL_CHARS, a[i + j]) && a[i + j] != 0)
 			j++;
 		l = ft_strsub(a, i, j);
-		printf("|%s|%d|%d|\n", l, i, j);
 		add_lc(l, s);
 		ft_strdel(&l);
 		i += j;
@@ -35,10 +33,8 @@ int	p_live(char *a, t_a *s, int i, int j)
 	}
 	else
 	{
-		printf("|%s|\n", a + i);
 		if (a[i] == '-' && ft_isdigit(a[i + 1]))
 		{
-			printf("chislo -\n");
 			while (ft_isdigit(a[i + 1 + j]))
 				j++;
 			l = ft_strsub(a, i, j + 1);
@@ -47,7 +43,6 @@ int	p_live(char *a, t_a *s, int i, int j)
 		}
 		else if (ft_isdigit(a[i]))
 		{
-			printf("chislo +\n");
 			while (ft_isdigit(a[i + j]))
 				j++;
 			l = ft_strsub(a, i, j);
@@ -116,26 +111,48 @@ int	p_ldi(char *a)
 	return (a[0]);
 }
 
-int	p_sti(char *a)
+int	p_sti(char *a, t_a *s)
 {
 	char	*tmp1;
 	char	**tmp2;
-	t_arg	arg[3];
+	t_arg	arg;
 
+	ft_bzero(&arg, sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
 		return (three_ae(split_cnt(tmp2)));
-	if (!eval_reg(tmp2[0], &arg[0], 0))
+	if (!eval_reg(tmp2[0], &arg, 0))
 		return (reg_exp(tmp2[0]));
-	if (!eval_reg(tmp2[1], &arg[1], 1) && !eval_dir(tmp2[1], &arg[1], 1) &&
-			!eval_ind(tmp2[1], &arg[1], 1))
+	if (tmp2[1][0] == 'r')
+	{
+		if (!eval_reg(tmp2[1], &arg, 1))
+			return (0);
+	}
+	else if (tmp2[1][0] == '%')
+	{
+		if (!eval_dir(tmp2[1], &arg, 1, s))
+			return (0);
+	}
+	else if (!eval_ind(tmp2[1], &arg, 1, s))
 		return (arg_exp(tmp2[1]));
-	if (!eval_dir(tmp2[2], &arg[2], 2) && !eval_reg(tmp2[2], &arg[2], 2))
-		return (0);
-	printf("arg[%d], codage [%d], |%x|%x|%x|\n", 0, arg[0].codage.magic,
-			arg[0].arg[0], arg[0].arg[1], arg[0].arg[2]);
-	printf("~~~~~~~~~~~~~~~~~~sti arg |%s|\n", tmp1);
+	if (tmp2[2][0] == '%')
+	{
+		if (!eval_dir(tmp2[2], &arg, 2, s))
+			return (0);
+	}
+	else if (tmp2[2][0] == 'r')
+		if (!eval_reg(tmp2[2], &arg, 2))
+			return (0);
+	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
+			arg.arg[0], arg.arg[1], arg.arg[2]);
+	//TODO	make it ifelse
+	add_code(arg.codage, s);
+	add_code(arg.arg[0], s);
+	add_2z(s);
+	add_code(0, s);
+	add_code(arg.arg[2], s);
+	printf("~~~~~~~~~~~sti arg |%s|\n", tmp1);
 	return (a[0]);
 }
 

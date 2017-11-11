@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 18:31:57 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/11 19:34:19 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,23 +133,24 @@ int				nc_exp(char a);
 int				num_exp(char a);
 int				er_stru(void);
 int				three_ae(int a);
+int				two_ae(int a);
 
-int				p_live(char *a, t_a *s, int i, int j);
-int				p_ld(char *a);
-int				p_st(char *a);
-int				p_add(char *a);
-int				p_sub(char *a);
+int				p_live(char *a, t_a *s);
+int				p_ld(char *a, t_a *s);
+int				p_st(char *a, t_a *s);
+int				p_add(char *a, t_a *s);
+int				p_sub(char *a, t_a *s);
 int				p_and(char *a, t_a *s);
-int				p_or(char *a);
-int				p_xor(char *a);
+int				p_or(char *a, t_a *s);
+int				p_xor(char *a, t_a *s);
 int				p_zjmp(char *a, t_a *s);
-int				p_ldi(char *a);
+int				p_ldi(char *a, t_a *s);
 int				p_sti(char *a, t_a *s);
-int				p_fork(char *a);
-int				p_lld(char *a);
-int				p_lldi(char *a);
-int				p_lfork(char *a);
-int				p_aff(char *a);
+int				p_fork(char *a, t_a *s);
+int				p_lld(char *a, t_a *s);
+int				p_lldi(char *a, t_a *s);
+int				p_lfork(char *a, t_a *s);
+int				p_aff(char *a, t_a *s);
 
 int				eval_reg(char *s, t_arg *a, int w);
 int				eval_dir(char *s, t_arg *a, int w, t_a *st);

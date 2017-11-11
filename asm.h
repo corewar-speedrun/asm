@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 21:46:55 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/11 18:31:57 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
 void			add_2z(t_a *s);
+void			add_2b(int a, t_a *s);
 void			add_4b(int add, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 int				split_cnt(char **s);
@@ -138,10 +139,10 @@ int				p_ld(char *a);
 int				p_st(char *a);
 int				p_add(char *a);
 int				p_sub(char *a);
-int				p_and(char *a);
+int				p_and(char *a, t_a *s);
 int				p_or(char *a);
 int				p_xor(char *a);
-int				p_zjmp(char *a);
+int				p_zjmp(char *a, t_a *s);
 int				p_ldi(char *a);
 int				p_sti(char *a, t_a *s);
 int				p_fork(char *a);

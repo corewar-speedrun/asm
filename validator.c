@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 21:01:12 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/11 17:18:31 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,11 +297,18 @@ int		validate(t_a *s)
 		s->i++;
 		j++;
 	}
-//	t_l *tmp = s->lablist;
-//	while (tmp)
-//	{
-//		printf("[%x|%s] ", tmp->defined, tmp->name);
-//		tmp = tmp->next;
-//	}
+	t_l *tmp = s->lablist;
+	while (tmp)
+	{
+		printf("[%d|%s] ", tmp->defined, tmp->name);
+		tmp = tmp->next;
+	}
+	printf("\n");
+	t_lc *tmp2 = s->lcallist;
+	while (tmp2)
+	{
+		printf("[%d|%s] ", tmp2->called_on, tmp2->name);
+		tmp2 = tmp2->next;
+	}
 	return (1);
 }

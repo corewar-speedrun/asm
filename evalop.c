@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:13:17 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 21:32:04 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/11 16:46:15 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	{
 		i++;
 		if (s[i] == LABEL_CHAR)
-			add_lc(s, st);
+			add_lc(s + i + 1, st);
 		else
 			a->arg[w] = ft_atoi(s + 1);
 		a->codage = a->codage | DIR_CODE;

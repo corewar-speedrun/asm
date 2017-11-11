@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 21:46:06 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/11 18:15:12 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		arg_parsa(unsigned char op, char *a, t_a *s)
 {
 	if (op == 9)
-		return (p_zjmp(a));
+		return (p_zjmp(a, s));
 	else if (op == 10)
 		return (p_ldi(a));
 	else if (op == 11)
@@ -35,6 +35,7 @@ int		arg_parsa(unsigned char op, char *a, t_a *s)
 
 int		arg_pars(unsigned char op, char *a, t_a *s)
 {
+//	printf("[%d]\n", s->total_bytes);
 	if (op == 1)
 		return (p_live(a, s, 0, 0));
 	else if (op == 2)
@@ -46,7 +47,7 @@ int		arg_pars(unsigned char op, char *a, t_a *s)
 	else if (op == 5)
 		return (p_sub(a));
 	else if (op == 6)
-		return (p_and(a));
+		return (p_and(a, s));
 	else if (op == 7)
 		return (p_or(a));
 	else if (op == 8)
@@ -62,6 +63,7 @@ int		add_op(char *op, t_a *s)
 	char	*args;
 	int		flag;
 
+//	printf("her\n");
 //	printf("operation |%s|", op);
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
@@ -88,6 +90,9 @@ void	add_la(char *l, t_a *s)
 	//трекання дефайну лейбла
 	new = (t_l*)malloc(sizeof(t_l));
 	new->name = ft_strdup(l);
+	new->name[ft_strlen(l) - 1] = '\0';
+//	s->total_bytes ? (new->defined = s->total_bytes - 1) :
+//		(new->defined = s->total_bytes);
 	new->defined = s->total_bytes;
 	new->next = NULL;
 	if (!s->lablist)
@@ -106,6 +111,7 @@ void	add_code(unsigned char cod, t_a *s)
 	t_pro			*new;
 	t_pro			*tmp;
 
+//	printf("{%d}\n", s->total_bytes);
 	new = (t_pro*)malloc(sizeof(t_pro));
 	new->byte = cod;
 	new->nb = s->total_bytes++;
@@ -131,7 +137,16 @@ void	add_4b(int add, t_a *s)
 	add_code(z.bit[2], s);
 	add_code(z.bit[1], s);
 	add_code(z.bit[0], s);
-	s->total_bytes += 4;
+}
+
+void	add_2b(int add, t_a *s)
+{
+
+	union u_onebyte	z;
+
+	z.magic = add;
+	add_code(z.bit[1], s);
+	add_code(z.bit[0], s);
 }
 
 void	add_4z(t_a *s)
@@ -140,14 +155,12 @@ void	add_4z(t_a *s)
 	add_code(0, s);
 	add_code(0, s);
 	add_code(0, s);
-	s->total_bytes += 4;
 }
 
 void	add_2z(t_a *s)
 {
 	add_code(0, s);
 	add_code(0, s);
-	s->total_bytes += 2;
 }
 
 void	add_lc(char *name, t_a *s)
@@ -155,9 +168,12 @@ void	add_lc(char *name, t_a *s)
 	t_lc			*new;
 	t_lc			*tmp;
 
+	printf("called label [%s]\n", name);
 	new = (t_lc*)malloc(sizeof(t_lc));
 	new->name = ft_strdup(name);
-	new->called_on = s->total_bytes;
+	s->total_bytes ? (new->called_on = s->total_bytes - 1) :
+		(new->called_on = s->total_bytes);
+//	new->called_on = s->total_bytes;
 	new->next = NULL;
 	if (!s->lcallist)
 		s->lcallist = new;

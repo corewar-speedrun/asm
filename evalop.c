@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:13:17 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 16:46:15 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 13:59:06 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		ch_ar(char *s)
 	{
 		if (s[i] != '-' && !ft_isdigit(s[i]))
 			return (0);
+		i++;
 	}
 	return (1);
 }

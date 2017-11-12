@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/12 12:57:44 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 14:20:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	p_ld(char *a, t_a *s)
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	add_code(arg.codage, s);
-	add_4b(arg.arg[0], s);
-	add_4b(arg.arg[1], s);
+	add_2b(arg.arg[0], s);
+	add_code(arg.arg[1], s);
 	printf("~~~~~~~~~~~ld arg |%s|\n", tmp1);
 	return (a[0]);
 }

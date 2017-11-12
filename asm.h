@@ -52,16 +52,16 @@ union			u_onebyte
 
 typedef struct	s_l
 {
-	char		*name;
-	int			defined;
-	struct s_l	*next;
+	char			*name;
+	unsigned int	defined;
+	struct s_l		*next;
 }				t_l;
 
 typedef struct	s_lc
 {
-	char		*name;
-	int			called_on;
-	struct s_lc	*next;
+	char			*name;
+	unsigned int	called_on;
+	struct s_lc		*next;
 }				t_lc;
 
 typedef struct	s_pro
@@ -70,15 +70,6 @@ typedef struct	s_pro
 	unsigned int	nb;
 	struct s_pro	*next;
 }				t_pro;
-
-typedef struct	s_o
-{
-	char			*op;
-	unsigned char	opcode;
-	unsigned char	codage;
-	char			*args;
-	struct s_o		*next;
-}				t_o;
 
 typedef struct	s_arg
 {
@@ -101,7 +92,6 @@ typedef struct	s_a
 	int				total_bytes;
 	char			**op;
 	struct s_pro	*output;
-	struct s_o		*oplist;
 	struct s_l		*lablist;
 	struct s_lc		*lcallist;
 }				t_a;
@@ -113,13 +103,16 @@ void			init2(t_a *s);
 void			init(t_a *s);
 void			s32(t_a *s);
 int				add_op(char *op, t_a *s);
+int				ass_lab(t_a *s);
 void			add_la(char *l, t_a *s);
 void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
 void			add_2z(t_a *s);
-void			add_2b(int a, t_a *s);
+void			modify_4b(int add, t_pro *t);
+void			modify_2b(int add, t_pro *t);
 void			add_4b(int add, t_a *s);
+void			add_2b(int a, t_a *s);
 unsigned char	ret_opcode(char *op, t_a *s);
 int				split_cnt(char **s);
 char			*ft_strstrip(char *s, int i, int j);
@@ -134,6 +127,7 @@ int				num_exp(char a);
 int				er_stru(void);
 int				three_ae(int a);
 int				two_ae(int a);
+int				ld_er(char *s);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/12 13:34:19 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 13:54:52 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ int		ch_op(t_a *s)
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n')
 		n++;
-	printf("[[\e[1;30m%.10s\e[0m]]\n", s->f + s->i);
+	printf("[[\e[1;31m%.10s\e[0m]]\n", s->f + s->i);
 	cmp = ft_strsub(s->f, s->i, n);
-	printf("[[\e[1;30m%s\e[0m]]\n", cmp);
+	printf("[[\e[1;31m%s\e[0m]]\n", cmp);
 //	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
@@ -290,14 +290,15 @@ int		validate(t_a *s)
 			else if (!check_comm(s))
 				return (0);
 		}
-		else if (!check(s))
-			return (0);
 		else if (s->f[s->i] == '\n')
 			s->i++ && s->curr_line++;
+		else if (!check(s))
+			return (0);
 		//check instructions && labels
 //		s->i++;
 		j++;
 	}
+	return (ass_lab(s));
 //	t_l *tmp = s->lablist;
 //	while (tmp)
 //	{

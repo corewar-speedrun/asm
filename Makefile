@@ -34,7 +34,7 @@ LIB = libft/ft_atoi.o libft/ft_bzero.o libft/ft_isalnum.o libft/ft_isalpha.o\
 	  libft/ft_itoa_base.o
 
 OBJ = main.o validator.o func.o func2.o list.o arg_parse.o printer.o evalop.o\
-	  printer2.o
+	  printer2.o printer3.o
 
 all: $(NAME)
 

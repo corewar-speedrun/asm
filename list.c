@@ -146,7 +146,27 @@ void	add_2b(int add, t_a *s)
 	add_code(z.bit[1], s);
 	add_code(z.bit[0], s);
 }
+/***********************************************/
+void	modify_4b(int add, t_pro *t)
+{
+	union u_onebyte	z;
 
+	z.magic = add;
+	t->byte = z.bit[3];
+	t->next->byte = z.bit[2];
+	t->next->next->byte = z.bit[1];
+	t->next->next->next->byte = z.bit[0];
+}
+
+void	modify_2b(int add, t_pro *t)
+{
+	union u_onebyte	z;
+	
+	z.magic = add;
+	t->byte = z.bit[1];
+	t->next->byte = z.bit[0];
+}
+/**************************************************/
 void	add_4z(t_a *s)
 {
 	add_code(0, s);

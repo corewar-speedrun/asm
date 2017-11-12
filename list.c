@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 19:34:45 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 13:32:02 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,14 @@ int		add_op(char *op, t_a *s)
 	int		flag;
 
 //	printf("her\n");
-//	printf("operation |%s|", op);
+	printf("curr line [%d], operation |%s|", s->curr_line, op);
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
 	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR)
-		s->i++;
+		s->f[s->i] != COMMENT_CHAR ? (s->i++) : 0;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
-//	printf(" args |%s|\n", args);
-	//парсер аргументів з треканням виклику лейбла
-	//	і вираховуванням codage
+	printf(" args |%s|\n", args);
+	printf("|[%s]|", s->f + s->i);
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else

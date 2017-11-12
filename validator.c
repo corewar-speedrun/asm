@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 17:18:31 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 13:34:19 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,6 @@ int		ch_l(t_a *s)
 			ft_putchar('\n');
 			return (0);
 		}
-		//функция пихания в лист лейблов
-		// и считывания операции, если операции нет - еррор
 		add_la(cmp, s);
 //		printf("label found |%s|\n", cmp);
 		return (1);
@@ -177,12 +175,13 @@ int		ch_op(t_a *s)
 	char	*cmp;
 
 	n = 0;
-	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
-		s->i++;
+	s32(s);
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
-			/*(s->f + s->i)[n] != DIRECT_CHAR && */(s->f + s->i)[n] != '\n')
+			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n')
 		n++;
+	printf("[[\e[1;30m%.10s\e[0m]]\n", s->f + s->i);
 	cmp = ft_strsub(s->f, s->i, n);
+	printf("[[\e[1;30m%s\e[0m]]\n", cmp);
 //	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
@@ -278,7 +277,9 @@ int		validate(t_a *s)
 	s->i = 0;
 	while (s->f[s->i] != '\0')
 	{
-		s32(s);
+//		s->f = ft_strstrip(s->f, 0, 0);
+		printf("[[\e[1;35m%s\e[0m]]\n", s->f + s->i);
+//		s32(s);
 //		printf("|%d|%c|		|%d|\n", s->i, s->f[s->i], j);
 		if (s->f[s->i] == COMMENT_CHAR)
 			scom(s);
@@ -291,24 +292,24 @@ int		validate(t_a *s)
 		}
 		else if (!check(s))
 			return (0);
-//		else if (s->f[s->i] == '\n')
-//			s->i++ && s->curr_line++;
+		else if (s->f[s->i] == '\n')
+			s->i++ && s->curr_line++;
 		//check instructions && labels
-		s->i++;
+//		s->i++;
 		j++;
 	}
-	t_l *tmp = s->lablist;
-	while (tmp)
-	{
-		printf("[%d|%s] ", tmp->defined, tmp->name);
-		tmp = tmp->next;
-	}
-	printf("\n");
-	t_lc *tmp2 = s->lcallist;
-	while (tmp2)
-	{
-		printf("[%d|%s] ", tmp2->called_on, tmp2->name);
-		tmp2 = tmp2->next;
-	}
+//	t_l *tmp = s->lablist;
+//	while (tmp)
+//	{
+//		printf("[%d|%s] ", tmp->defined, tmp->name);
+//		tmp = tmp->next;
+//	}
+//	printf("\n");
+//	t_lc *tmp2 = s->lcallist;
+//	while (tmp2)
+//	{
+//		printf("[%d|%s] ", tmp2->called_on, tmp2->name);
+//		tmp2 = tmp2->next;
+//	}
 	return (1);
 }

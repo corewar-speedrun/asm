@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 19:36:52 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/12 12:57:44 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ int	p_ld(char *a, t_a *s)
 	else
 		return (reg_exp(tmp2[1]));
 	/***************OUTPUT******************/
+	arg.codage = arg.codage << 2;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	add_code(arg.codage, s);
 	add_4b(arg.arg[0], s);
-	add_code(arg.arg[1], s);
+	add_4b(arg.arg[1], s);
 	printf("~~~~~~~~~~~ld arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -115,6 +116,7 @@ int	p_st(char *a, t_a *s)
 	else
 		return (reg_exp(tmp2[0]));
 	/***************OUTPUT******************/
+	arg.codage = arg.codage << 2;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
@@ -518,7 +520,7 @@ int	p_fork(char *a, t_a *s)
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
-	printf("~~~~~~~~~~~zjmp arg |%s|\n", tmp1);
+	printf("~~~~~~~~~~~fork arg |%s|\n", tmp1);
 	add_2z(s);
 	return (a[0]);
 }

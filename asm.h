@@ -151,6 +151,6 @@ int				p_aff(char *a, t_a *s);
 int				eval_reg(char *s, t_arg *a, int w);
 int				eval_dir(char *s, t_arg *a, int w, t_a *st);
 int				eval_ind(char *s, t_arg *a, int w, t_a *st);
-int				eval_lable(void);
+void			badder(t_arg *arg, t_a *s, int args, int ls);
 
 #endif

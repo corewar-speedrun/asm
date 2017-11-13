@@ -69,18 +69,18 @@ void	chooser(int add, t_pro *t)
 	else if (t->byte == 9 || t->byte == 12 || t->byte == 15)
 		modify_2b(add, t->next);
 	//дальше жопа с учитыванием кодирующего байта и аргумента
-	else if (t->byte == 2)
-	else if (t->byte == 3)
-	else if (t->byte == 4)
-	else if (t->byte == 5)
-	else if (t->byte == 6)
-	else if (t->byte == 7)
-	else if (t->byte == 8)
-	else if (t->byte == 10)
-	else if (t->byte == 11)
-	else if (t->byte == 13)
-	else if (t->byte == 14)
-	else if (t->byte == 16)
+	// else if (t->byte == 2)
+	// else if (t->byte == 3)
+	// else if (t->byte == 4)
+	// else if (t->byte == 5)
+	// else if (t->byte == 6)
+	// else if (t->byte == 7)
+	// else if (t->byte == 8)
+	// else if (t->byte == 10)
+	// else if (t->byte == 11)
+	// else if (t->byte == 13)
+	// else if (t->byte == 14)
+	// else if (t->byte == 16)
 }
 
 int		wtop(t_lc *to, t_l *from, t_a *s)
@@ -111,4 +111,40 @@ int		ass_lab(t_a *s)
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+void	badder(t_arg *arg, t_a *s, int args, int ls)
+{
+	int	i;
+
+	i = -1;
+	if (arg->codage)
+		add_code(arg->codage, s);
+	while (++i < args)
+	{
+		if (arg->ditype[i] == 1)		//if indirect
+		{
+			if (arg->type[i] == 1)		//if lable
+				add_2z(s);
+			else						//if num
+				add_2b(arg->arg[i], s);
+		}
+		else if (arg->ditype[i] == 0)	//if direct
+			if (arg->type[i] == 1)		//if lable
+			{	
+				if (ls == 4)
+					add_4z(s);
+				else
+					add_2z(s);
+			}
+			else						//if num
+			{	
+				if (ls == 4)
+					add_4b(arg->arg[i], s);
+				else
+					add_2b(arg->arg[i], s);
+			}
+		else if (arg->ditype[i] == -1)							//if reg
+			add_code((unsigned char)arg->arg[i], s);
+	}	
 }

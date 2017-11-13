@@ -18,6 +18,7 @@ int		eval_reg(char *s, t_arg *a, int w)
 	int	cod;
 
 	i = 0;
+	a->ditype[w] = -1;
 	if (s[i] != 'r')
 		return (reg_exp(s));
 	else
@@ -40,7 +41,7 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	int i;
 
 	i = 0;
-	arg.type[w] = 0;
+	a->type[w] = 0;
 	if (s[i] != DIRECT_CHAR)
 		return (dir_exp(s));
 	else
@@ -49,7 +50,7 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 		if (s[i] == LABEL_CHAR)
 		{
 			add_lc(s + i + 1, st);
-			arg.type[w] = 1;
+			a->type[w] = 1;
 		}
 		else
 			a->arg[w] = ft_atoi(s + 1);
@@ -78,12 +79,12 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 	int i;
 
 	i = 0;
-	arg->type[w] = 0;
-	arg->ditype[w] = 1;
+	a->type[w] = 0;
+	a->ditype[w] = 1;
 	if (s[0] == LABEL_CHAR)
 	{
 		add_lc(s, st);
-		arg->type[w] = 1;
+		a->type[w] = 1;
 	}
 	else
 	{
@@ -97,9 +98,4 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 		}
 	}
 	return (1);
-}
-
-int		eval_lable(void)
-{
-	return (0);
 }

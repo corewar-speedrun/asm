@@ -33,12 +33,9 @@ int	p_live(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
+	arg.codage = 0;
+	badder(&arg, s, 1, 4);
 	printf("~~~~~~~~~~~live arg |%s|\n", tmp1);
-	if (arg.type[0] == 1)
-		add_4z(s);
-	else
-		add_4b(arg.arg[0], s);
 	return (1);
 }
 
@@ -78,10 +75,7 @@ int	p_ld(char *a, t_a *s)
 	arg.codage = arg.codage << 2;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_2b(arg.arg[0], s);
-	add_code(arg.arg[1], s);
+	badder(&arg, s, 2, 4);
 	printf("~~~~~~~~~~~ld arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -123,9 +117,7 @@ int	p_st(char *a, t_a *s)
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_2b(arg.arg[1], s);
+	badder(&arg, s, 2, 2);
 	printf("~~~~~~~~~~~st arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -168,11 +160,7 @@ int	p_add(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_code(arg.arg[1], s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 2);
 	printf("~~~~~~~~~~~add arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -216,10 +204,7 @@ int	p_sub(char *a, t_a *s)
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_code(arg.arg[1], s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 2);
 	printf("~~~~~~~~~~~sub arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -267,11 +252,7 @@ int	p_and(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_4z(s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 4);
 	printf("~~~~~~~~~~~and arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -319,11 +300,7 @@ int	p_or(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_4z(s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 4);
 	printf("~~~~~~~~~~~or arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -371,11 +348,7 @@ int	p_xor(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_4z(s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 4);
 	printf("~~~~~~~~~~~xor arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -400,7 +373,8 @@ int	p_zjmp(char *a, t_a *s)
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	printf("~~~~~~~~~~~zjmp arg |%s|\n", tmp1);
-	add_2z(s);
+	arg.codage = 0;
+	badder(&arg, s, 1, 2);
 	return (a[0]);
 }
 
@@ -447,11 +421,7 @@ int	p_ldi(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_4z(s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 2);
 	printf("~~~~~~~~~~~ldi arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -495,11 +465,7 @@ int	p_sti(char *a, t_a *s)
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	/***************OUTPUT******************/
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_2z(s);
-	add_2b(arg.arg[2], s);
+	badder(&arg, s, 3, 2);
 	printf("~~~~~~~~~~~sti arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -522,9 +488,9 @@ int	p_fork(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
+	arg.codage = 0;
+	badder(&arg, s, 1, 2);
 	printf("~~~~~~~~~~~fork arg |%s|\n", tmp1);
-	add_2z(s);
 	return (a[0]);
 }
 
@@ -563,10 +529,7 @@ int	p_lld(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_4b(arg.arg[0], s);
-	add_code(arg.arg[1], s);
+	badder(&arg, s, 2, 4);
 	printf("~~~~~~~~~~~lld arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -614,11 +577,7 @@ int	p_lldi(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
-	add_code(arg.codage, s);
-	add_code(arg.arg[0], s);
-	add_4z(s);
-	add_code(arg.arg[2], s);
+	badder(&arg, s, 3, 2);
 	printf("~~~~~~~~~~~lldi arg |%s|\n", tmp1);
 	return (a[0]);
 }
@@ -643,7 +602,8 @@ int	p_lfork(char *a, t_a *s)
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	printf("~~~~~~~~~~~lfork arg |%s|\n", tmp1);
-	add_2z(s);
+	arg.codage = 0;
+	badder(&arg, s, 1, 2);
 	return (a[0]);
 }
 
@@ -668,6 +628,6 @@ int	p_aff(char *a, t_a *s)
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	printf("~~~~~~~~~~~aff arg |%s|\n", tmp1);
-	add_code(0, s);
-	return (a[0]);
+	badder(&arg, s, 1, 2);
+	return (1);
 }

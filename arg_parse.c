@@ -73,6 +73,7 @@ int	p_ld(char *a, t_a *s)
 		return (reg_exp(tmp2[1]));
 	/***************OUTPUT******************/
 	arg.codage = arg.codage << 2;
+	tmp2[0][0] == DIRECT_CHAR ? (arg.codage = arg.codage | 1) : 0;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	badder(&arg, s, 2, 4);
@@ -419,6 +420,7 @@ int	p_ldi(char *a, t_a *s)
 	if (!eval_reg(tmp2[2], &arg, 2))
 		return (reg_exp(tmp2[2]));
 	/***************OUTPUT******************/
+	//TODO
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	badder(&arg, s, 3, 2);
@@ -527,6 +529,8 @@ int	p_lld(char *a, t_a *s)
 	else
 		return (reg_exp(tmp2[1]));
 	/***************OUTPUT******************/
+	arg.codage = arg.codage << 2;
+	tmp2[0][0] == DIRECT_CHAR ? (arg.codage = arg.codage | 1) : 0;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	badder(&arg, s, 2, 4);

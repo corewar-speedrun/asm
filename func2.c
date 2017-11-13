@@ -64,30 +64,38 @@ t_l	*lab_def(char *name, t_a *s)
 
 void	chooser(int add, t_pro *t)
 {
+	unsigned char	b;
+
+	b = 0;
 	if (t->byte == 1)
 		modify_4b(add, t->next);
 	else if (t->byte == 9 || t->byte == 12 || t->byte == 15)
 		modify_2b(add, t->next);
-	//дальше жопа с учитыванием кодирующего байта и аргумента
-	// else if (t->byte == 2)
-	// else if (t->byte == 3)
-	// else if (t->byte == 4)
-	// else if (t->byte == 5)
+	else if (t->byte == 3)
+		modify_2b(add, t->next->next->next);
+	//дальше жопа с учитыванием кодирующего байта и позиции аргумента
+	else if (t->byte == 2 || t->byte == 13)
+	{
+		b = (t->next->byte << 6) >> 6;
+		b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
+		t->next->byte = 0xFC & t->next->byte;
+	}
+	// else if (t->byte == 10 || t->byte == 14)
+	// {
+	// 	b = (t->next->byte << 6) >> 6;
+	// 	b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
+	// 	t->next->byte = 0xFC & t->next->byte;
+	// }
 	// else if (t->byte == 6)
 	// else if (t->byte == 7)
 	// else if (t->byte == 8)
-	// else if (t->byte == 10)
 	// else if (t->byte == 11)
-	// else if (t->byte == 13)
-	// else if (t->byte == 14)
-	// else if (t->byte == 16)
 }
 
 int		wtop(t_lc *to, t_l *from, t_a *s)
 {
 	t_pro	*lol;
 
-	(void)from;
 	lol = s->output;
 	while (lol->nb != to->called_on)
 		lol = lol->next;

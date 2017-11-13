@@ -40,13 +40,17 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	int i;
 
 	i = 0;
-	if (s[i] != '%')
+	arg.type[w] = 0;
+	if (s[i] != DIRECT_CHAR)
 		return (dir_exp(s));
 	else
 	{
 		i++;
 		if (s[i] == LABEL_CHAR)
+		{
 			add_lc(s + i + 1, st);
+			arg.type[w] = 1;
+		}
 		else
 			a->arg[w] = ft_atoi(s + 1);
 		a->codage = a->codage | DIR_CODE;
@@ -74,8 +78,13 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 	int i;
 
 	i = 0;
+	arg->type[w] = 0;
+	arg->ditype[w] = 1;
 	if (s[0] == LABEL_CHAR)
+	{
 		add_lc(s, st);
+		arg->type[w] = 1;
+	}
 	else
 	{
 		if (!ch_ar(s))

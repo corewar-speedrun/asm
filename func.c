@@ -90,7 +90,6 @@ void			init(t_a *s)
 	s->i = 0;
 	s->output = NULL;
 	s->total_bytes = 0;
-	s->oplist = NULL;
 	s->lablist = NULL;
 	s->lcallist = NULL;
 }

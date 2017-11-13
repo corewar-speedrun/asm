@@ -74,6 +74,8 @@ typedef struct	s_pro
 typedef struct	s_arg
 {
 	int				arg[3];
+	int				type[3];	// 1 if label, 0 if num
+	int				ditype[3];	// 1 if indirect, 0 if direct
 	unsigned char	codage;
 }				t_arg;
 

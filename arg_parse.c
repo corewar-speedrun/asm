@@ -35,7 +35,10 @@ int	p_live(char *a, t_a *s)
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse
 	printf("~~~~~~~~~~~live arg |%s|\n", tmp1);
-	add_4b(arg.arg[0], s);
+	if (arg.type[0] == 1)
+		add_4z(s);
+	else
+		add_4b(arg.arg[0], s);
 	return (1);
 }
 
@@ -660,6 +663,7 @@ int	p_aff(char *a, t_a *s)
 	else
 		return (reg_exp(a));
 	/***************OUTPUT******************/
+	arg.codage = arg.codage << 4;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
 	//TODO	make it ifelse

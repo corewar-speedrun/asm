@@ -282,6 +282,13 @@ int		validate(t_a *s)
 			return (0);
 		j++;
 	}
+	t_arg *tmp = s->args;
+	while (tmp)
+	{
+		printf("[%d {%x|%x|%x}{%x|%x|%x}] ", tmp->byte, tmp->ditype[0], tmp->ditype[1], tmp->ditype[2], tmp->type[0], tmp->type[1], tmp->type[2]);
+		tmp = tmp->next;
+	}
+	printf("\n");
 	return (ass_lab(s));
 //	t_l *tmp = s->lablist;
 //	while (tmp)

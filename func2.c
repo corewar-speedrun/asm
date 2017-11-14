@@ -254,3 +254,24 @@ int		rd_arg(char *tmp, t_a *s, t_arg *arg, int w)
 		return (arg_exp(tmp));
 	return (1);
 }
+
+t_arg	*arg_init(void)
+{
+	t_arg	*arg;
+	int		i;
+
+	arg = (t_arg*)malloc(sizeof(t_arg));
+	i = -1;
+	while (++i < 3)
+		arg->arg[i] = 0;
+	i = -1;
+	while (++i < 3)
+		arg->type[i] = 0;
+	i = -1;
+	while (++i < 3)
+		arg->ditype[i] = 0;
+	arg->codage = 0;
+	arg->byte = 0;
+	arg->next = NULL;
+	return (arg);
+}

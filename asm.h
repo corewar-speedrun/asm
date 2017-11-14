@@ -151,7 +151,7 @@ int				p_lldi(char *a, t_a *s);
 int				p_lfork(char *a, t_a *s);
 int				p_aff(char *a, t_a *s);
 
-
+t_arg			*arg_init(void);
 int				di_arg(char *tmp, t_a *s, t_arg *arg, int w);
 int				r_arg(char *tmp, t_arg *arg, int w);
 int				d_arg(char *tmp, t_a *s, t_arg *arg, int w);

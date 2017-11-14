@@ -98,6 +98,7 @@ typedef struct	s_a
 	struct s_pro	*output;
 	struct s_l		*lablist;
 	struct s_lc		*lcallist;
+	struct s_arg	*args;
 }				t_a;
 
 int				validate(t_a *s);

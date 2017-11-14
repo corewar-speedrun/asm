@@ -53,12 +53,12 @@ int	p_ld(char *a, t_a *s)
 	/****************ARG 1******************/
 	if (tmp2[0][0] == DIRECT_CHAR)
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
 	else if (tmp2[0][0] != 'r')
 	{
-		if (!eval_ind(tmp2[0], &arg, 1, s))
+		if (!eval_ind(tmp2[0], &arg, 0, s))
 			return (0);
 	}
 	else
@@ -145,7 +145,7 @@ int	p_add(char *a, t_a *s)
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
 	{
-		if (!eval_reg(tmp2[1], &arg, 0))
+		if (!eval_reg(tmp2[1], &arg, 1))
 			return (0);
 	}
 	else
@@ -153,7 +153,7 @@ int	p_add(char *a, t_a *s)
 	/****************ARG 3******************/
 	if (tmp2[2][0] == 'r')
 	{
-		if (!eval_reg(tmp2[2], &arg, 0))
+		if (!eval_reg(tmp2[2], &arg, 2))
 			return (0);
 	}
 	else
@@ -188,7 +188,7 @@ int	p_sub(char *a, t_a *s)
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
 	{
-		if (!eval_reg(tmp2[1], &arg, 0))
+		if (!eval_reg(tmp2[1], &arg, 1))
 			return (0);
 	}
 	else
@@ -196,7 +196,7 @@ int	p_sub(char *a, t_a *s)
 	/****************ARG 3******************/
 	if (tmp2[2][0] == 'r')
 	{
-		if (!eval_reg(tmp2[2], &arg, 0))
+		if (!eval_reg(tmp2[2], &arg, 2))
 			return (0);
 	}
 	else
@@ -229,10 +229,10 @@ int	p_and(char *a, t_a *s)
 	}
 	else if (tmp2[0][0] == DIRECT_CHAR) 
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
-	else if (!eval_ind(tmp2[0], &arg, 1, s))
+	else if (!eval_ind(tmp2[0], &arg, 0, s))
 		return (arg_exp(tmp2[0]));
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
@@ -277,10 +277,10 @@ int	p_or(char *a, t_a *s)
 	}
 	else if (tmp2[0][0] == DIRECT_CHAR) 
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
-	else if (!eval_ind(tmp2[0], &arg, 1, s))
+	else if (!eval_ind(tmp2[0], &arg, 0, s))
 		return (arg_exp(tmp2[0]));
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
@@ -325,10 +325,10 @@ int	p_xor(char *a, t_a *s)
 	}
 	else if (tmp2[0][0] == DIRECT_CHAR) 
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
-	else if (!eval_ind(tmp2[0], &arg, 1, s))
+	else if (!eval_ind(tmp2[0], &arg, 0, s))
 		return (arg_exp(tmp2[0]));
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
@@ -398,10 +398,10 @@ int	p_ldi(char *a, t_a *s)
 	}
 	else if (tmp2[0][0] == DIRECT_CHAR) 
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
-	else if (!eval_ind(tmp2[0], &arg, 1, s))
+	else if (!eval_ind(tmp2[0], &arg, 0, s))
 		return (arg_exp(tmp2[0]));
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
@@ -510,12 +510,12 @@ int	p_lld(char *a, t_a *s)
 	/****************ARG 1******************/
 	if (tmp2[0][0] == DIRECT_CHAR)
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
 	else if (tmp2[0][0] != 'r')
 	{
-		if (!eval_ind(tmp2[0], &arg, 1, s))
+		if (!eval_ind(tmp2[0], &arg, 0, s))
 			return (0);
 	}
 	else
@@ -557,10 +557,10 @@ int	p_lldi(char *a, t_a *s)
 	}
 	else if (tmp2[0][0] == DIRECT_CHAR) 
 	{
-		if (!eval_dir(tmp2[0], &arg, 1, s))
+		if (!eval_dir(tmp2[0], &arg, 0, s))
 			return (0);
 	}
-	else if (!eval_ind(tmp2[0], &arg, 1, s))
+	else if (!eval_ind(tmp2[0], &arg, 0, s))
 		return (arg_exp(tmp2[0]));
 	/****************ARG 2******************/
 	if (tmp2[1][0] == 'r')
@@ -604,7 +604,6 @@ int	p_lfork(char *a, t_a *s)
 	/***************OUTPUT******************/
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
 	printf("~~~~~~~~~~~lfork arg |%s|\n", tmp1);
 	arg.codage = 0;
 	badder(&arg, s, 1, 2);
@@ -630,7 +629,6 @@ int	p_aff(char *a, t_a *s)
 	arg.codage = arg.codage << 4;
 	printf("codage [%d], |%x|%x|%x|\n", arg.codage,
 			arg.arg[0], arg.arg[1], arg.arg[2]);
-	//TODO	make it ifelse
 	printf("~~~~~~~~~~~aff arg |%s|\n", tmp1);
 	badder(&arg, s, 1, 2);
 	return (1);

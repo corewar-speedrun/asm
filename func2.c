@@ -73,13 +73,15 @@ void	chooser(int add, t_pro *t)
 		modify_2b(add, t->next);
 	else if (t->byte == 3)
 		modify_2b(add, t->next->next->next);
-	//дальше жопа с учитыванием кодирующего байта и позиции аргумента
 	else if (t->byte == 2 || t->byte == 13)
 	{
 		b = (t->next->byte << 6) >> 6;
 		b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
-		t->next->byte = 0xFC & t->next->byte;
+		t->next->byte = t->next->byte & 0xFC;
 	}
+	//дальше жопа с учитыванием кодирующего байта и позиции аргумента
+	// лейблов может быть два, в двух аргументах
+	//
 	// else if (t->byte == 10 || t->byte == 14)
 	// {
 	// 	b = (t->next->byte << 6) >> 6;

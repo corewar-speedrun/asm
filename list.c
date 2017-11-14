@@ -64,14 +64,14 @@ int		add_op(char *op, t_a *s)
 	int		flag;
 
 //	printf("her\n");
-	printf("curr line [%d], operation |%s|", s->curr_line, op);
+//	printf("curr line [%d], operation |%s|", s->curr_line, op);
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
 	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR)
 		s->f[s->i] != COMMENT_CHAR ? (s->i++) : 0;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
-	printf(" args |%s|\n", args);
-	printf("|[%s]|", s->f + s->i);
+//	printf(" args |%s|\n", args);
+//	printf("|[%s]|", s->f + s->i);
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else

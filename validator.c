@@ -179,9 +179,9 @@ int		ch_op(t_a *s)
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n')
 		n++;
-	printf("[[\e[1;31m%.10s\e[0m]]\n", s->f + s->i);
+//	printf("[[\e[1;31m%.10s\e[0m]]\n", s->f + s->i);
 	cmp = ft_strsub(s->f, s->i, n);
-	printf("[[\e[1;31m%s\e[0m]]\n", cmp);
+//	printf("[[\e[1;31m%s\e[0m]]\n", cmp);
 //	printf("operation predict |%s|\n", cmp);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
@@ -278,7 +278,7 @@ int		validate(t_a *s)
 	while (s->f[s->i] != '\0')
 	{
 //		s->f = ft_strstrip(s->f, 0, 0);
-		printf("[[\e[1;35m%s\e[0m]]\n", s->f + s->i);
+//		printf("[[\e[1;35m%s\e[0m]]\n", s->f + s->i);
 //		s32(s);
 //		printf("|%d|%c|		|%d|\n", s->i, s->f[s->i], j);
 		if (s->f[s->i] == COMMENT_CHAR)

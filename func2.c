@@ -66,10 +66,27 @@ t_l	*lab_def(char *name, t_a *s)
 	return (0);
 }
 
-void	chooser(int add, t_pro *t)
+t_arg	*get_args(t_a *s, int byte)
+{
+	t_arg	*tmp;
+
+	tmp = s->args;
+	while (tmp)
+	{
+		if (tmp->byte == byte)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+void	chooser(int add, t_pro *t, t_a *s)
 {
 	unsigned char	b;
+	t_arg			*tmp;
+	int				i;
 
+	i = -1;
 	b = 0;
 	if (t->byte == 1)
 		modify_4b(add, t->next);
@@ -86,16 +103,62 @@ void	chooser(int add, t_pro *t)
 	//дальше жопа с учитыванием кодирующего байта и позиции аргумента
 	// лейблов может быть два, в двух аргументах
 	//
-	// else if (t->byte == 10 || t->byte == 14)
-	// {
-	// 	b = (t->next->byte << 6) >> 6;
-	// 	b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
-	// 	t->next->byte = 0xFC & t->next->byte;
-	// }
-	// else if (t->byte == 6)
-	// else if (t->byte == 7)
-	// else if (t->byte == 8)
-	// else if (t->byte == 11)
+	else if (t->byte == 10 || t->byte == 14)
+	{
+		tmp = get_args(s, t->nb);
+		if (tmp->type[0] == 1)
+			modify_2b(add, t->next->next);
+		else if (tmp->type[1] == 1)
+		{
+			if (tmp->ditype[0] == -1)
+				modify_2b(add, t->next->next->next);
+			else
+				modify_2b(add, t->next->next->next->next);
+		}
+	}
+	else if (t->byte == 6 || t->byte == 7 || t->byte == 8)
+	{
+		tmp = get_args(s, t->nb);
+		if (tmp->type[0] == 1)
+		{
+			if (tmp->ditype[0] == 1)
+				modify_2b(add, t->next->next);
+			else
+				modify_4b(add, t->next->next);
+		}
+		else if (tmp->type[1] == 1)
+		{
+			if (tmp->ditype[0] == -1)
+			{
+				if (tmp->ditype[1] == 1)
+					modify_2b(add, t->next->next->next);
+				else
+					modify_4b(add, t->next->next->next);
+			}
+			else if (tmp->ditype[0] == 1)
+			{
+				if (tmp->ditype[1] == 1)
+					modify_2b(add, t->next->next->next->next);
+				else
+					modify_4b(add, t->next->next->next->next);
+			}
+			else
+			{
+				if (tmp->ditype[1] == 1)
+					modify_2b(add, t->next->next->next->next->next->next);
+				else
+					modify_4b(add, t->next->next->next->next->next->next);
+			}
+		}
+	}
+	else if (t->byte == 11)
+	{
+		tmp = get_args(s, t->nb);
+		if (tmp->type[1] == 1)
+			modify_2b(add, t->next->next->next);
+		else if (tmp->type[2] == 1)
+			modify_2b(add, t->next->next->next->next->next);
+	}
 }
 
 int		wtop(t_lc *to, t_l *from, t_a *s)
@@ -105,7 +168,7 @@ int		wtop(t_lc *to, t_l *from, t_a *s)
 	lol = s->output;
 	while (lol->nb != to->called_on)
 		lol = lol->next;
-	chooser(from->defined - to->called_on, lol);
+	chooser(from->defined - to->called_on, lol, s);
 	printf("byte called |%d|, op |%x|\n", to->called_on, lol->byte);
 	return (1);
 }

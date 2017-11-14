@@ -6,7 +6,7 @@
 #    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/14 16:05:14 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/11/14 17:00:01 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/14 22:52:32 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ cp $1 $1.or.s
 hexdump $1.my.cor > $1.my.cor.d
 hexdump $1.or.cor > $1.or.cor.d
 
-diff -c $1.my.cor.d $1.or.cor.d > result
+diff $1.my.cor.d $1.or.cor.d > result
 
 cat result
 echo

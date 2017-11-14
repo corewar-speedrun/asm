@@ -63,21 +63,16 @@ int		add_op(char *op, t_a *s)
 	char	*args;
 	int		flag;
 
-//	printf("her\n");
-//	printf("curr line [%d], operation |%s|", s->curr_line, op);
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
 	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR)
 		s->f[s->i] != COMMENT_CHAR ? (s->i++) : 0;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
-//	printf(" args |%s|\n", args);
-//	printf("|[%s]|", s->f + s->i);
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	else
 		flag = 0;
 	ft_strdel(&args);
-//	printf("op |%s| args |%s|\n", op, args);
 	return (flag);
 }
 
@@ -90,8 +85,6 @@ void	add_la(char *l, t_a *s)
 	new = (t_l*)malloc(sizeof(t_l));
 	new->name = ft_strdup(l);
 	new->name[ft_strlen(l) - 1] = '\0';
-//	s->total_bytes ? (new->defined = s->total_bytes - 1) :
-//		(new->defined = s->total_bytes);
 	new->defined = s->total_bytes;
 	new->next = NULL;
 	if (!s->lablist)
@@ -123,6 +116,7 @@ void	add_code(unsigned char cod, t_a *s)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	printf("last [%x], total [%d]\n", cod, s->total_bytes);
 }
 
 void	add_4b(int add, t_a *s)
@@ -146,7 +140,7 @@ void	add_2b(int add, t_a *s)
 	add_code(z.bit[1], s);
 	add_code(z.bit[0], s);
 }
-/***********************************************/
+
 void	modify_4b(int add, t_pro *t)
 {
 	union u_onebyte	z;
@@ -166,7 +160,7 @@ void	modify_2b(int add, t_pro *t)
 	t->byte = z.bit[1];
 	t->next->byte = z.bit[0];
 }
-/**************************************************/
+
 void	add_4z(t_a *s)
 {
 	add_code(0, s);
@@ -200,5 +194,21 @@ void	add_lc(char *name, t_a *s)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
+	}
+}
+
+void	add_arg(t_a *s, t_arg *add)
+{
+	t_arg	*tmp;
+
+	add->next = NULL;
+	if (!s->args)
+		s->args = add;
+	else
+	{
+		tmp = s->args;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = add;
 	}
 }

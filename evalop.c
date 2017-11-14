@@ -41,6 +41,7 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	int i;
 
 	i = 0;
+	a->ditype[w] = 0;
 	a->type[w] = 0;
 	if (s[i] != DIRECT_CHAR)
 		return (dir_exp(s));

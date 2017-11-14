@@ -12,15 +12,12 @@
 
 #include "asm.h"
 
-//TODO в место вызова лейбла записывать
-//"байт дефайна лейбла - байт начала операции, где он вызван"
-
 int	p_live(char *a, t_a *s)
 {
 	char	*tmp1;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	/****************ARG 1******************/
 	if (!d_arg(tmp1, s, arg, 0))
@@ -28,6 +25,7 @@ int	p_live(char *a, t_a *s)
 	/***************OUTPUT******************/
 	arg->codage = 0;
 	badder(arg, s, 1, 4);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~live arg |%s|\n", tmp1);
 	return (1);
 }
@@ -38,7 +36,7 @@ int	p_ld(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 2)
@@ -51,9 +49,9 @@ int	p_ld(char *a, t_a *s)
 		return (0);
 	/***************OUTPUT******************/
 	arg->codage = arg->codage << 2;
+	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 2, 4);
-	s->total_bytes ? (arg->byte = s->total_bytes - 1) :
-		(arg->byte = s->total_bytes);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~ld arg |%s|\n", tmp1);
 	return (1);
 }
@@ -64,7 +62,7 @@ int	p_st(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 2)
@@ -78,6 +76,7 @@ int	p_st(char *a, t_a *s)
 	/***************OUTPUT******************/
 	arg->codage = arg->codage << 2;
 	badder(arg, s, 2, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~st arg |%s|\n", tmp1);
 	return (1);
 }
@@ -88,7 +87,7 @@ int	p_add(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -103,8 +102,8 @@ int	p_add(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~add arg |%s|\n", tmp1);
 	return (1);
 }
@@ -115,7 +114,7 @@ int	p_sub(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -130,8 +129,8 @@ int	p_sub(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~sub arg |%s|\n", tmp1);
 	return (1);
 }
@@ -142,7 +141,7 @@ int	p_and(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -157,8 +156,8 @@ int	p_and(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 4);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~and arg |%s|\n", tmp1);
 	return (1);
 }
@@ -169,7 +168,7 @@ int	p_or(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -184,8 +183,8 @@ int	p_or(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 4);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~or arg |%s|\n", tmp1);
 	return (1);
 }
@@ -196,7 +195,7 @@ int	p_xor(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -211,8 +210,8 @@ int	p_xor(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 4);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~xor arg |%s|\n", tmp1);
 	return (1);
 }
@@ -222,7 +221,7 @@ int	p_zjmp(char *a, t_a *s)
 	char	*tmp1;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	/****************ARG 1******************/
 	if (!d_arg(tmp1, s, arg, 0))
@@ -231,6 +230,7 @@ int	p_zjmp(char *a, t_a *s)
 	printf("~~~~~~~~~~~zjmp arg |%s|\n", tmp1);
 	arg->codage = 0;
 	badder(arg, s, 1, 2);
+	add_arg(s, arg);
 	return (1);
 }
 
@@ -240,7 +240,7 @@ int	p_ldi(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -255,8 +255,8 @@ int	p_ldi(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~ldi arg |%s|\n", tmp1);
 	return (1);
 }
@@ -267,7 +267,7 @@ int	p_sti(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -282,8 +282,8 @@ int	p_sti(char *a, t_a *s)
 	if (!rd_arg(tmp2[2], s, arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~sti arg |%s|\n", tmp1);
 	return (1);
 }
@@ -293,7 +293,7 @@ int	p_fork(char *a, t_a *s)
 	char	*tmp1;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	/****************ARG 1******************/
 	if (!d_arg(tmp1, s, arg, 0))
@@ -301,6 +301,7 @@ int	p_fork(char *a, t_a *s)
 	/***************OUTPUT******************/
 	arg->codage = 0;
 	badder(arg, s, 1, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~fork arg |%s|\n", tmp1);
 	return (1);
 }
@@ -311,7 +312,7 @@ int	p_lld(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 2)
@@ -325,6 +326,7 @@ int	p_lld(char *a, t_a *s)
 	/***************OUTPUT******************/
 	arg->codage = arg->codage << 2;
 	badder(arg, s, 2, 4);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~lld arg |%s|\n", tmp1);
 	return (1);
 }
@@ -335,7 +337,7 @@ int	p_lldi(char *a, t_a *s)
 	char	**tmp2;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	tmp2 = ft_strsplit(tmp1, SEPARATOR_CHAR);
 	if (split_cnt(tmp2) != 3)
@@ -350,8 +352,8 @@ int	p_lldi(char *a, t_a *s)
 	if (!r_arg(tmp2[2], arg, 2))
 		return (0);
 	/***************OUTPUT******************/
-	arg->codage = arg->codage << 2;
 	badder(arg, s, 3, 2);
+	add_arg(s, arg);
 	printf("~~~~~~~~~~~lldi arg |%s|\n", tmp1);
 	return (1);
 }
@@ -361,7 +363,7 @@ int	p_lfork(char *a, t_a *s)
 	char	*tmp1;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	/****************ARG 1******************/
 	if (!d_arg(tmp1, s, arg, 0))
@@ -370,6 +372,7 @@ int	p_lfork(char *a, t_a *s)
 	printf("~~~~~~~~~~~lfork arg |%s|\n", tmp1);
 	arg->codage = 0;
 	badder(arg, s, 1, 2);
+	add_arg(s, arg);
 	return (1);
 }
 
@@ -378,7 +381,7 @@ int	p_aff(char *a, t_a *s)
 	char	*tmp1;
 	t_arg	*arg;
 
-	ft_bzero(&arg, sizeof(t_arg));
+	arg = (t_arg*)malloc(sizeof(t_arg));
 	tmp1 = ft_strstrip(a, 0, 0);
 	/****************ARG 1******************/
 	if (!r_arg(tmp1, arg, 0))
@@ -387,5 +390,6 @@ int	p_aff(char *a, t_a *s)
 	arg->codage = arg->codage << 4;
 	printf("~~~~~~~~~~~aff arg |%s|\n", tmp1);
 	badder(arg, s, 1, 2);
+	add_arg(s, arg);
 	return (1);
 }

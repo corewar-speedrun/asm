@@ -161,6 +161,7 @@ int				rd_arg(char *tmp, t_a *s, t_arg *arg, int w);
 int				eval_reg(char *s, t_arg *a, int w);
 int				eval_dir(char *s, t_arg *a, int w, t_a *st);
 int				eval_ind(char *s, t_arg *a, int w, t_a *st);
+void			add_arg(t_a *s, t_arg *add);
 void			badder(t_arg *arg, t_a *s, int args, int ls);
 
 #endif

@@ -17,6 +17,8 @@ int		split_cnt(char **s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (-1);
 	while (s[i] != NULL)
 		i++;
 	return (i);
@@ -30,6 +32,8 @@ char	*ft_strstrip(char *s, int i, int j)
 
 	len = 0;
 	tmp = ft_strtrim(s);
+	if (!tmp)
+		return (NULL);
 	while (tmp[i] != '\0')
 	{
 		if (tmp[i] != ' ' && tmp[i] != '\t')
@@ -132,29 +136,29 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 		add_code(arg->codage, s);
 	while (++i < args)
 	{
-		if (arg->ditype[i] == 1)		//if indirect
+		if (arg->ditype[i] == 1)			//if indirect
 		{
-			if (arg->type[i] == 1)		//if lable
+			if (arg->type[i] == 1)			//if lable
 				add_2z(s);
-			else						//if num
+			else							//if num
 				add_2b(arg->arg[i], s);
 		}
-		else if (arg->ditype[i] == 0)	//if direct
-			if (arg->type[i] == 1)		//if lable
+		else if (arg->ditype[i] == 0)		//if direct
+			if (arg->type[i] == 1)			//if lable
 			{	
 				if (ls == 4)
 					add_4z(s);
 				else
 					add_2z(s);
 			}
-			else						//if num
+			else							//if num
 			{	
 				if (ls == 4)
 					add_4b(arg->arg[i], s);
 				else
 					add_2b(arg->arg[i], s);
 			}
-		else if (arg->ditype[i] == -1)							//if reg
+		else if (arg->ditype[i] == -1)		//if reg
 			add_code((unsigned char)arg->arg[i], s);
 	}	
 }
@@ -173,7 +177,7 @@ int		di_arg(char *tmp, t_a *s, t_arg *arg, int w)
 	}
 	else
 		return (arg_exp(tmp));
-	return (0);
+	return (1);
 }
 
 int		r_arg(char *tmp, t_arg *arg, int w)
@@ -185,7 +189,7 @@ int		r_arg(char *tmp, t_arg *arg, int w)
 	}
 	else
 		return (reg_exp(tmp));
-	return (0);
+	return (1);
 }
 
 int		d_arg(char *tmp, t_a *s, t_arg *arg, int w)
@@ -197,7 +201,7 @@ int		d_arg(char *tmp, t_a *s, t_arg *arg, int w)
 	}
 	else
 		return (dir_exp(tmp));
-	return (0);
+	return (1);
 }
 
 int		ir_arg(char *tmp, t_a *s, t_arg *arg, int w)
@@ -214,7 +218,7 @@ int		ir_arg(char *tmp, t_a *s, t_arg *arg, int w)
 	}
 	else
 		return (reg_exp(tmp));
-	return (0);
+	return (1);
 }
 
 int		rdi_arg(char *tmp, t_a *s, t_arg *arg, int w)
@@ -231,7 +235,7 @@ int		rdi_arg(char *tmp, t_a *s, t_arg *arg, int w)
 	}
 	else if (!eval_ind(tmp, arg, w, s))
 		return (arg_exp(tmp));
-	return (0);
+	return (1);
 }
 
 int		rd_arg(char *tmp, t_a *s, t_arg *arg, int w)
@@ -248,5 +252,5 @@ int		rd_arg(char *tmp, t_a *s, t_arg *arg, int w)
 	}
 	else
 		return (arg_exp(tmp));
-	return (0);
+	return (1);
 }

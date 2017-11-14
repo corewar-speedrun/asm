@@ -191,7 +191,6 @@ void	add_lc(char *name, t_a *s)
 	new->name = ft_strdup(name);
 	s->total_bytes ? (new->called_on = s->total_bytes - 1) :
 		(new->called_on = s->total_bytes);
-//	new->called_on = s->total_bytes;
 	new->next = NULL;
 	if (!s->lcallist)
 		s->lcallist = new;

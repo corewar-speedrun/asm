@@ -77,6 +77,8 @@ typedef struct	s_arg
 	int				type[3];	// 1 if label, 0 if num
 	int				ditype[3];	// 1 if indirect, 0 if direct, -1 if reg
 	unsigned char	codage;
+	int				byte;
+	struct s_arg	*next;
 }				t_arg;
 
 typedef struct	s_a
@@ -148,6 +150,13 @@ int				p_lldi(char *a, t_a *s);
 int				p_lfork(char *a, t_a *s);
 int				p_aff(char *a, t_a *s);
 
+
+int				di_arg(char *tmp, t_a *s, t_arg *arg, int w);
+int				r_arg(char *tmp, t_arg *arg, int w);
+int				d_arg(char *tmp, t_a *s, t_arg *arg, int w);
+int				ir_arg(char *tmp, t_a *s, t_arg *arg, int w);
+int				rdi_arg(char *tmp, t_a *s, t_arg *arg, int w);
+int				rd_arg(char *tmp, t_a *s, t_arg *arg, int w);
 int				eval_reg(char *s, t_arg *a, int w);
 int				eval_dir(char *s, t_arg *a, int w, t_a *st);
 int				eval_ind(char *s, t_arg *a, int w, t_a *st);

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:03:01 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/10 16:12:57 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/15 20:42:11 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,7 @@ int		split_cnt(char **s)
 	return (i);
 }
 
-char	*ft_strstrip(char *s, int i, int j)
-{
-	char	*ret;
-	char	*tmp;
-	int		len;
-
-	len = 0;
-	tmp = ft_strtrim(s);
-	if (!tmp)
-		return (NULL);
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] != ' ' && tmp[i] != '\t')
-			len++;
-		i++;
-	}
-	ret = ft_strnew(len);
-	i = 0;
-	while (j < len)
-	{
-		if (tmp[i] != ' ' && tmp[i] != '\t')
-			ret[j++] = tmp[i++];
-		else
-			i++;
-	}
-	return (ret);
-}
-
-t_l	*lab_def(char *name, t_a *s)
+t_l		*lab_def(char *name, t_a *s)
 {
 	t_l	*tmp;
 
@@ -144,7 +116,7 @@ void	chooser(int add, t_pro *t, t_a *s)
 			else
 			{
 				if (tmp->ditype[1] == 1
-					&& vopros(2, t->next->next->next->next->next->next))
+						&& vopros(2, t->next->next->next->next->next->next))
 					modify_2b(add, t->next->next->next->next->next->next);
 				else if (vopros(4, t->next->next->next->next->next->next))
 					modify_4b(add, t->next->next->next->next->next->next);
@@ -157,38 +129,9 @@ void	chooser(int add, t_pro *t, t_a *s)
 		if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
 			modify_2b(add, t->next->next->next);
 		else if (tmp->type[2] == 1 &&
-			vopros(2, t->next->next->next->next->next))
+				vopros(2, t->next->next->next->next->next))
 			modify_2b(add, t->next->next->next->next->next);
 	}
-}
-
-int		wtop(t_lc *to, t_l *from, t_a *s)
-{
-	t_pro	*lol;
-
-	lol = s->output;
-	while (lol->nb != to->called_on)
-		lol = lol->next;
-	chooser(from->defined - to->called_on, lol, s);
-	return (1);
-}
-
-int		ass_lab(t_a *s)
-{
-	t_lc	*tmp;
-	t_l		*t2;
-
-	tmp = s->lcallist;
-	while (tmp)
-	{
-		t2 = lab_def(tmp->name, s);
-		if (!t2)
-			return (ld_er(tmp->name));
-		else
-			wtop(tmp, t2, s);
-		tmp = tmp->next;
-	}
-	return (1);
 }
 
 void	badder(t_arg *arg, t_a *s, int args, int ls)
@@ -225,117 +168,4 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 		else if (arg->ditype[i] == -1)
 			add_code((unsigned char)arg->arg[i], s);
 	}	
-}
-
-int		di_arg(char *tmp, t_a *s, t_arg *arg, int w)
-{
-	if (tmp[0] == DIRECT_CHAR)
-	{
-		if (!eval_dir(tmp, arg, w, s))
-			return (0);
-	}
-	else if (tmp[0] != 'r')
-	{
-		if (!eval_ind(tmp, arg, w, s))
-			return (0);
-	}
-	else
-		return (arg_exp(tmp));
-	return (1);
-}
-
-int		r_arg(char *tmp, t_arg *arg, int w)
-{	
-	if (tmp[0] == 'r')
-	{
-		if (!eval_reg(tmp, arg, w))
-			return (0);
-	}
-	else
-		return (reg_exp(tmp));
-	return (1);
-}
-
-int		d_arg(char *tmp, t_a *s, t_arg *arg, int w)
-{
-	if (tmp[0] == DIRECT_CHAR)
-	{
-		if (!eval_dir(tmp, arg, w, s))
-			return (0);
-	}
-	else
-		return (dir_exp(tmp));
-	return (1);
-}
-
-int		ir_arg(char *tmp, t_a *s, t_arg *arg, int w)
-{
-	if (tmp[0] == 'r')
-	{
-		if (!eval_reg(tmp, arg, w))
-			return (0);
-	}
-	else if (tmp[0] != DIRECT_CHAR)
-	{
-		if (!eval_ind(tmp, arg, w, s))
-			return (0);
-	}
-	else
-		return (reg_exp(tmp));
-	return (1);
-}
-
-int		rdi_arg(char *tmp, t_a *s, t_arg *arg, int w)
-{
-	if (tmp[0] == 'r')
-	{
-		if (!eval_reg(tmp, arg, w))
-			return (0);
-	}
-	else if (tmp[0] == DIRECT_CHAR) 
-	{
-		if (!eval_dir(tmp, arg, w, s))
-			return (0);
-	}
-	else if (!eval_ind(tmp, arg, w, s))
-		return (arg_exp(tmp));
-	return (1);
-}
-
-int		rd_arg(char *tmp, t_a *s, t_arg *arg, int w)
-{
-	if (tmp[0] == 'r')
-	{
-		if (!eval_reg(tmp, arg, w))
-			return (0);
-	}
-	else if (tmp[0] == DIRECT_CHAR)
-	{
-		if (!eval_dir(tmp, arg, w, s))
-			return (0);
-	}
-	else
-		return (arg_exp(tmp));
-	return (1);
-}
-
-t_arg	*arg_init(void)
-{
-	t_arg	*arg;
-	int		i;
-
-	arg = (t_arg*)malloc(sizeof(t_arg));
-	i = -1;
-	while (++i < 3)
-		arg->arg[i] = 0;
-	i = -1;
-	while (++i < 3)
-		arg->type[i] = 0;
-	i = -1;
-	while (++i < 3)
-		arg->ditype[i] = 0;
-	arg->codage = 0;
-	arg->byte = 0;
-	arg->next = NULL;
-	return (arg);
 }

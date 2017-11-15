@@ -6,27 +6,18 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/12 13:54:52 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/15 21:00:37 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int		print_le(int i, t_a *s)
-{
-	ft_putstr("Lexical error at [");
-	ft_putnbr(s->curr_line);
-	ft_putchar(':');
-	ft_putnbr(i);
-	ft_putstr("]\n");
-	return (0);
-}
 
 int		grep_name(t_a *s)
 {
 	int name_point_stop = 0;
 	int name_point_start = 0;
 	int tmp_i = 0;
+
 	while (s->f[s->i] == NAME_CMD_STRING[tmp_i])
 	{
 		s->i++;
@@ -81,6 +72,7 @@ int		grep_comm(t_a *s)
 	int comment_point_start = 0;
 	int comment_point_stop = 0;
 	int tmp_i = 0;
+
 	while (s->f[s->i] == COMMENT_CMD_STRING[tmp_i])
 	{
 		s->i++;
@@ -201,89 +193,11 @@ int		ch_op(t_a *s)
 	return (0);
 }
 
-int		check(t_a *s)
-{
-	if (ch_op(s))
-		return (1);
-	else if (ch_l(s))
-		return (1);
-	else
-		return (0);
-}
-
-void	s32(t_a *s)
-{
-	while (s->f[s->i] == ' ' || s->f[s->i] == '\t')
-		s->i++;
-}
-
-void	scom(t_a *s)
-{
-	while (s->f[s->i] != '\n')
-		s->i++;
-	s->f[s->i] == '\n' ? s->curr_line++ : 0;
-}
-
-int		check_name(t_a *s)
-{
-	if (ft_strnequ(NAME_CMD_STRING, s->f + s->i,
-				ft_strlen(NAME_CMD_STRING)))
-	{
-		if (s->prog_name[0] == '\0')
-		{
-			if (grep_name(s) == 0)
-				return (0);
-		}
-		else
-		{
-			ft_putstr("Duplicate .name in file\n");
-			return (0);
-		}
-	}
-	return (1);
-}
-
-int		print_uc(t_a *s)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (s->f[s->i + i] != ' ' && s->f[s->i + i] != '\t'
-		&& s->f[s->i + i] != '\n' && s->f[s->i + i] != '\0')
-		i++;
-	tmp = ft_strsub(s->f, s->i, i);
-	ft_putstr("Unknown command \"");
-	ft_putstr(tmp);
-	ft_strdel(&tmp);
-	ft_putstr("\".\n");
-	return (0);
-}
-
-int		check_comm(t_a *s)
-{
-	if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
-				ft_strlen(COMMENT_CMD_STRING)))
-	{
-		if (s->comment[0] == '\0')
-		{
-			if (grep_comm(s) == 0)
-				return (0);
-		}
-		else
-		{
-			ft_putstr("Duplicate .comment in file");
-			return (0);
-		}
-	}
-	else
-		return (print_uc(s));
-	return (1);
-}
-
 int		validate(t_a *s)
 {
-	int j = 0;
+	int j;
+
+	j = 0;
 	s->i = 0;
 	while (s->f[s->i] != '\0')
 	{
@@ -303,26 +217,5 @@ int		validate(t_a *s)
 			return (0);
 		j++;
 	}
-	// t_arg *tmp = s->args;
-	// while (tmp)
-	// {
-	// 	printf("[%d {%x|%x|%x}{%x|%x|%x}] ", tmp->byte, tmp->ditype[0], tmp->ditype[1], tmp->ditype[2], tmp->type[0], tmp->type[1], tmp->type[2]);
-	// 	tmp = tmp->next;
-	// }
-	// printf("\n");
-	// t_l *tmp = s->lablist;
-	// while (tmp)
-	// {
-	// 	printf("[%d|%s] ", tmp->defined, tmp->name);
-	// 	tmp = tmp->next;
-	// }
-	// printf("\n\n\n");
-	// t_lc *tmp2 = s->lcallist;
-	// while (tmp2)
-	// {
-	// 	printf("[%d|%s] ", tmp2->called_on, tmp2->name);
-	// 	tmp2 = tmp2->next;
-	// }
 	return (ass_lab(s));
-	return (1);
 }

@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer3.c                                         :+:      :+:    :+:   */
+/*   byop2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/12 20:00:34 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:29:30 by dmaznyts         ###   ########.fr       */
+/*   Created: 2017/11/15 20:31:34 by dmaznyts          #+#    #+#             */
+/*   Updated: 2017/11/15 20:32:38 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	ld_er(char *s)
+void	add_code(unsigned char cod, t_a *s)
 {
-	ft_putstr("Label \"");
-	ft_putstr(s);
-	ft_putstr("\" is not defined!\n");
-	return (0);
+	t_pro			*new;
+	t_pro			*tmp;
+
+	new = (t_pro*)malloc(sizeof(t_pro));
+	new->byte = cod;
+	new->nb = s->total_bytes++;
+	new->next = NULL;
+	if (!s->output)
+		s->output = new;
+	else
+	{
+		tmp = s->output;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void	add_2z(t_a *s)
+{
+	add_code(0, s);
+	add_code(0, s);
 }

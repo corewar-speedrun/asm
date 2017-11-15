@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/11 19:34:19 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/15 21:11:27 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
-
-typedef struct	s_header
-{
-	unsigned int		magic;
-	char				prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int		prog_size;
-	char				comment[COMMENT_LENGTH + 1];
-}				t_header;
 
 union			u_onebyte
 {
@@ -164,5 +156,16 @@ int				eval_ind(char *s, t_arg *a, int w, t_a *st);
 void			add_arg(t_a *s, t_arg *add);
 void			badder(t_arg *arg, t_a *s, int args, int ls);
 int				vopros(int j, t_pro *t);
+int				check(t_a *s);
+int				check_name(t_a *s);
+int				print_le(int i, t_a *s);
+void			scom(t_a *s);
+int				check_comm(t_a *s);
+int				ch_op(t_a *s);
+int				ch_l(t_a *s);
+int				grep_comm(t_a *s);
+int				grep_name(t_a *s);
+void			chooser(int add, t_pro *l, t_a *s);
+t_l				*lab_def(char *name, t_a *s);
 
 #endif

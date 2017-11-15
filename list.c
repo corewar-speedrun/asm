@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/12 13:32:02 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/15 20:36:18 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int		add_op(char *op, t_a *s)
 
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
-	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR && s->f[s->i] != ';')
+	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR
+			&& s->f[s->i] != ';')
 		(s->f[s->i] != COMMENT_CHAR && s->f[s->i] != ';') ? (s->i++) : 0;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
 	if (arg_pars(ret_opcode(op, s), args, s))
@@ -73,136 +74,4 @@ int		add_op(char *op, t_a *s)
 		flag = 0;
 	ft_strdel(&args);
 	return (flag);
-}
-
-void	add_la(char *l, t_a *s)
-{
-	t_l		*new;
-	t_l		*tmp;
-
-	new = (t_l*)malloc(sizeof(t_l));
-	new->name = ft_strdup(l);
-	new->name[ft_strlen(l) - 1] = '\0';
-	new->defined = s->total_bytes;
-	new->next = NULL;
-	if (!s->lablist)
-		s->lablist = new;
-	else
-	{
-		tmp = s->lablist;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
-void	add_code(unsigned char cod, t_a *s)
-{
-	t_pro			*new;
-	t_pro			*tmp;
-
-	new = (t_pro*)malloc(sizeof(t_pro));
-	new->byte = cod;
-	new->nb = s->total_bytes++;
-	new->next = NULL;
-	if (!s->output)
-		s->output = new;
-	else
-	{
-		tmp = s->output;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
-void	add_4b(int add, t_a *s)
-{
-	union u_onebyte	z;
-
-	z.magic = add;
-	add_code(z.bit[3], s);
-	add_code(z.bit[2], s);
-	add_code(z.bit[1], s);
-	add_code(z.bit[0], s);
-}
-
-void	add_2b(int add, t_a *s)
-{
-	union u_onebyte	z;
-
-	z.magic = add;
-	add_code(z.bit[1], s);
-	add_code(z.bit[0], s);
-}
-
-void	modify_4b(int add, t_pro *t)
-{
-	union u_onebyte	z;
-
-	z.magic = add;
-	t->byte = z.bit[3];
-	t->next->byte = z.bit[2];
-	t->next->next->byte = z.bit[1];
-	t->next->next->next->byte = z.bit[0];
-}
-
-void	modify_2b(int add, t_pro *t)
-{
-	union u_onebyte	z;
-	
-	z.magic = add;
-	t->byte = z.bit[1];
-	t->next->byte = z.bit[0];
-}
-
-void	add_4z(t_a *s)
-{
-	add_code(0, s);
-	add_code(0, s);
-	add_code(0, s);
-	add_code(0, s);
-}
-
-void	add_2z(t_a *s)
-{
-	add_code(0, s);
-	add_code(0, s);
-}
-
-void	add_lc(char *name, t_a *s)
-{
-	t_lc			*new;
-	t_lc			*tmp;
-
-	new = (t_lc*)malloc(sizeof(t_lc));
-	new->name = ft_strdup(name);
-	s->total_bytes ? (new->called_on = s->total_bytes - 1) :
-		(new->called_on = s->total_bytes);
-	new->next = NULL;
-	if (!s->lcallist)
-		s->lcallist = new;
-	else
-	{
-		tmp = s->lcallist;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
-void	add_arg(t_a *s, t_arg *add)
-{
-	t_arg	*tmp;
-
-	add->next = NULL;
-	if (!s->args)
-		s->args = add;
-	else
-	{
-		tmp = s->args;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = add;
-	}
 }

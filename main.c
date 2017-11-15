@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/14 21:18:03 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/15 21:23:25 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,6 @@ int		main(int ac, char **av)
 		print_usage(av[0]);
 	else
 		main_loop(ac, av);
-	LEAK
+//	LEAK
 	return (0);
 }

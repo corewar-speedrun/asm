@@ -32,7 +32,7 @@ void	ve(char *fn, char *er)
 {
 	ft_putstr("File : ");
 	ft_putstr(fn);
-	ft_putstr(" : \e[1;31mError!\e[0m : ");
+	ft_putstr(" : \e[1;31mError!\e[0m ");
 	ft_putstr(er);
 	ft_putchar('\n');
 }
@@ -116,7 +116,8 @@ char	*ft_strndup(char *src)
 	size_t	i;
 
 	i = -1;
-	ret = (char*)malloc(sizeof(char) * ft_strlen(src) - 2);
+	ret = (char*)malloc(sizeof(char) * ft_strlen(src) - 1);
+	ft_bzero(ret, ft_strlen(src) - 1);
 	while (++i < ft_strlen(src) - 1)
 		ret[i] = src[i];
 	return (ret);
@@ -159,7 +160,7 @@ int		read_file(t_a *s)
 		{
 			tmp = s->f;
 			s->f = ft_strjoin(s->f, buf);
-			ft_strdel(&tmp);
+			free(tmp);
 		}
 	}
 	if (n < 0)
@@ -241,7 +242,7 @@ void	main_loop(int ac, char **av)
 		if (check_ext(&st))
 		{
 			if (read_file(&st))
-				compile(&st) ? cs(av[i]) : ve(av[i], "incorrect file");
+				compile(&st) ? cs(av[i]) : ve(av[i], "");
 			else
 				ve(av[i], "file error");
 		}
@@ -249,14 +250,16 @@ void	main_loop(int ac, char **av)
 			ve(av[i], "Not '.s' file!");
 		ft_bzero(st.prog_name, PROG_NAME_LENGTH + 1);
 		ft_bzero(st.comment, COMMENT_LENGTH + 1);
+		ft_strdel(&st.f);
 	}
 }
 
 int		main(int ac, char **av)
 {
-	if (ac < 2)
+	if (ac < 2 && ac > 0)
 		print_usage(av[0]);
 	else
 		main_loop(ac, av);
+	LEAK
 	return (0);
 }

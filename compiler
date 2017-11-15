@@ -1,22 +1,10 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    compiler                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/11/14 16:05:14 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/11/14 22:52:32 by dmaznyts         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 clear
 
 cp $1 $1.my.s
 cp $1 $1.or.s
 
-./asm $1.my.s > /dev/null
-./asm_original $1.or.s > /dev/null
+./asm $1.my.s
+./asm_original $1.or.s
 
 hexdump $1.my.cor > $1.my.cor.d
 hexdump $1.or.cor > $1.or.cor.d
@@ -24,10 +12,10 @@ hexdump $1.or.cor > $1.or.cor.d
 diff $1.my.cor.d $1.or.cor.d > result
 
 cat result
-echo
-echo ">>>>>>>> $1 : <<<<<<<<"
-echo
-head -n 26 $1
+#echo
+#echo ">>>>>>>> $1 : <<<<<<<<"
+#echo
+#head -n 26 $1
 
 rm $1.my.s
 rm $1.or.s

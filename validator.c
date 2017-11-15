@@ -175,7 +175,8 @@ int		ch_op(t_a *s)
 	n = 0;
 	s32(s);
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
-			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n')
+			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n'
+			&& (s->f + s->i)[n] != ';')
 		n++;
 	cmp = ft_strsub(s->f, s->i, n);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
@@ -286,6 +287,7 @@ int		validate(t_a *s)
 	s->i = 0;
 	while (s->f[s->i] != '\0')
 	{
+		s32(s);
 		if (s->f[s->i] == COMMENT_CHAR || s->f[s->i] == ';')
 			scom(s);
 		else if (s->f[s->i] == '.')

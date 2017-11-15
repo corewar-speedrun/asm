@@ -242,25 +242,6 @@ int		check_name(t_a *s)
 	return (1);
 }
 
-int		check_comm(t_a *s)
-{
-	if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
-				ft_strlen(COMMENT_CMD_STRING)))
-	{
-		if (s->comment[0] == '\0')
-		{
-			if (grep_comm(s) == 0)
-				return (0);
-		}
-		else
-		{
-			ft_putstr("Duplicate .comment in file");
-			return (0);
-		}
-	}
-	return (1);
-}
-
 int		print_uc(t_a *s)
 {
 	int		i;
@@ -278,13 +259,34 @@ int		print_uc(t_a *s)
 	return (0);
 }
 
+int		check_comm(t_a *s)
+{
+	if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
+				ft_strlen(COMMENT_CMD_STRING)))
+	{
+		if (s->comment[0] == '\0')
+		{
+			if (grep_comm(s) == 0)
+				return (0);
+		}
+		else
+		{
+			ft_putstr("Duplicate .comment in file");
+			return (0);
+		}
+	}
+	else
+		return (print_uc(s));
+	return (1);
+}
+
 int		validate(t_a *s)
 {
 	int j = 0;
 	s->i = 0;
 	while (s->f[s->i] != '\0')
 	{
-		if (s->f[s->i] == COMMENT_CHAR)
+		if (s->f[s->i] == COMMENT_CHAR || s->f[s->i] == ';')
 			scom(s);
 		else if (s->f[s->i] == '.')
 		{
@@ -292,8 +294,6 @@ int		validate(t_a *s)
 				return (0);
 			else if (!check_comm(s))
 				return (0);
-			else
-				return (print_uc(s));
 		}
 		else if (s->f[s->i] == '\n')
 			s->i++ && s->curr_line++;
@@ -301,7 +301,6 @@ int		validate(t_a *s)
 			return (0);
 		j++;
 	}
-	return (ass_lab(s));
 	// t_arg *tmp = s->args;
 	// while (tmp)
 	// {
@@ -315,12 +314,13 @@ int		validate(t_a *s)
 	// 	printf("[%d|%s] ", tmp->defined, tmp->name);
 	// 	tmp = tmp->next;
 	// }
-	// printf("\n");
+	// printf("\n\n\n");
 	// t_lc *tmp2 = s->lcallist;
 	// while (tmp2)
 	// {
 	// 	printf("[%d|%s] ", tmp2->called_on, tmp2->name);
 	// 	tmp2 = tmp2->next;
 	// }
+	return (ass_lab(s));
 	return (1);
 }

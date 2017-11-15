@@ -84,7 +84,7 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 	a->ditype[w] = 1;
 	if (s[0] == LABEL_CHAR)
 	{
-		add_lc(s, st);
+		add_lc(s + 1, st);
 		a->type[w] = 1;
 	}
 	else

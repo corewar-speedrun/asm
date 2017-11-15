@@ -96,9 +96,11 @@ void	chooser(int add, t_pro *t, t_a *s)
 		modify_2b(add, t->next->next->next);
 	else if (t->byte == 2 || t->byte == 13)
 	{
-		b = (t->next->byte << 6) >> 6;
-		b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
-		t->next->byte = t->next->byte & 0xFC;
+		tmp = get_args(s, t->nb);
+		if (tmp->ditype[0] == 1)
+			modify_2b(add, t->next->next);
+		else
+			modify_4b(add, t->next->next);
 	}
 	else if (t->byte == 10 || t->byte == 14)
 	{

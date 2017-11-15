@@ -17,7 +17,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-
+#include <stdio.h>//////////////////////////////////////////////////////////////////////////////
 # define LEAK system("leaks asm");
 
 # define REG_CODE				1

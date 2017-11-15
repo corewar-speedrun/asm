@@ -15,7 +15,7 @@
 void	add_code_h(unsigned char cod, t_a *s)
 {
 	t_pro	*new;
-	
+
 	new = (t_pro*)malloc(sizeof(t_pro));
 	new->byte = cod;
 	new->nb = s->total_bytes;

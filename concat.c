@@ -25,7 +25,7 @@ void	putmagic(t_a *s)
 
 void	putname(t_a *s)
 {
-    int	l2;
+	int	l2;
 	int	len;
 
 	len = PROG_NAME_LENGTH + 1;

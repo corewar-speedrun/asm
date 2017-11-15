@@ -16,6 +16,6 @@ int ld_er(char *s)
 {
     ft_putstr("Label \"");
     ft_putstr(s);
-    ft_putstr("\" is not defined!");
+    ft_putstr("\" is not defined!\n");
     return (0);
 }

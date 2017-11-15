@@ -63,7 +63,7 @@ t_l	*lab_def(char *name, t_a *s)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 t_arg	*get_args(t_a *s, int byte)
@@ -179,7 +179,8 @@ int		ass_lab(t_a *s)
 	tmp = s->lcallist;
 	while (tmp)
 	{
-		if ((t2 = lab_def(tmp->name, s)) == NULL)
+		t2 = lab_def(tmp->name, s);
+		if (!t2)
 			return (ld_er(tmp->name));
 		else
 			wtop(tmp, t2, s);

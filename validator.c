@@ -288,7 +288,7 @@ int		validate(t_a *s)
 	// 	tmp = tmp->next;
 	// }
 	// printf("\n");
-	// return (ass_lab(s));
+	return (ass_lab(s));
 	// t_l *tmp = s->lablist;
 	// while (tmp)
 	// {

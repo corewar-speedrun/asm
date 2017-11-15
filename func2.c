@@ -100,53 +100,51 @@ void	chooser(int add, t_pro *t, t_a *s)
 		b ? (modify_4b(add, t->next->next)) : (modify_2b(add, t->next->next));
 		t->next->byte = t->next->byte & 0xFC;
 	}
-	//дальше жопа с учитыванием кодирующего байта и позиции аргумента
-	// лейблов может быть два, в двух аргументах
-	//
 	else if (t->byte == 10 || t->byte == 14)
 	{
 		tmp = get_args(s, t->nb);
-		if (tmp->type[0] == 1)
+		if (tmp->type[0] == 1 && vopros(2, t->next->next))
 			modify_2b(add, t->next->next);
 		else if (tmp->type[1] == 1)
 		{
-			if (tmp->ditype[0] == -1)
+			if (tmp->ditype[0] == -1 && vopros(2, t->next->next->next))
 				modify_2b(add, t->next->next->next);
-			else
+			else if (vopros(2, t->next->next->next->next))
 				modify_2b(add, t->next->next->next->next);
 		}
 	}
 	else if (t->byte == 6 || t->byte == 7 || t->byte == 8)
 	{
 		tmp = get_args(s, t->nb);
-		if (tmp->type[0] == 1)
+		if (tmp->type[0] == 1 && vopros(2, t->next->next))
 		{
-			if (tmp->ditype[0] == 1)
+			if (tmp->ditype[0] == 1 && vopros(2, t->next->next))
 				modify_2b(add, t->next->next);
-			else
+			else if (vopros(4, t->next->next))
 				modify_4b(add, t->next->next);
 		}
-		else if (tmp->type[1] == 1)
+		else if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
 		{
-			if (tmp->ditype[0] == -1)
+			if (tmp->ditype[0] == -1 && vopros(2, t->next->next->next))
 			{
-				if (tmp->ditype[1] == 1)
+				if (tmp->ditype[1] == 1 && vopros(2, t->next->next->next))
 					modify_2b(add, t->next->next->next);
-				else
+				else if (vopros(4, t->next->next->next))
 					modify_4b(add, t->next->next->next);
 			}
-			else if (tmp->ditype[0] == 1)
+			else if (tmp->ditype[0] == 1 && vopros(2, t->next->next->next->next))
 			{
-				if (tmp->ditype[1] == 1)
+				if (tmp->ditype[1] == 1 && vopros(2, t->next->next->next->next))
 					modify_2b(add, t->next->next->next->next);
-				else
+				else if (vopros(4, t->next->next->next->next))
 					modify_4b(add, t->next->next->next->next);
 			}
 			else
 			{
-				if (tmp->ditype[1] == 1)
+				if (tmp->ditype[1] == 1
+					&& vopros(2, t->next->next->next->next->next->next))
 					modify_2b(add, t->next->next->next->next->next->next);
-				else
+				else if (vopros(4, t->next->next->next->next->next->next))
 					modify_4b(add, t->next->next->next->next->next->next);
 			}
 		}
@@ -154,9 +152,10 @@ void	chooser(int add, t_pro *t, t_a *s)
 	else if (t->byte == 11)
 	{
 		tmp = get_args(s, t->nb);
-		if (tmp->type[1] == 1)
+		if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
 			modify_2b(add, t->next->next->next);
-		else if (tmp->type[2] == 1)
+		else if (tmp->type[2] == 1 &&
+			vopros(2, t->next->next->next->next->next))
 			modify_2b(add, t->next->next->next->next->next);
 	}
 }
@@ -169,7 +168,6 @@ int		wtop(t_lc *to, t_l *from, t_a *s)
 	while (lol->nb != to->called_on)
 		lol = lol->next;
 	chooser(from->defined - to->called_on, lol, s);
-	printf("byte called |%d|, op |%x|\n", to->called_on, lol->byte);
 	return (1);
 }
 
@@ -199,29 +197,29 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 		add_code(arg->codage, s);
 	while (++i < args)
 	{
-		if (arg->ditype[i] == 1)			//if indirect
+		if (arg->ditype[i] == 1)
 		{
-			if (arg->type[i] == 1)			//if lable
+			if (arg->type[i] == 1)
 				add_2z(s);
-			else							//if num
+			else
 				add_2b(arg->arg[i], s);
 		}
-		else if (arg->ditype[i] == 0)		//if direct
-			if (arg->type[i] == 1)			//if lable
+		else if (arg->ditype[i] == 0)
+			if (arg->type[i] == 1)
 			{	
 				if (ls == 4)
 					add_4z(s);
 				else
 					add_2z(s);
 			}
-			else							//if num
+			else
 			{	
 				if (ls == 4)
 					add_4b(arg->arg[i], s);
 				else
 					add_2b(arg->arg[i], s);
 			}
-		else if (arg->ditype[i] == -1)		//if reg
+		else if (arg->ditype[i] == -1)
 			add_code((unsigned char)arg->arg[i], s);
 	}	
 }

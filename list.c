@@ -35,7 +35,6 @@ int		arg_parsa(unsigned char op, char *a, t_a *s)
 
 int		arg_pars(unsigned char op, char *a, t_a *s)
 {
-//	printf("[%d]\n", s->total_bytes);
 	if (op == 1)
 		return (p_live(a, s));
 	else if (op == 2)
@@ -81,7 +80,6 @@ void	add_la(char *l, t_a *s)
 	t_l		*new;
 	t_l		*tmp;
 
-	//трекання дефайну лейбла
 	new = (t_l*)malloc(sizeof(t_l));
 	new->name = ft_strdup(l);
 	new->name[ft_strlen(l) - 1] = '\0';
@@ -116,12 +114,10 @@ void	add_code(unsigned char cod, t_a *s)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	printf("last [%x], total [%d]\n", cod, s->total_bytes);
 }
 
 void	add_4b(int add, t_a *s)
 {
-
 	union u_onebyte	z;
 
 	z.magic = add;
@@ -133,7 +129,6 @@ void	add_4b(int add, t_a *s)
 
 void	add_2b(int add, t_a *s)
 {
-
 	union u_onebyte	z;
 
 	z.magic = add;
@@ -180,7 +175,6 @@ void	add_lc(char *name, t_a *s)
 	t_lc			*new;
 	t_lc			*tmp;
 
-	printf("called label [%s]\n", name);
 	new = (t_lc*)malloc(sizeof(t_lc));
 	new->name = ft_strdup(name);
 	s->total_bytes ? (new->called_on = s->total_bytes - 1) :

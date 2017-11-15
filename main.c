@@ -112,7 +112,6 @@ int		read_file(t_a *s)
 
 int		writeout_fd(t_a *s, int fd)
 {
-	//LISTS OUTPUT!!!!
 	int		i;
 	t_pro	*tmp;
 

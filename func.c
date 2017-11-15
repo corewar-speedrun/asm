@@ -12,16 +12,6 @@
 
 #include "asm.h"
 
-size_t			ft_bytelen(unsigned char *s)
-{
-	size_t	n;
-
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
-
 unsigned char	ret_opcode(char *op, t_a *s)
 {
 	unsigned char	opcode;
@@ -31,28 +21,6 @@ unsigned char	ret_opcode(char *op, t_a *s)
 	while (++i < 16)
 		ft_strequ(op, s->op[i]) ? opcode = i + 1 : 0;
 	return (opcode);
-}
-
-unsigned char	*ft_bytejoin(unsigned char *s1, unsigned char *s2)
-{
-	unsigned char	*ret;
-	size_t			i;
-	size_t			j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	ret = (unsigned char*)malloc(ft_bytelen(s1) + ft_bytelen(s2) + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[j])
-		ret[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		ret[i++] = s2[j++];
-	ret[i] = '\0';
-	return (ret);
 }
 
 void			init2(t_a *s)
@@ -92,4 +60,23 @@ void			init(t_a *s)
 	s->total_bytes = 0;
 	s->lablist = NULL;
 	s->lcallist = NULL;
+}
+
+int				vopros(int j, t_pro *t)
+{
+	if (j == 2)
+	{
+		if (t->byte == 0)
+			if (t->next->byte == 0)
+				return (1);
+	}
+	else
+	{
+		if (t->byte == 0)
+			if (t->next->byte == 0)
+				if (t->next->next->byte == 0)
+					if (t->next->next->next->byte == 0)
+						return (1);
+	}
+	return (0);
 }

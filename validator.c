@@ -189,7 +189,6 @@ int		ch_op(t_a *s)
 	{
 		if (ft_strequ(s->op[n++], cmp))
 		{
-			printf("operation found |%s|\n", cmp);
 			if (add_op(s->op[n - 1], s))
 				return (1);
 			else
@@ -282,26 +281,26 @@ int		validate(t_a *s)
 			return (0);
 		j++;
 	}
-	t_arg *tmp = s->args;
-	while (tmp)
-	{
-		printf("[%d {%x|%x|%x}{%x|%x|%x}] ", tmp->byte, tmp->ditype[0], tmp->ditype[1], tmp->ditype[2], tmp->type[0], tmp->type[1], tmp->type[2]);
-		tmp = tmp->next;
-	}
-	printf("\n");
-	return (ass_lab(s));
-//	t_l *tmp = s->lablist;
-//	while (tmp)
-//	{
-//		printf("[%d|%s] ", tmp->defined, tmp->name);
-//		tmp = tmp->next;
-//	}
-//	printf("\n");
-//	t_lc *tmp2 = s->lcallist;
-//	while (tmp2)
-//	{
-//		printf("[%d|%s] ", tmp2->called_on, tmp2->name);
-//		tmp2 = tmp2->next;
-//	}
+	// t_arg *tmp = s->args;
+	// while (tmp)
+	// {
+	// 	printf("[%d {%x|%x|%x}{%x|%x|%x}] ", tmp->byte, tmp->ditype[0], tmp->ditype[1], tmp->ditype[2], tmp->type[0], tmp->type[1], tmp->type[2]);
+	// 	tmp = tmp->next;
+	// }
+	// printf("\n");
+	// return (ass_lab(s));
+	// t_l *tmp = s->lablist;
+	// while (tmp)
+	// {
+	// 	printf("[%d|%s] ", tmp->defined, tmp->name);
+	// 	tmp = tmp->next;
+	// }
+	// printf("\n");
+	// t_lc *tmp2 = s->lcallist;
+	// while (tmp2)
+	// {
+	// 	printf("[%d|%s] ", tmp2->called_on, tmp2->name);
+	// 	tmp2 = tmp2->next;
+	// }
 	return (1);
 }

@@ -17,7 +17,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <stdio.h>//////////////////////////////////////////////////////////
 
 # define LEAK system("leaks asm");
 
@@ -163,5 +162,6 @@ int				eval_dir(char *s, t_arg *a, int w, t_a *st);
 int				eval_ind(char *s, t_arg *a, int w, t_a *st);
 void			add_arg(t_a *s, t_arg *add);
 void			badder(t_arg *arg, t_a *s, int args, int ls);
+int				vopros(int j, t_pro *t);
 
 #endif

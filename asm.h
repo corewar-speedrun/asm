@@ -125,6 +125,9 @@ int				er_stru(void);
 int				three_ae(int a);
 int				two_ae(int a);
 int				ld_er(char *s);
+void			print_usage(char *pname);
+void			cs(char *fn);
+void			ve(char *fn, char *er);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);
@@ -167,5 +170,14 @@ int				grep_comm(t_a *s);
 int				grep_name(t_a *s);
 void			chooser(int add, t_pro *l, t_a *s);
 t_l				*lab_def(char *name, t_a *s);
+int				check_ext(t_a *s);
+char			*ft_strndup(char *src);
+void			add_code_h(unsigned char cod, t_a *s);
+
+void			putmagic(t_a *s);
+void			putname(t_a *s);
+void			putcomment(t_a *s);
+void			putident(t_a *s);
+void			putsize(t_a *s);
 
 #endif

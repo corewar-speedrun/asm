@@ -19,12 +19,12 @@ int		eval_reg(char *s, t_arg *a, int w)
 
 	i = 0;
 	a->ditype[w] = -1;
-	if (s[i] != 'r')
+	if (s[i] != 'r' || s[i + 1] == '\0')
 		return (reg_exp(s));
 	else
 	{
 		cod = ft_atoi(s + 1);
-		if (cod > REG_NUMBER)
+		if (cod > REG_NUMBER && cod > 0)
 			return (reg_bad(cod));
 		else
 		{
@@ -48,13 +48,15 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	else
 	{
 		i++;
-		if (s[i] == LABEL_CHAR)
+		if (s[i] == LABEL_CHAR && s[i + 1] != '\0')
 		{
 			add_lc(s + i + 1, st);
 			a->type[w] = 1;
 		}
-		else
+		else if (s[i] != '\0')
 			a->arg[w] = ft_atoi(s + 1);
+		else
+			return (arg_exp(s));
 		a->codage = a->codage | DIR_CODE;
 		a->codage = a->codage << 2;
 	}

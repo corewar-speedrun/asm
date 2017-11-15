@@ -55,7 +55,7 @@ int		grep_name(t_a *s)
 	s->curr_line++;
 	s->prog_name_tmp = ft_strsub(s->f, name_point_start,
 			name_point_stop - name_point_start);
-	if (ft_strlen(s->prog_name_tmp) > PROG_NAME_LENGTH)
+	if (ft_strlen(s->prog_name_tmp) >= PROG_NAME_LENGTH)
 	{
 		ft_putstr("Champion name is too long (Max ");
 		ft_putnbr(PROG_NAME_LENGTH);

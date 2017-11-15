@@ -12,13 +12,14 @@
 
 #include "asm.h"
 
-void	print_le(int i, t_a *s)
+int		print_le(int i, t_a *s)
 {
 	ft_putstr("Lexical error at [");
 	ft_putnbr(s->curr_line);
 	ft_putchar(':');
 	ft_putnbr(i);
 	ft_putstr("]\n");
+	return (0);
 }
 
 int		grep_name(t_a *s)
@@ -260,6 +261,23 @@ int		check_comm(t_a *s)
 	return (1);
 }
 
+int		print_uc(t_a *s)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (s->f[s->i + i] != ' ' && s->f[s->i + i] != '\t'
+		&& s->f[s->i + i] != '\n' && s->f[s->i + i] != '\0')
+		i++;
+	tmp = ft_strsub(s->f, s->i, i);
+	ft_putstr("Unknown command \"");
+	ft_putstr(tmp);
+	ft_strdel(&tmp);
+	ft_putstr("\".\n");
+	return (0);
+}
+
 int		validate(t_a *s)
 {
 	int j = 0;
@@ -274,6 +292,8 @@ int		validate(t_a *s)
 				return (0);
 			else if (!check_comm(s))
 				return (0);
+			else
+				return (print_uc(s));
 		}
 		else if (s->f[s->i] == '\n')
 			s->i++ && s->curr_line++;
@@ -281,6 +301,7 @@ int		validate(t_a *s)
 			return (0);
 		j++;
 	}
+	return (ass_lab(s));
 	// t_arg *tmp = s->args;
 	// while (tmp)
 	// {
@@ -288,7 +309,6 @@ int		validate(t_a *s)
 	// 	tmp = tmp->next;
 	// }
 	// printf("\n");
-	return (ass_lab(s));
 	// t_l *tmp = s->lablist;
 	// while (tmp)
 	// {

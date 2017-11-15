@@ -111,6 +111,7 @@ int				ass_lab(t_a *s);
 void			add_la(char *l, t_a *s);
 void			add_lc(char *name, t_a *s);
 void			add_code(unsigned char cod, t_a *s);
+void			add_code_h(unsigned char cod, t_a *s);
 void			add_4z(t_a *s);
 void			add_2z(t_a *s);
 void			modify_4b(int add, t_pro *t);

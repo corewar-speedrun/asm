@@ -42,11 +42,72 @@ void	putmagic(t_a *s)
 	union u_onebyte	z;
 
 	z.magic = COREWAR_EXEC_MAGIC;
-	add_code(z.bit[3], s);
-	add_code(z.bit[2], s);
-	add_code(z.bit[1], s);
-	add_code(z.bit[0], s);
-	s->total_bytes = 4;
+	add_code_h(z.bit[0], s);
+	add_code_h(z.bit[1], s);
+	add_code_h(z.bit[2], s);
+	add_code_h(z.bit[3], s);
+}
+
+void	putname(t_a *s)
+{
+    int	l2;
+	int	len;
+
+	len = PROG_NAME_LENGTH + 1;
+	l2 = ft_strlen(s->prog_name);
+	while (len > 0)
+	{
+		if (s->prog_name[len] != 0 && len <= l2)
+		{
+			add_code_h(s->prog_name[len], s);
+			l2--;
+		}
+		else
+			add_code_h(0, s);
+		len--;
+	}
+}
+
+void	putcomment(t_a *s)
+{
+	int	len;
+	int	l2;
+
+	l2 = ft_strlen(s->comment);
+	len = COMMENT_LENGTH + 1;
+	while (len > 0)
+	{
+		if (s->comment[len] != 0 && len <= l2)
+		{
+			add_code_h(s->comment[len], s);
+			l2--;
+		}
+		else
+			add_code_h(0, s);
+		len--;
+	}
+}
+
+void	putident(t_a *s)
+{
+	int id;
+
+	id = 0;
+	if ((PROG_NAME_LENGTH + 1) % 4 != 0)
+		id = 4 - (PROG_NAME_LENGTH + 1) % 4;
+	while (id-- > 0)
+		add_code_h(0, s);
+}
+
+void	putsize(t_a *s)
+{
+	union u_onebyte	z;
+
+	z.magic = s->total_bytes;
+	add_code_h(z.bit[0], s);
+	add_code_h(z.bit[1], s);
+	add_code_h(z.bit[2], s);
+	add_code_h(z.bit[3], s);
 }
 
 char	*ft_strndup(char *src)
@@ -130,6 +191,17 @@ int		writeout_fd(t_a *s, int fd)
 	return (1);
 }
 
+void	add_code_h(unsigned char cod, t_a *s)
+{
+	t_pro	*new;
+	
+	new = (t_pro*)malloc(sizeof(t_pro));
+	new->byte = cod;
+	new->nb = s->total_bytes;
+	new->next = s->output;
+	s->output = new;
+}
+
 int		compile(t_a *s)
 {
 	int	fd;
@@ -141,14 +213,12 @@ int		compile(t_a *s)
 		return (er_stru());
 	if (validate(s))
 	{
-//		TODO
-//		putmagic(s);
-//		putname(s);
-//		putident(s);
-//		putsize(s);
-//		putcomment(s);
-//		putident(s);
-//		putcode(s);
+		putident(s);
+		putcomment(s);
+		putsize(s);
+		putident(s);
+		putname(s);
+		putmagic(s);
 		flag = writeout_fd(s, fd);
 		return (flag);
 	}

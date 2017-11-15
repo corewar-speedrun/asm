@@ -92,11 +92,9 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 		if (!ch_ar(s))
 			return (ind_exp(s));
 		else
-		{
 			a->arg[w] = ft_atoi(s);
-			a->codage = a->codage | IND_CODE;
-			a->codage = a->codage << 2;
-		}
 	}
+	a->codage = a->codage | IND_CODE;
+	a->codage = a->codage << 2;
 	return (1);
 }

@@ -55,7 +55,7 @@ int		last(char *s)
 	int	len;
 
 	len = ft_strlen(s);
-	while (s[len] != COMMENT_CHAR && s[len] != ';' && len > 0)
+	while (s[len] != COMMENT_CHAR && s[len] != ';' && len > 0 && s[len] != '\n')
 	{
 		if (s[len] == '\n')
 			return (1);

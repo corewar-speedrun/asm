@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:36:18 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 21:15:41 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ int		add_op(char *op, t_a *s)
 	if (arg_pars(ret_opcode(op, s), args, s))
 		flag = 1;
 	ft_strdel(&args);
-	// ft_strdel(&op);
 	return (flag);
 }

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 15:20:19 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/16 15:20:55 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 21:16:45 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	freespl(char **s)
 	i = split_cnt(s);
 	while (++j < i)
 		ft_strdel(&s[j]);
-	free (s);
+	free(s);
 }
 
 void	freeoutput(t_a *s)

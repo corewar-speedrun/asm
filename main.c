@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 21:23:25 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 21:16:13 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		compile(t_a *s)
 	int		fd;
 	int		flag;
 	char	*t;
-	
+
 	flag = 1;
 	t = ft_strjoin(s->basename, "cor");
 	if (last(s->f) || s->f[ft_strlen(s->f) - 1] != '\n')

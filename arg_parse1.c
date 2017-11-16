@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:00:59 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:27:14 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:56:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	p_live(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 1, 4);
 	add_arg(s, arg);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -47,6 +48,8 @@ int	p_ld(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 2, 4);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -69,6 +72,8 @@ int	p_st(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 2, 2);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -92,6 +97,8 @@ int	p_add(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 3, 2);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -115,5 +122,7 @@ int	p_sub(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 3, 2);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }

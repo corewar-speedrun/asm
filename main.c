@@ -63,11 +63,12 @@ int		writeout_fd(t_a *s, int fd)
 
 int		compile(t_a *s)
 {
-	int	fd;
-	int	flag;
-
-	fd = open(ft_strjoin(s->basename, "cor"), O_CREAT | O_WRONLY |
-			O_TRUNC, 0666);
+	int		fd;
+	int		flag;
+	char	*t;
+	
+	t = ft_strjoin(s->basename, "cor");
+	fd = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (s->f[ft_strlen(s->f) - 1] != '\n')
 		return (er_stru());
 	if (validate(s))
@@ -79,6 +80,7 @@ int		compile(t_a *s)
 		putname(s);
 		putmagic(s);
 		flag = writeout_fd(s, fd);
+		ft_strdel(&t);
 		return (flag);
 	}
 	else
@@ -106,10 +108,9 @@ void	main_loop(int ac, char **av)
 		}
 		else
 			ve(av[i], "Not '.s' file!");
-		ft_bzero(st.prog_name, PROG_NAME_LENGTH + 1);
-		ft_bzero(st.comment, COMMENT_LENGTH + 1);
-		ft_strdel(&st.f);
+		freeall(&st);
 	}
+	freeop(st.op);
 }
 
 int		main(int ac, char **av)
@@ -118,6 +119,6 @@ int		main(int ac, char **av)
 		print_usage(av[0]);
 	else
 		main_loop(ac, av);
-//	LEAK
+	LEAK
 	return (0);
 }

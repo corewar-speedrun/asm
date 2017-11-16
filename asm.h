@@ -174,6 +174,12 @@ t_l				*lab_def(char *name, t_a *s);
 int				check_ext(t_a *s);
 char			*ft_strndup(char *src);
 void			add_code_h(unsigned char cod, t_a *s);
+void			normefucker1(int add, t_pro *t, t_arg *tmp);
+void			normefucker2(int add, t_pro *t, t_a *s, t_arg *tmp);
+t_arg			*get_args(t_a *s, int byte);
+void			freespl(char **s);
+void			freeall(t_a *s);
+void			freeop(char **s);
 
 void			putmagic(t_a *s);
 void			putname(t_a *s);

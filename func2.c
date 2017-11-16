@@ -58,6 +58,7 @@ void	chooser(int add, t_pro *t, t_a *s)
 	t_arg			*tmp;
 	int				i;
 
+	tmp = 0;
 	i = -1;
 	b = 0;
 	if (t->byte == 1)
@@ -87,52 +88,8 @@ void	chooser(int add, t_pro *t, t_a *s)
 				modify_2b(add, t->next->next->next->next);
 		}
 	}
-	else if (t->byte == 6 || t->byte == 7 || t->byte == 8)
-	{
-		tmp = get_args(s, t->nb);
-		if (tmp->type[0] == 1 && vopros(2, t->next->next))
-		{
-			if (tmp->ditype[0] == 1 && vopros(2, t->next->next))
-				modify_2b(add, t->next->next);
-			else if (vopros(4, t->next->next))
-				modify_4b(add, t->next->next);
-		}
-		else if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
-		{
-			if (tmp->ditype[0] == -1 && vopros(2, t->next->next->next))
-			{
-				if (tmp->ditype[1] == 1 && vopros(2, t->next->next->next))
-					modify_2b(add, t->next->next->next);
-				else if (vopros(4, t->next->next->next))
-					modify_4b(add, t->next->next->next);
-			}
-			else if (tmp->ditype[0] == 1
-				&& vopros(2, t->next->next->next->next))
-			{
-				if (tmp->ditype[1] == 1 && vopros(2, t->next->next->next->next))
-					modify_2b(add, t->next->next->next->next);
-				else if (vopros(4, t->next->next->next->next))
-					modify_4b(add, t->next->next->next->next);
-			}
-			else
-			{
-				if (tmp->ditype[1] == 1
-						&& vopros(2, t->next->next->next->next->next->next))
-					modify_2b(add, t->next->next->next->next->next->next);
-				else if (vopros(4, t->next->next->next->next->next->next))
-					modify_4b(add, t->next->next->next->next->next->next);
-			}
-		}
-	}
-	else if (t->byte == 11)
-	{
-		tmp = get_args(s, t->nb);
-		if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
-			modify_2b(add, t->next->next->next);
-		else if (tmp->type[2] == 1 &&
-				vopros(2, t->next->next->next->next->next))
-			modify_2b(add, t->next->next->next->next->next);
-	}
+	else
+		normefucker2(add, t, s, tmp);
 }
 
 void	badder(t_arg *arg, t_a *s, int args, int ls)

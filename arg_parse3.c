@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:21:06 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:21:39 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:57:25 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	p_sti(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 3, 2);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -48,6 +50,7 @@ int	p_fork(char *a, t_a *s)
 	arg->codage = 0;
 	badder(arg, s, 1, 2);
 	add_arg(s, arg);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -70,6 +73,8 @@ int	p_lld(char *a, t_a *s)
 	arg->codage = arg->codage << 2;
 	badder(arg, s, 2, 4);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -93,6 +98,8 @@ int	p_lldi(char *a, t_a *s)
 	arg->byte = s->total_bytes - 1;
 	badder(arg, s, 3, 2);
 	add_arg(s, arg);
+	freespl(tmp2);
+	ft_strdel(&tmp1);
 	return (1);
 }
 
@@ -109,5 +116,6 @@ int	p_lfork(char *a, t_a *s)
 	arg->codage = 0;
 	badder(arg, s, 1, 2);
 	add_arg(s, arg);
+	ft_strdel(&tmp1);
 	return (1);
 }

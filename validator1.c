@@ -153,7 +153,9 @@ int		ch_op(t_a *s)
 {
 	int		n;
 	char	*cmp;
+	int		flag;
 
+	flag = 0;
 	n = 0;
 	s32(s);
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
@@ -172,15 +174,11 @@ int		ch_op(t_a *s)
 	while (n < 16)
 	{
 		if (ft_strequ(s->op[n++], cmp))
-		{
 			if (add_op(s->op[n - 1], s))
-				return (1);
-			else
-				return (0);
-		}
+				flag = 1;
 	}
 	ft_strdel(&cmp);
-	return (0);
+	return (flag);
 }
 
 int		validate(t_a *s)

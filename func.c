@@ -60,6 +60,7 @@ void			init(t_a *s)
 	s->total_bytes = 0;
 	s->lablist = NULL;
 	s->lcallist = NULL;
+	s->args = NULL;
 }
 
 int				vopros(int j, t_pro *t)

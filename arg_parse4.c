@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:21:46 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:22:02 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:57:42 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	p_aff(char *a, t_a *s)
 	arg->codage = arg->codage << 4;
 	badder(arg, s, 1, 2);
 	add_arg(s, arg);
+	ft_strdel(&tmp1);
 	return (1);
 }

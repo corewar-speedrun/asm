@@ -36,7 +36,7 @@ int		check_comm(t_a *s)
 	{
 		if (s->comment[0] == '\0')
 		{
-			if (grep_comm(s) == 0)
+			if (grep_comm(s, 0, 0, 0) == 0)
 				return (0);
 		}
 		else

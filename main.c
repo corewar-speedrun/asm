@@ -84,8 +84,7 @@ int		compile(t_a *s)
 		ft_strdel(&t);
 		return (flag);
 	}
-	else
-		return (flag);
+	return (0);
 }
 
 void	main_loop(int ac, char **av)

@@ -106,7 +106,8 @@ void	chooser(int add, t_pro *t, t_a *s)
 				else if (vopros(4, t->next->next->next))
 					modify_4b(add, t->next->next->next);
 			}
-			else if (tmp->ditype[0] == 1 && vopros(2, t->next->next->next->next))
+			else if (tmp->ditype[0] == 1
+				&& vopros(2, t->next->next->next->next))
 			{
 				if (tmp->ditype[1] == 1 && vopros(2, t->next->next->next->next))
 					modify_2b(add, t->next->next->next->next);
@@ -152,14 +153,14 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 		}
 		else if (arg->ditype[i] == 0)
 			if (arg->type[i] == 1)
-			{	
+			{
 				if (ls == 4)
 					add_4z(s);
 				else
 					add_2z(s);
 			}
 			else
-			{	
+			{
 				if (ls == 4)
 					add_4b(arg->arg[i], s);
 				else
@@ -167,5 +168,5 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 			}
 		else if (arg->ditype[i] == -1)
 			add_code((unsigned char)arg->arg[i], s);
-	}	
+	}
 }

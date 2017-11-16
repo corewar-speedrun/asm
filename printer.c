@@ -40,9 +40,10 @@ int	num_exp(char a)
 	return (0);
 }
 
-int	er_stru(void)
+int	er_stru(char *s)
 {
 	ft_putstr("File should end with newline, but NULL-Terminator found\n");
+	ft_strdel(&s);
 	return (0);
 }
 

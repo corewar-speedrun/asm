@@ -84,6 +84,8 @@ void	freeoutput(t_a *s)
 	t_pro	*tmp;
 	t_pro	*tmp2;
 
+	if (s->output == NULL)
+		return ;
 	tmp = s->output;
 	while (tmp)
 	{
@@ -91,6 +93,7 @@ void	freeoutput(t_a *s)
 		free(tmp);
 		tmp = tmp2;
 	}
+	s->output = NULL;
 }
 
 void	freeargs(t_a *s)
@@ -98,6 +101,8 @@ void	freeargs(t_a *s)
 	t_arg	*tmp;
 	t_arg	*tmp2;
 
+	if (!s->args)
+		return ;
 	tmp = s->args;
 	while (tmp)
 	{
@@ -105,6 +110,7 @@ void	freeargs(t_a *s)
 		free(tmp);
 		tmp = tmp2;
 	}
+	s->args = NULL;
 }
 
 void	freelablist(t_a *s)
@@ -112,6 +118,8 @@ void	freelablist(t_a *s)
 	t_l	*tmp;
 	t_l	*tmp2;
 
+	if (!s->lablist)
+		return ;
 	tmp = s->lablist;
 	while (tmp)
 	{
@@ -120,6 +128,7 @@ void	freelablist(t_a *s)
 		free(tmp);
 		tmp = tmp2;
 	}
+	s->lablist = NULL;
 }
 
 void	freelcallist(t_a *s)
@@ -127,6 +136,8 @@ void	freelcallist(t_a *s)
 	t_lc	*tmp;
 	t_lc	*tmp2;
 
+	if (!s->lcallist)
+		return ;
 	tmp = s->lcallist;
 	while (tmp)
 	{
@@ -135,6 +146,7 @@ void	freelcallist(t_a *s)
 		free(tmp);
 		tmp = tmp2;
 	}
+	s->lcallist = NULL;
 }
 
 void	freeop(char **s)
@@ -150,7 +162,8 @@ void	freeop(char **s)
 void	freeall(t_a *s)
 {
 	ft_strdel(&s->f);
-	// ft_strdel(&s->av);
+	ft_bzero(s->prog_name, PROG_NAME_LENGTH);
+	ft_bzero(s->comment, PROG_NAME_LENGTH);
 	ft_strdel(&s->basename);
 	ft_strdel(&s->prog_name_tmp);
 	ft_strdel(&s->comment_tmp);

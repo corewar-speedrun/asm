@@ -167,6 +167,7 @@ int		ch_op(t_a *s)
 	{
 		add_la(cmp, s);
 		s->i += n;
+		ft_strdel(&cmp);
 		return (1);
 	}
 	s->i += n;

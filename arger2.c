@@ -104,5 +104,6 @@ char	*ft_strstrip(char *s, int i, int j)
 		else
 			i++;
 	}
+	ft_strdel(&tmp);
 	return (ret);
 }

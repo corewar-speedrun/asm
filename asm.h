@@ -121,7 +121,7 @@ int				ind_exp(char *a);
 int				reg_bad(int got);
 int				nc_exp(char a);
 int				num_exp(char a);
-int				er_stru(void);
+int				er_stru(char *s);
 int				three_ae(int a);
 int				two_ae(int a);
 int				ld_er(char *s);

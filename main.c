@@ -67,11 +67,11 @@ int		compile(t_a *s)
 	int		flag;
 	char	*t;
 	
+	flag = 1;
 	t = ft_strjoin(s->basename, "cor");
-	fd = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (s->f[ft_strlen(s->f) - 1] != '\n')
-		return (er_stru());
-	if (validate(s))
+		flag = er_stru(t);
+	if (flag && validate(s))
 	{
 		putident(s);
 		putcomment(s);
@@ -79,12 +79,13 @@ int		compile(t_a *s)
 		putident(s);
 		putname(s);
 		putmagic(s);
+		fd = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		flag = writeout_fd(s, fd);
 		ft_strdel(&t);
 		return (flag);
 	}
 	else
-		return (0);
+		return (flag);
 }
 
 void	main_loop(int ac, char **av)
@@ -119,6 +120,5 @@ int		main(int ac, char **av)
 		print_usage(av[0]);
 	else
 		main_loop(ac, av);
-	LEAK
 	return (0);
 }

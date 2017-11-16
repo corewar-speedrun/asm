@@ -12,12 +12,8 @@
 
 #include "asm.h"
 
-int		grep_name(t_a *s)
+int		grep_name(t_a *s, int stop, int start, int tmp_i)
 {
-	int name_point_stop = 0;
-	int name_point_start = 0;
-	int tmp_i = 0;
-
 	while (s->f[s->i] == NAME_CMD_STRING[tmp_i])
 	{
 		s->i++;
@@ -34,13 +30,13 @@ int		grep_name(t_a *s)
 		print_le(tmp_i, s);
 		return (0);
 	}
-	name_point_start = s->i++;
+	start = s->i++;
 	while (s->f[s->i] != '\"')
 	{
 		s->i++;
 		tmp_i++;
 	}
-	name_point_stop = s->i++;
+	stop = s->i++;
 	while (s->f[s->i] != '\n')
 	{
 		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
@@ -53,8 +49,7 @@ int		grep_name(t_a *s)
 	}
 	s->i++;
 	s->curr_line++;
-	s->prog_name_tmp = ft_strsub(s->f, name_point_start,
-			name_point_stop - name_point_start);
+	s->prog_name_tmp = ft_strsub(s->f, start, stop - start);
 	if (ft_strlen(s->prog_name_tmp) >= PROG_NAME_LENGTH)
 	{
 		ft_putstr("Champion name is too long (Max ");
@@ -67,12 +62,8 @@ int		grep_name(t_a *s)
 	return (1);
 }
 
-int		grep_comm(t_a *s)
+int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 {
-	int comment_point_start = 0;
-	int comment_point_stop = 0;
-	int tmp_i = 0;
-
 	while (s->f[s->i] == COMMENT_CMD_STRING[tmp_i])
 	{
 		s->i++;
@@ -89,13 +80,13 @@ int		grep_comm(t_a *s)
 		print_le(tmp_i, s);
 		return (0);
 	}
-	comment_point_start = s->i++;
+	start = s->i++;
 	while (s->f[s->i] != '\"' && s->f[s->i] != '\0')
 	{
 		s->i++;
 		tmp_i++;
 	}
-	comment_point_stop = s->i++;
+	stop = s->i++;
 	while (s->f[s->i] != '\n')
 	{
 		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
@@ -111,8 +102,7 @@ int		grep_comm(t_a *s)
 		ft_putstr("expected '\"' for comment. File with no operations");
 		return (0);
 	}
-	s->comment_tmp = ft_strsub(s->f, comment_point_start,
-			comment_point_stop - comment_point_start);
+	s->comment_tmp = ft_strsub(s->f, start, stop - start);
 	s->i++;
 	if (ft_strlen(s->comment_tmp) > COMMENT_LENGTH)
 	{

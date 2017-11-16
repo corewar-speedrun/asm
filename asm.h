@@ -128,6 +128,7 @@ int				ld_er(char *s);
 void			print_usage(char *pname);
 void			cs(char *fn);
 void			ve(char *fn, char *er);
+int				pe(char *s);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);
@@ -166,8 +167,8 @@ void			scom(t_a *s);
 int				check_comm(t_a *s);
 int				ch_op(t_a *s);
 int				ch_l(t_a *s);
-int				grep_comm(t_a *s);
-int				grep_name(t_a *s);
+int				grep_comm(t_a *s, int start, int stop, int i);
+int				grep_name(t_a *s, int start, int stop, int i);
 void			chooser(int add, t_pro *l, t_a *s);
 t_l				*lab_def(char *name, t_a *s);
 int				check_ext(t_a *s);

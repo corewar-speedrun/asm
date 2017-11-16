@@ -42,3 +42,9 @@ void	ve(char *fn, char *er)
 	ft_putstr(er);
 	ft_putchar('\n');
 }
+
+int		pe(char *s)
+{
+	ft_putstr(s);
+	return (0);
+}

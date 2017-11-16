@@ -22,10 +22,7 @@ int		read_file(t_a *s)
 	tmp = NULL;
 	fd = open(s->av, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putstr("No such file!\n");
-		return (0);
-	}
+		return (pe("No such file!\n"));
 	while ((n = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[n] = '\0';
@@ -39,10 +36,7 @@ int		read_file(t_a *s)
 		}
 	}
 	if (n < 0)
-	{
-		ft_putstr("Can't read file!\n");
-		return (0);
-	}
+		return (pe("Can't read file!\n"));
 	else
 		return (1);
 }

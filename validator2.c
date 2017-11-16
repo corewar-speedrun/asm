@@ -52,7 +52,7 @@ int		check_name(t_a *s)
 	{
 		if (s->prog_name[0] == '\0')
 		{
-			if (grep_name(s) == 0)
+			if (grep_name(s, 0, 0, 0) == 0)
 				return (0);
 		}
 		else

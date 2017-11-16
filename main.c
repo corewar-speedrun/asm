@@ -69,7 +69,7 @@ int		compile(t_a *s)
 	
 	flag = 1;
 	t = ft_strjoin(s->basename, "cor");
-	if (s->f[ft_strlen(s->f) - 1] != '\n')
+	if (last(s->f) || s->f[ft_strlen(s->f) - 1] != '\n')
 		flag = er_stru(t);
 	if (flag && validate(s))
 	{

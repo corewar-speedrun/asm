@@ -49,3 +49,17 @@ int		check_ext(t_a *s)
 		flag = 0;
 	return (flag);
 }
+
+int		last(char *s)
+{
+	int	len;
+
+	len = ft_strlen(s);
+	while (s[len] != COMMENT_CHAR && s[len] != ';' && len > 0)
+	{
+		if (s[len] == '\n')
+			return (1);
+		len--;
+	}
+	return (0);
+}

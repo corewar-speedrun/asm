@@ -129,6 +129,7 @@ void			print_usage(char *pname);
 void			cs(char *fn);
 void			ve(char *fn, char *er);
 int				pe(char *s);
+int				last(char *s);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);

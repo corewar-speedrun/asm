@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 21:00:37 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 22:00:20 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,39 +116,6 @@ int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 	return (1);
 }
 
-int		ch_l(t_a *s)
-{
-	size_t	n;
-	char	*cmp;
-
-	n = 0;
-	while (s->f[s->i] == ' ' || s->f[s->i] == '\t' || s->f[s->i] == '\n')
-		s->i++;
-	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
-			(s->f + s->i)[n] != '\0')
-		n++;
-	cmp = ft_strsub(s->f + s->i, 0, n);
-	s->i += n;
-	n = 0;
-	if (cmp[ft_strlen(cmp) - 1] != LABEL_CHAR)
-		return (1);
-	while (n < ft_strlen(cmp))
-	{
-		if (!ft_strchr(LABEL_CHARS, cmp[n]))
-		{
-			ft_putstr(cmp);
-			ft_putstr("Illegal label char at line ");
-			ft_putnbr(s->curr_line);
-			ft_putchar('\n');
-			return (0);
-		}
-		add_la(cmp, s);
-		return (1);
-	}
-	ft_strdel(&cmp);
-	return (0);
-}
-
 int		ch_op(t_a *s)
 {
 	int		n;
@@ -165,10 +132,13 @@ int		ch_op(t_a *s)
 	cmp = ft_strsub(s->f, s->i, n);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
+		flag = 1;
+		if (cmp[0] == LABEL_CHAR)
+			flag = emplabdef();
 		add_la(cmp, s);
 		s->i += n;
 		ft_strdel(&cmp);
-		return (1);
+		return (flag);
 	}
 	s->i += n;
 	n = 0;

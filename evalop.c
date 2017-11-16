@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:13:17 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:27:42 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 22:08:38 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		eval_reg(char *s, t_arg *a, int w)
 	else
 	{
 		cod = ft_atoi(s + 1);
-		if (cod > REG_NUMBER && cod > 0)
+		if (cod > REG_NUMBER || cod <= 0)
 			return (reg_bad(cod));
 		else
 		{
@@ -48,8 +48,10 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 	else
 	{
 		i++;
-		if (s[i] == LABEL_CHAR && s[i + 1] != '\0')
+		if (s[i] == LABEL_CHAR)
 		{
+			if (s[1] == '\0')
+				return (emplabcal());
 			add_lc(s + i + 1, st);
 			a->type[w] = 1;
 		}
@@ -86,6 +88,8 @@ int		eval_ind(char *s, t_arg *a, int w, t_a *st)
 	a->ditype[w] = 1;
 	if (s[0] == LABEL_CHAR)
 	{
+		if (s[1] == '\0')
+			return (emplabcal());
 		add_lc(s + 1, st);
 		a->type[w] = 1;
 	}

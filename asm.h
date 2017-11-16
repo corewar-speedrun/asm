@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 21:11:27 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 22:03:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void			cs(char *fn);
 void			ve(char *fn, char *er);
 int				pe(char *s);
 int				last(char *s);
+int				emplabdef(void);
+int				emplabcal(void);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);

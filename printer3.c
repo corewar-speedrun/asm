@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 20:00:34 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:29:30 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/16 22:03:14 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,17 @@ void	ve(char *fn, char *er)
 int		pe(char *s)
 {
 	ft_putstr(s);
+	return (0);
+}
+
+int		emplabdef(void)
+{
+	ft_putstr("Empty label defined!\n");
+	return (0);
+}
+
+int		emplabcal(void)
+{
+	ft_putstr("Empty label called!\n");
 	return (0);
 }

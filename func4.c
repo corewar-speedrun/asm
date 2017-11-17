@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 15:20:19 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/16 21:16:45 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/17 19:27:26 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,10 @@ void	freeall(t_a *s)
 	ft_strdel(&s->basename);
 	ft_strdel(&s->prog_name_tmp);
 	ft_strdel(&s->comment_tmp);
+	s->total_bytes = 0;
+	s->curr_line = 0;
+	s->prog_size = 0;
+	s->i = 0;
 	freeoutput(s);
 	freelablist(s);
 	freelcallist(s);

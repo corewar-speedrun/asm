@@ -29,8 +29,8 @@ char	*ft_strndup(char *src)
 	size_t	i;
 
 	i = -1;
-	ret = (char*)malloc(sizeof(char) * ft_strlen(src) - 1);
-	ft_bzero(ret, ft_strlen(src) - 1);
+	ret = (char*)malloc(sizeof(char) * ft_strlen(src));
+	ft_bzero(ret, ft_strlen(src));
 	while (++i < ft_strlen(src) - 1)
 		ret[i] = src[i];
 	return (ret);

@@ -42,22 +42,3 @@ void	scom(t_a *s)
 		s->i++;
 	s->f[s->i] == '\n' ? s->curr_line++ : 0;
 }
-
-int		check_name(t_a *s)
-{
-	if (ft_strnequ(NAME_CMD_STRING, s->f + s->i,
-				ft_strlen(NAME_CMD_STRING)))
-	{
-		if (s->prog_name[0] == '\0')
-		{
-			if (grep_name(s, 0, 0, 0) == 0)
-				return (0);
-		}
-		else
-		{
-			ft_putstr("Duplicate .name in file\n");
-			return (0);
-		}
-	}
-	return (1);
-}

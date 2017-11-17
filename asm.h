@@ -165,6 +165,7 @@ void			badder(t_arg *arg, t_a *s, int args, int ls);
 int				vopros(int j, t_pro *t);
 int				check(t_a *s);
 int				check_name(t_a *s);
+int				ch_naco(t_a *s);
 int				print_le(int i, t_a *s);
 void			scom(t_a *s);
 int				check_comm(t_a *s);

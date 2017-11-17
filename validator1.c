@@ -165,10 +165,7 @@ int		validate(t_a *s)
 			scom(s);
 		else if (s->f[s->i] == '.')
 		{
-			printf("[%.10s]\n", s->f + s->i);
-			if (!check_name(s))
-				return (0);
-			else if (!check_comm(s))
+			if (!ch_naco(s))
 				return (0);
 		}
 		else if (s->f[s->i] == '\n')

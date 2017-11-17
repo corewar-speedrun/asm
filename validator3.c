@@ -29,9 +29,20 @@ int		print_uc(t_a *s)
 	return (0);
 }
 
-int		check_comm(t_a *s)
+int		ch_naco(t_a *s)
 {
-	if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
+	if (ft_strnequ(NAME_CMD_STRING, s->f + s->i,
+				ft_strlen(NAME_CMD_STRING)))
+	{
+		if (s->prog_name[0] == '\0')
+		{
+			if (grep_name(s, 0, 0, 0) == 0)
+				return (0);
+		}
+		else
+			return (pe("Duplicate .comment in file\n"));
+	}
+	else if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
 				ft_strlen(COMMENT_CMD_STRING)))
 	{
 		if (s->comment[0] == '\0')
@@ -40,10 +51,7 @@ int		check_comm(t_a *s)
 				return (0);
 		}
 		else
-		{
-			ft_putstr("Duplicate .comment in file");
-			return (0);
-		}
+			return (pe("Duplicate .comment in file\n"));
 	}
 	else
 		return (print_uc(s));

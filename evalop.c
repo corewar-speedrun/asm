@@ -12,6 +12,20 @@
 
 #include "asm.h"
 
+int		ch_ar(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < ft_strlen(s))
+	{
+		if (s[i] != '-' && !ft_isdigit(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int		eval_reg(char *s, t_arg *a, int w)
 {
 	int i;
@@ -23,7 +37,7 @@ int		eval_reg(char *s, t_arg *a, int w)
 		return (reg_exp(s));
 	else
 	{
-		cod = ft_atoi(s + 1);
+		ch_ar(s + 1) ? (cod = ft_atoi(s + 1)) : (cod = 0);
 		if (cod > REG_NUMBER || cod <= 0)
 			return (reg_bad(cod));
 		else
@@ -55,26 +69,12 @@ int		eval_dir(char *s, t_arg *a, int w, t_a *st)
 			add_lc(s + i + 1, st);
 			a->type[w] = 1;
 		}
-		else if (s[i] != '\0')
+		else if (s[i] != '\0' && ch_ar(s + 1))
 			a->arg[w] = ft_atoi(s + 1);
 		else
 			return (arg_exp(s));
 		a->codage = a->codage | DIR_CODE;
 		a->codage = a->codage << 2;
-	}
-	return (1);
-}
-
-int		ch_ar(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < ft_strlen(s))
-	{
-		if (s[i] != '-' && !ft_isdigit(s[i]))
-			return (0);
-		i++;
 	}
 	return (1);
 }

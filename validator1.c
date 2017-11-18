@@ -116,6 +116,17 @@ int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 	return (1);
 }
 
+int		extra(char *s, int i)
+{
+	while (s[i] != '\n')
+	{
+		if (ft_isalnum(s[i]) && s[i + 1] == LABEL_CHAR)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int		ch_op(t_a *s)
 {
 	int		n;
@@ -127,14 +138,17 @@ int		ch_op(t_a *s)
 	s32(s);
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n'
-			&& (s->f + s->i)[n] != ';')
+			&& (s->f + s->i)[n] != ';' && s->f[s->i + n] != LABEL_CHAR)
 		n++;
+	s->f[s->i + n] == LABEL_CHAR ? (n++) : 0;
 	cmp = ft_strsub(s->f, s->i, n);
 	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
 	{
 		flag = 1;
 		if (cmp[0] == LABEL_CHAR)
 			flag = emplabdef();
+		if (extra(s->f + s->i + n, 0))
+			flag = 0;
 		add_la(cmp, s);
 		s->i += n;
 		ft_strdel(&cmp);

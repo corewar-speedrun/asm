@@ -24,7 +24,7 @@ void	print_usage(char *pname)
 {
 	ft_putstr("Usage: ");
 	ft_putstr(pname);
-	ft_putstr(" [-a] <sourcefile.s>\n");
+	ft_putstr(" <sourcefile.s>\n");
 }
 
 void	cs(char *fn)

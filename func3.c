@@ -50,16 +50,29 @@ int		check_ext(t_a *s)
 	return (flag);
 }
 
-int		last(char *s)
+int		last(char *s, int l, int b)
 {
-	int	len;
+	char	*tmp;
 
-	len = ft_strlen(s);
-	while (s[len] != COMMENT_CHAR && s[len] != ';' && len > 0 && s[len] != '\n')
+	l = ft_strlen(s);
+	b = l;
+	while (s[l] != '\n')
+		l--;
+	tmp = ft_strsub(s, ++l, b);
+	l = 0;
+	while (tmp[l])
 	{
-		if (s[len] == '\n')
+		if (tmp[l] == '\t' || tmp[l] == ' ')
+			l++;
+		else if (tmp[l] == COMMENT_CHAR || tmp[l] == ';')
+		{
+			while (tmp[l] != '\0')
+				l++;
+			ft_strdel(&tmp);
+			return (0);
+		}
+		else
 			return (1);
-		len--;
 	}
 	return (0);
 }

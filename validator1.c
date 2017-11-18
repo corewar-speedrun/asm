@@ -172,6 +172,7 @@ int		validate(t_a *s)
 			s->i++ && s->curr_line++;
 		else if (!check(s))
 			return (0);
+		s32(s);
 		j++;
 	}
 	return (ass_lab(s));

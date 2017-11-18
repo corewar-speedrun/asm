@@ -35,6 +35,8 @@ int		read_file(t_a *s)
 			free(tmp);
 		}
 	}
+	if (!s->f || s->f[0] == '\0')
+		return (pe("Empty file\n"));
 	if (n < 0)
 		return (pe("Can't read file!\n"));
 	else
@@ -69,7 +71,7 @@ int		compile(t_a *s)
 
 	flag = 1;
 	t = ft_strjoin(s->basename, "cor");
-	if (last(s->f) || s->f[ft_strlen(s->f) - 1] != '\n')
+	if (last(s->f, 0, 0) == 1)
 		flag = er_stru(t);
 	if (flag && validate(s))
 	{

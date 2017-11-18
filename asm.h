@@ -129,7 +129,7 @@ void			print_usage(char *pname);
 void			cs(char *fn);
 void			ve(char *fn, char *er);
 int				pe(char *s);
-int				last(char *s);
+int				last(char *s, int i, int j);
 int				emplabdef(void);
 int				emplabcal(void);
 

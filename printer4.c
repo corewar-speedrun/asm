@@ -29,3 +29,11 @@ int		emplabcal(void)
 	ft_putstr("Empty label called!\n");
 	return (0);
 }
+
+int		lccd(void)
+{
+	ft_putstr("Champion comment is too long (Max ");
+	ft_putnbr(COMMENT_LENGTH);
+	ft_putstr(" ASCII chars)\n");
+	return (0);
+}

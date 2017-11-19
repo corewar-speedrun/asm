@@ -42,3 +42,20 @@ void	scom(t_a *s)
 		s->i++;
 	s->f[s->i] == '\n' ? s->curr_line++ : 0;
 }
+
+int		normefucker5(char *cmp, int *f, int n, t_a *s)
+{
+	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
+	{
+		*f = 1;
+		if (cmp[0] == LABEL_CHAR)
+			*f = emplabdef();
+		if (extra(s->f + s->i + n, 0))
+			*f = 0;
+		add_la(cmp, s);
+		s->i += n;
+		ft_strdel(&cmp);
+		return (*f);
+	}
+	return (*f);
+}

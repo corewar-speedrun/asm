@@ -77,3 +77,32 @@ int		last(char *s, int l, int b)
 	ft_strdel(&tmp);
 	return (0);
 }
+
+int		grep_comm2(t_a *s, int *start, int *stop, int *i)
+{
+	if (s->f[s->i] != '\"')
+	{
+		print_le(*i, s);
+		return (0);
+	}
+	*start = s->i++;
+	while (s->f[s->i] != '\"' && s->f[s->i] != '\0')
+	{
+		s->i++;
+		*i += 1;
+	}
+	*stop = s->i++;
+	while (s->f[s->i] != '\n')
+	{
+		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
+		{
+			print_le(*i, s);
+			return (0);
+		}
+		s->i++;
+		*i += 1;
+	}
+	if (s->f[s->i] == '\0')
+		return (pe("expected '\"' for comment. File with no operations\n"));
+	return (1);
+}

@@ -58,7 +58,7 @@ void	chooser(int add, t_pro *t, t_a *s)
 	t_arg			*tmp;
 	int				i;
 
-	tmp = 0;
+	tmp = NULL;
 	i = -1;
 	b = 0;
 	if (t->byte == 1)
@@ -68,26 +68,9 @@ void	chooser(int add, t_pro *t, t_a *s)
 	else if (t->byte == 3)
 		modify_2b(add, t->next->next->next);
 	else if (t->byte == 2 || t->byte == 13)
-	{
-		tmp = get_args(s, t->nb);
-		if (tmp->ditype[0] == 1)
-			modify_2b(add, t->next->next);
-		else
-			modify_4b(add, t->next->next);
-	}
+		normefucker4(add, t, s, tmp);
 	else if (t->byte == 10 || t->byte == 14)
-	{
-		tmp = get_args(s, t->nb);
-		if (tmp->type[0] == 1 && vopros(2, t->next->next))
-			modify_2b(add, t->next->next);
-		else if (tmp->type[1] == 1)
-		{
-			if (tmp->ditype[0] == -1 && vopros(2, t->next->next->next))
-				modify_2b(add, t->next->next->next);
-			else if (vopros(2, t->next->next->next->next))
-				modify_2b(add, t->next->next->next->next);
-		}
-	}
+		normefucker3(add, t, s, tmp);
 	else
 		normefucker2(add, t, s, tmp);
 }
@@ -109,20 +92,7 @@ void	badder(t_arg *arg, t_a *s, int args, int ls)
 				add_2b(arg->arg[i], s);
 		}
 		else if (arg->ditype[i] == 0)
-			if (arg->type[i] == 1)
-			{
-				if (ls == 4)
-					add_4z(s);
-				else
-					add_2z(s);
-			}
-			else
-			{
-				if (ls == 4)
-					add_4b(arg->arg[i], s);
-				else
-					add_2b(arg->arg[i], s);
-			}
+			badder2(arg, ls, i, s);
 		else if (arg->ditype[i] == -1)
 			add_code((unsigned char)arg->arg[i], s);
 	}

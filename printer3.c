@@ -42,3 +42,11 @@ void	ve(char *fn, char *er)
 	ft_putstr(er);
 	ft_putchar('\n');
 }
+
+int		lcnd(void)
+{
+	ft_putstr("Champion name is too long (Max ");
+	ft_putnbr(PROG_NAME_LENGTH);
+	ft_putstr(" ASCII chars)\n");
+	return (0);
+}

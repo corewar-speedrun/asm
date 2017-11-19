@@ -30,33 +30,11 @@ int		grep_name(t_a *s, int stop, int start, int tmp_i)
 		print_le(tmp_i, s);
 		return (0);
 	}
-	start = s->i++;
-	while (s->f[s->i] != '\"')
-	{
-		s->i++;
-		tmp_i++;
-	}
-	stop = s->i++;
-	while (s->f[s->i] != '\n')
-	{
-		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
-		{
-			print_le(tmp_i, s);
-			return (0);
-		}
-		s->i++;
-		tmp_i++;
-	}
-	s->i++;
-	s->curr_line++;
+	if (!grep_name2(s, &stop, &start, &tmp_i))
+		return (0);
 	s->prog_name_tmp = ft_strsub(s->f, start, stop - start);
 	if (ft_strlen(s->prog_name_tmp) >= PROG_NAME_LENGTH)
-	{
-		ft_putstr("Champion name is too long (Max ");
-		ft_putnbr(PROG_NAME_LENGTH);
-		ft_putstr(" ASCII chars)\n");
-		return (0);
-	}
+		return (lcnd());
 	else
 		ft_strcpy(s->prog_name, s->prog_name_tmp);
 	return (1);
@@ -75,42 +53,12 @@ int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 		s->i++;
 		tmp_i++;
 	}
-	if (s->f[s->i] != '\"')
-	{
-		print_le(tmp_i, s);
+	if (!grep_comm2(s, &start, &stop, &tmp_i))
 		return (0);
-	}
-	start = s->i++;
-	while (s->f[s->i] != '\"' && s->f[s->i] != '\0')
-	{
-		s->i++;
-		tmp_i++;
-	}
-	stop = s->i++;
-	while (s->f[s->i] != '\n')
-	{
-		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
-		{
-			print_le(tmp_i, s);
-			return (0);
-		}
-		s->i++;
-		tmp_i++;
-	}
-	if (s->f[s->i] == '\0')
-	{
-		ft_putstr("expected '\"' for comment. File with no operations");
-		return (0);
-	}
 	s->comment_tmp = ft_strsub(s->f, start, stop - start);
 	s->i++;
 	if (ft_strlen(s->comment_tmp) > COMMENT_LENGTH)
-	{
-		ft_putstr("Champion comment is too long (Max ");
-		ft_putnbr(COMMENT_LENGTH);
-		ft_putstr(" ASCII chars)\n");
-		return (0);
-	}
+		return (lccd());
 	else
 		ft_strcpy(s->comment, s->comment_tmp);
 	return (1);
@@ -142,18 +90,8 @@ int		ch_op(t_a *s)
 		n++;
 	s->f[s->i + n] == LABEL_CHAR ? (n++) : 0;
 	cmp = ft_strsub(s->f, s->i, n);
-	if (cmp[ft_strlen(cmp) - 1] == LABEL_CHAR)
-	{
-		flag = 1;
-		if (cmp[0] == LABEL_CHAR)
-			flag = emplabdef();
-		if (extra(s->f + s->i + n, 0))
-			flag = 0;
-		add_la(cmp, s);
-		s->i += n;
-		ft_strdel(&cmp);
+	if (normefucker5(cmp, &flag, n, s))
 		return (flag);
-	}
 	s->i += n;
 	n = 0;
 	while (n < 16)

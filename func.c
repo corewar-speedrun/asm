@@ -81,3 +81,27 @@ int				vopros(int j, t_pro *t)
 	}
 	return (0);
 }
+
+int				grep_name2(t_a *s, int *stop, int *start, int *tmp_i)
+{
+	*start = s->i++;
+	while (s->f[s->i] != '\"')
+	{
+		s->i++;
+		*tmp_i += 1;
+	}
+	*stop = s->i++;
+	while (s->f[s->i] != '\n')
+	{
+		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
+		{
+			print_le(*tmp_i, s);
+			return (0);
+		}
+		s->i++;
+		*tmp_i += 1;
+	}
+	s->i++;
+	s->curr_line++;
+	return (1);
+}

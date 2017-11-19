@@ -109,7 +109,7 @@ void	main_loop(int ac, char **av)
 		freeall(&st);
 	}
 	freeall(&st);
-	freeop(st.op);
+	st.op ? (freeop(st.op)) : 0;
 }
 
 int		main(int ac, char **av)

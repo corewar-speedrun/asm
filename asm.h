@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/17 19:27:27 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/19 16:22:07 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct	s_a
 	char			*av;
 	char			*basename;
 	unsigned int	prog_size;
+	int				nameflag;
+	int				commflag;
 	char			prog_name[PROG_NAME_LENGTH + 1];
 	char			*prog_name_tmp;
 	char			comment[COMMENT_LENGTH + 1];

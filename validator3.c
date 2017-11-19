@@ -29,30 +29,42 @@ int		print_uc(t_a *s)
 	return (0);
 }
 
+int		ch_na(t_a *s)
+{
+	if (s->prog_name[0] == '\0')
+	{
+		if (grep_name(s, 0, 0, 0) == 0)
+			return (0);
+		else
+			s->nameflag = 1;
+	}
+	else
+		return (pe("Duplicate .comment in file\n"));
+	return (1);
+}
+
+int		ch_co(t_a *s)
+{
+	if (s->comment[0] == '\0')
+	{
+		if (grep_comm(s, 0, 0, 0) == 0)
+			return (0);
+		else
+			s->commflag = 1;
+	}
+	else
+		return (pe("Duplicate .comment in file\n"));
+	return (1);
+}
+
 int		ch_naco(t_a *s)
 {
 	if (ft_strnequ(NAME_CMD_STRING, s->f + s->i,
 				ft_strlen(NAME_CMD_STRING)))
-	{
-		if (s->prog_name[0] == '\0')
-		{
-			if (grep_name(s, 0, 0, 0) == 0)
-				return (0);
-		}
-		else
-			return (pe("Duplicate .comment in file\n"));
-	}
+		return (ch_na(s));
 	else if (ft_strnequ(COMMENT_CMD_STRING, s->f + s->i,
 				ft_strlen(COMMENT_CMD_STRING)))
-	{
-		if (s->comment[0] == '\0')
-		{
-			if (grep_comm(s, 0, 0, 0) == 0)
-				return (0);
-		}
-		else
-			return (pe("Duplicate .comment in file\n"));
-	}
+		return (ch_co(s));
 	else
 		return (print_uc(s));
 	return (1);

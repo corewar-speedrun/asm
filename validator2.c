@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:49:01 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/16 22:00:11 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/19 16:21:31 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ int		print_le(int i, t_a *s)
 
 int		check(t_a *s)
 {
-	if (ch_op(s))
-		return (1);
+	if (s->nameflag && s->commflag)
+	{
+		if (ch_op(s))
+			return (1);
+		else
+			return (0);
+	}
 	else
-		return (0);
+		return (pe("No bot_name or bot_comment\n"));
 }
 
 void	s32(t_a *s)

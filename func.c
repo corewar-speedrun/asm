@@ -61,6 +61,8 @@ void			init(t_a *s)
 	s->lablist = NULL;
 	s->lcallist = NULL;
 	s->args = NULL;
+	s->nameflag = 0;
+	s->commflag = 0;
 }
 
 int				vopros(int j, t_pro *t)

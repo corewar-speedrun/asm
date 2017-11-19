@@ -95,6 +95,8 @@ void	freeall(t_a *s)
 	freelablist(s);
 	freelcallist(s);
 	freeargs(s);
+	s->nameflag = 0;
+	s->commflag = 0;
 }
 
 char	*joincasino(char *s1, char *buf)

@@ -1,26 +1,30 @@
-clear
+for lol in $@
+do
+	cp $lol $lol.my.s
+	cp $lol $lol.or.s
 
-cp $1 $1.my.s
-cp $1 $1.or.s
+	./asm $lol.my.s
+	./asm_original $lol.or.s
 
-./asm $1.my.s
-./asm_original $1.or.s
+	hexdump $lol.my.cor > $lol.my.cor.d
+	hexdump $lol.or.cor > $lol.or.cor.d
 
-hexdump $1.my.cor > $1.my.cor.d
-hexdump $1.or.cor > $1.or.cor.d
+	diff $lol.my.cor.d $lol.or.cor.d > result
 
-diff $1.my.cor.d $1.or.cor.d > result
+	cat result
+	#echo
+	#echo ">>>>>>>> $1 : <<<<<<<<"
+	#echo
+	#head -n 26 $1
 
-cat result
-#echo
-#echo ">>>>>>>> $1 : <<<<<<<<"
-#echo
-#head -n 26 $1
+	rm $lol.my.s > /dev/null
+	rm $lol.or.s > /dev/null
+	rm $lol.my.cor > /dev/null
+	rm $lol.my.cor.d > /dev/null
+	rm $lol.or.cor > /dev/null
+	rm $lol.or.cor.d > /dev/null
+	rm result > /dev/null
 
-rm $1.my.s
-rm $1.or.s
-rm $1.my.cor
-rm $1.my.cor.d
-rm $1.or.cor
-rm $1.or.cor.d
-rm result
+	echo "============================================================================="
+
+done

@@ -5,37 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 13:59:18 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/04 16:20:47 by dmaznyts         ###   ########.fr       */
+/*   Created: 2017/11/19 19:27:43 by dmaznyts          #+#    #+#             */
+/*   Updated: 2017/11/19 19:27:51 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int i;
-	int n;
-	int min;
+	long long	rez;
+	int			neg;
 
-	i = 0;
-	n = 0;
-	min = 1;
-	while (((str[i] >= 9 && str[i] <= 13) || (str[i] == 32)) && str[i] != '\0')
+	rez = 0;
+	neg = 1;
+	while (*str == ' ' || *str == '\t' || *str == '\n' ||
+		*str == '\v' || *str == '\r' || *str == '\f')
+		str++;
+	if (*str == '-')
+		neg = -1;
+	if ((*str == '+' && (ft_isdigit(*++str) != 1)) ||
+	(*str == '-' && (ft_isdigit(*++str) != 1)))
+		return (0);
+	while (ft_isdigit(*str) == 1)
 	{
-		if (str[i] == '\200')
+		if ((rez > 922337203685477580 || (rez == 922337203685477580
+			&& (*str - '0') > 7)) && neg == 1)
+			return (-1);
+		else if ((rez > 922337203685477580 || (rez == 922337203685477580
+			&& (*str - '0') > 8)) && neg == -1)
 			return (0);
-		i++;
+		rez = (rez * 10 + *str * 1 - 48);
+		str++;
 	}
-	if (str[i] == '-')
-		min = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= 48 && str[i] <= 57 && str[i] != '\0')
-	{
-		n *= 10;
-		n += ((int)str[i] - 48);
-		i++;
-	}
-	return (n * min);
+	return ((size_t)(rez * neg));
 }

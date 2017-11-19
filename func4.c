@@ -62,8 +62,8 @@ void	normefucker2(int add, t_pro *t, t_a *s, t_arg *tmp)
 		if (tmp->type[1] == 1 && vopros(2, t->next->next->next))
 			modify_2b(add, t->next->next->next);
 		else if (tmp->type[2] == 1 &&
-				vopros(2, t->next->next->next->next->next))
-			modify_2b(add, t->next->next->next->next->next);
+				vopros(2, t->next->next->next->next))
+			modify_2b(add, t->next->next->next->next);
 	}
 }
 

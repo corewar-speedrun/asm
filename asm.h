@@ -19,6 +19,7 @@
 # include <fcntl.h>
 #include <stdio.h>//////////////////////////////////////////////////////////////////////////////
 # define LEAK system("leaks asm");
+#include <stdlib.h>
 
 # define REG_CODE				1
 # define DIR_CODE				2

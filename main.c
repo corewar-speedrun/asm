@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/16 21:16:13 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/19 19:37:12 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int		compile(t_a *s)
 
 	flag = 1;
 	t = ft_strjoin(s->basename, "cor");
-	if (last(s->f, 0, 0) == 1)
-		flag = er_stru(t);
-	if (flag && validate(s))
+	(last(s->f, 0, 0) == 1) ? (flag = er_stru()) : 0;
+	!validate(s) ? (flag = 0) : 0;
+	if (flag)
 	{
 		putident(s);
 		putcomment(s);
@@ -79,10 +79,9 @@ int		compile(t_a *s)
 		putmagic(s);
 		fd = open(t, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		flag = writeout_fd(s, fd);
-		ft_strdel(&t);
-		return (flag);
 	}
-	return (0);
+	ft_strdel(&t);
+	return (flag);
 }
 
 void	main_loop(int ac, char **av)

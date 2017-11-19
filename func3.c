@@ -72,7 +72,7 @@ int		last(char *s, int l, int b)
 			return (0);
 		}
 		else
-			return (1);
+			return (kostil(tmp));
 	}
 	ft_strdel(&tmp);
 	return (0);

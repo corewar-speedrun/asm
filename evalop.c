@@ -37,7 +37,8 @@ int		eval_reg(char *s, t_arg *a, int w)
 		return (reg_exp(s));
 	else
 	{
-		ch_ar(s + 1) ? (cod = ft_atoi(s + 1)) : (cod = 0);
+		ch_ar(s + 1) ? (cod = ft_atoi(s + 1)) :
+		(cod = 0);
 		if (cod > REG_NUMBER || cod <= 0)
 			return (reg_bad(cod));
 		else

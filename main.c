@@ -29,11 +29,7 @@ int		read_file(t_a *s)
 		if (!s->f)
 			s->f = ft_strdup(buf);
 		else
-		{
-			tmp = s->f;
-			s->f = ft_strjoin(s->f, buf);
-			free(tmp);
-		}
+			s->f = joincasino(s->f, buf);
 	}
 	if (!s->f || s->f[0] == '\0')
 		return (pe("Empty file\n"));
@@ -112,6 +108,7 @@ void	main_loop(int ac, char **av)
 			ve(av[i], "Not '.s' file!");
 		freeall(&st);
 	}
+	freeall(&st);
 	freeop(st.op);
 }
 

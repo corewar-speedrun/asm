@@ -74,5 +74,6 @@ int		last(char *s, int l, int b)
 		else
 			return (1);
 	}
+	ft_strdel(&tmp);
 	return (0);
 }

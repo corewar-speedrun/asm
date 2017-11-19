@@ -184,6 +184,12 @@ t_arg			*get_args(t_a *s, int byte);
 void			freespl(char **s);
 void			freeall(t_a *s);
 void			freeop(char **s);
+char			*joincasino(char *s1, char *buf);
+void			freeoutput(t_a *s);
+void			freeargs(t_a *s);
+void			freelablist(t_a *s);
+void			freelcallist(t_a *s);
+void			freeop(char **s);
 
 void			putmagic(t_a *s);
 void			putname(t_a *s);

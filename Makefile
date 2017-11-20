@@ -12,7 +12,7 @@
 
 NAME = asm
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 11:28:54 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/19 19:37:12 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:07:10 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		read_file(t_a *s)
 		else
 			s->f = joincasino(s->f, buf);
 	}
-	if (!s->f || s->f[0] == '\0')
-		return (pe("Empty file\n"));
+	if (!s->f || !ft_isprint(s->f[0]))
+		return (pe("Empty or binary file\n"));
 	if (n < 0)
 		return (pe("Can't read file!\n"));
 	else

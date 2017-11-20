@@ -137,6 +137,7 @@ int				emplabdef(void);
 int				emplabcal(void);
 int				lcnd(void);
 int				lccd(void);
+int				kostil(char *s);
 
 int				p_live(char *a, t_a *s);
 int				p_ld(char *a, t_a *s);

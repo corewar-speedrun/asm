@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
-# define BUFF_SIZE	512
+# define BUFF_SIZE 1
 
 typedef	struct	s_list
 {

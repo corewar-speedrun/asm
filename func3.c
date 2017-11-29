@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 21:38:11 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 21:38:27 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/29 04:41:49 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ int		last(char *s, int l, int b)
 int		grep_comm2(t_a *s, int *start, int *stop, int *i)
 {
 	if (s->f[s->i] != '\"')
-	{
-		print_le(*i, s);
-		return (0);
-	}
+		return (print_le(*i, s));
 	*start = s->i++;
 	while (s->f[s->i] != '\"' && s->f[s->i] != '\0')
 	{
@@ -92,13 +89,11 @@ int		grep_comm2(t_a *s, int *start, int *stop, int *i)
 		*i += 1;
 	}
 	*stop = s->i++;
-	while (s->f[s->i] != '\n')
+	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR
+			&& s->f[s->i] != ';' && s->f[s->i] != '\0')
 	{
 		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
-		{
-			print_le(*i, s);
-			return (0);
-		}
+			return (print_le(*i, s));
 		s->i++;
 		*i += 1;
 	}

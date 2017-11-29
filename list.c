@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 11:03:25 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/16 21:15:41 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/28 22:44:21 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		add_op(char *op, t_a *s)
 	add_code(ret_opcode(op, s), s);
 	st_p = s->i;
 	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR
-			&& s->f[s->i] != ';')
+			&& s->f[s->i] != ';' && s->f[s->i])
 		(s->f[s->i] != COMMENT_CHAR && s->f[s->i] != ';') ? (s->i++) : 0;
 	args = ft_strsub(s->f, st_p, s->i - st_p);
 	if (arg_pars(ret_opcode(op, s), args, s))

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 20:07:45 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/15 20:28:41 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/29 04:38:51 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ int				grep_name2(t_a *s, int *stop, int *start, int *tmp_i)
 		*tmp_i += 1;
 	}
 	*stop = s->i++;
-	while (s->f[s->i] != '\n')
+	while (s->f[s->i] != '\n' && s->f[s->i] != COMMENT_CHAR
+			&& s->f[s->i] != ';' && s->f[s->i] != '\0')
 	{
-		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n')
+		if (s->f[s->i] != ' ' && s->f[s->i] != '\t' && s->f[s->i] != '\n'
+			&& s->f[s->i] != COMMENT_CHAR && s->f[s->i] != ';')
 		{
 			print_le(*tmp_i, s);
 			return (0);
@@ -103,7 +105,6 @@ int				grep_name2(t_a *s, int *stop, int *start, int *tmp_i)
 		s->i++;
 		*tmp_i += 1;
 	}
-	s->i++;
 	s->curr_line++;
 	return (1);
 }

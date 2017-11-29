@@ -6,13 +6,13 @@
 #    By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 13:09:37 by dmaznyts          #+#    #+#              #
-#    Updated: 2017/11/19 12:38:33 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/29 02:22:11 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 CC = gcc
 
@@ -45,22 +45,22 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
 	@$(CC) $(FLAGS) -o $(NAME) $(LIB) $(OBJ)
-	@echo "\033[32;1m<asm>		| done\033[0m"
+	@echo "\033[32;1m<asm>			| done\033[0m"
 
 clean:
 	@make -C libft clean
-	@echo "\033[32;1m<libft *.o>	| removed\033[0m"
+	@echo "\033[1;33m<asm libft *.o>		| removed\033[0m"
 	@/bin/rm -f $(OBJ)
-	@echo "\033[32;1m<asm *.o>	| removed\033[0m"
+	@echo "\033[1;33m<asm *.o>		| removed\033[0m"
 	
 fclean: clean
 	@make -C libft fclean
-	@echo "\033[32;1m<libft.a>	| removed\033[0m"
+	@echo "\033[1;33m<asm libft.a>		| removed\033[0m"
 	@/bin/rm -f $(NAME)
-	@echo "\033[32;1m<./asm>		| removed\033[0m\n-------------------------"
+	@echo "\033[1;33m<./asm>			| removed\033[0m\n-------------------------"
 
 $(LIB):
 	@make -C libft
-	@echo "\033[32;1m<libft>		| done\033[0m"
+	@echo "\033[32;1m<asm libft>		| done\033[0m"
 
 re: fclean all

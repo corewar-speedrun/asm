@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 16:59:43 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/19 16:22:07 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/19 19:36:45 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-#include <stdio.h>//////////////////////////////////////////////////////////////////////////////
-# define LEAK system("leaks asm");
-#include <stdlib.h>
 
 # define REG_CODE				1
 # define DIR_CODE				2
@@ -66,8 +63,8 @@ typedef struct	s_pro
 typedef struct	s_arg
 {
 	int				arg[3];
-	int				type[3];	// 1 if label, 0 if num
-	int				ditype[3];	// 1 if indirect, 0 if direct, -1 if reg
+	int				type[3];
+	int				ditype[3];
 	unsigned char	codage;
 	int				byte;
 	struct s_arg	*next;
@@ -124,7 +121,7 @@ int				ind_exp(char *a);
 int				reg_bad(int got);
 int				nc_exp(char a);
 int				num_exp(char a);
-int				er_stru(char *s);
+int				er_stru(void);
 int				three_ae(int a);
 int				two_ae(int a);
 int				ld_er(char *s);

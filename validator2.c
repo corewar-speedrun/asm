@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:49:01 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/19 16:21:31 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/28 23:19:30 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	s32(t_a *s)
 
 void	scom(t_a *s)
 {
-	while (s->f[s->i] != '\n')
+	while (s->f[s->i] != '\n' && s->f[s->i])
 		s->i++;
 	s->f[s->i] == '\n' ? s->curr_line++ : 0;
 }
@@ -59,7 +59,8 @@ int		normefucker5(char *cmp, int *f, int n, t_a *s)
 			*f = 0;
 		add_la(cmp, s);
 		s->i += n;
-		ft_strdel(&cmp);
+		if (*f == 1)
+			ft_strdel(&cmp);
 		return (*f);
 	}
 	return (*f);

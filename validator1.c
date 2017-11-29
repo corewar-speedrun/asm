@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 20:56:04 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/11/19 16:22:06 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/29 03:03:36 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 	if (!grep_comm2(s, &start, &stop, &tmp_i))
 		return (0);
 	s->comment_tmp = ft_strsub(s->f, start, stop - start);
-	s->i++;
 	if (ft_strlen(s->comment_tmp) > COMMENT_LENGTH)
 		return (lccd());
 	else
@@ -66,7 +65,7 @@ int		grep_comm(t_a *s, int start, int stop, int tmp_i)
 
 int		extra(char *s, int i)
 {
-	while (s[i] != '\n')
+	while (s[i] != '\n' && s[i] != '\0')
 	{
 		if (ft_isalnum(s[i]) && s[i + 1] == LABEL_CHAR)
 			return (1);
@@ -86,7 +85,8 @@ int		ch_op(t_a *s)
 	s32(s);
 	while ((s->f + s->i)[n] != ' ' && (s->f + s->i)[n] != '\t' &&
 			(s->f + s->i)[n] != COMMENT_CHAR && (s->f + s->i)[n] != '\n'
-			&& (s->f + s->i)[n] != ';' && s->f[s->i + n] != LABEL_CHAR)
+			&& (s->f + s->i)[n] != ';' && s->f[s->i + n] != LABEL_CHAR
+			&& s->f[s->i + n])
 		n++;
 	s->f[s->i + n] == LABEL_CHAR ? (n++) : 0;
 	cmp = ft_strsub(s->f, s->i, n);
@@ -95,11 +95,9 @@ int		ch_op(t_a *s)
 	s->i += n;
 	n = 0;
 	while (n < 16)
-	{
 		if (ft_strequ(s->op[n++], cmp))
 			if (add_op(s->op[n - 1], s))
 				flag = 1;
-	}
 	ft_strdel(&cmp);
 	return (flag);
 }
